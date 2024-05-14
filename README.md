@@ -54,12 +54,11 @@
 
 Диаграмма структуры БД:
 
-![Диаграмма БД](https://github.com/AndryDewsden/ToyStore/assets/154083401/996220c3-981c-4e22-85ac-ee628975b06e)
+![Диаграмма БД](https://github.com/AndryDewsden/ToyStoreByVlasovAndry/assets/154083401/ca57acb7-141e-4ee3-beca-c561125b20ef)
 
 Таблица Игрушки:
 
-![Данные таблицы](https://github.com/AndryDewsden/ToyStore/assets/154083401/e8c48709-e9a6-4c1a-8d6e-e5e3fe9a9e89)
-
+![Данные таблицы](https://github.com/AndryDewsden/ToyStoreByVlasovAndry/assets/154083401/0dc838ff-b32b-40d4-a308-6cdce173acca)
 
 # Чек-лист:
 
