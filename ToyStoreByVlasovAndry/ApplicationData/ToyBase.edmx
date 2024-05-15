@@ -1,0 +1,1271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AgeCategories_ToyStore">
+          <Key>
+            <PropertyRef Name="id_ageCategory" />
+          </Key>
+          <Property Name="id_ageCategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ageCategory_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories_ToyStore">
+          <Key>
+            <PropertyRef Name="id_category" />
+          </Key>
+          <Property Name="id_category" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categorys">
+          <Key>
+            <PropertyRef Name="id_category" />
+          </Key>
+          <Property Name="id_category" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Classes">
+          <Key>
+            <PropertyRef Name="id_user_class" />
+          </Key>
+          <Property Name="id_user_class" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="class" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Countries_ToyStore">
+          <Key>
+            <PropertyRef Name="id_country" />
+          </Key>
+          <Property Name="id_country" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="country_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Deals">
+          <Key>
+            <PropertyRef Name="id_deal" />
+          </Key>
+          <Property Name="id_deal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="good_id" Type="int" Nullable="false" />
+          <Property Name="good_count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Directories_ToyStore">
+          <Key>
+            <PropertyRef Name="id_directory" />
+          </Key>
+          <Property Name="id_directory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="directory_id_user" Type="int" Nullable="false" />
+          <Property Name="directory_order_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Edenices">
+          <Key>
+            <PropertyRef Name="id_edenic" />
+          </Key>
+          <Property Name="id_edenic" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="edenic_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Givers">
+          <Key>
+            <PropertyRef Name="id_giver" />
+          </Key>
+          <Property Name="id_giver" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="giver_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Main">
+          <Key>
+            <PropertyRef Name="id_main" />
+          </Key>
+          <Property Name="id_main" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="article" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name_id" Type="int" Nullable="false" />
+          <Property Name="edenic_id" Type="int" Nullable="false" />
+          <Property Name="prize" Type="int" Nullable="false" />
+          <Property Name="maxSkid" Type="int" Nullable="false" />
+          <Property Name="maker_id" Type="int" Nullable="false" />
+          <Property Name="giver_id" Type="int" Nullable="false" />
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="actSkid" Type="int" Nullable="false" />
+          <Property Name="kolOnSklad" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="image" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Makers">
+          <Key>
+            <PropertyRef Name="id_maker" />
+          </Key>
+          <Property Name="id_maker" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="maker_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Manufacturers_ToyStore">
+          <Key>
+            <PropertyRef Name="id_manufacturer" />
+          </Key>
+          <Property Name="id_manufacturer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="manufacturer_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Names">
+          <Key>
+            <PropertyRef Name="id_name" />
+          </Key>
+          <Property Name="id_name" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders_ToyStore">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="order_id_toy" Type="int" Nullable="false" />
+          <Property Name="order_quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Providers_ToyStore">
+          <Key>
+            <PropertyRef Name="id_provider" />
+          </Key>
+          <Property Name="id_provider" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="provider_name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles_ToyStore">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Toys_ToyStore">
+          <Key>
+            <PropertyRef Name="id_toy" />
+          </Key>
+          <Property Name="id_toy" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="toy_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="toy_id_category" Type="int" Nullable="false" />
+          <Property Name="toy_id_country" Type="int" Nullable="false" />
+          <Property Name="toy_id_manufacturer" Type="int" Nullable="false" />
+          <Property Name="toy_id_provider" Type="int" Nullable="false" />
+          <Property Name="toy_wholesalePrice" Type="int" Nullable="false" />
+          <Property Name="toy_retailPrice" Type="int" Nullable="false" />
+          <Property Name="toy_id_ageCategory" Type="int" Nullable="false" />
+          <Property Name="toy_discription" Type="nvarchar(max)" />
+          <Property Name="toy_image" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_class_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users_ToyStore">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_login" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="user_password" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="user_id_role" Type="int" Nullable="false" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="user_phone" Type="nchar" MaxLength="17" />
+          <Property Name="user_mail" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK_Deals_Main">
+          <End Role="Main" Type="Self.Main" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Main">
+              <PropertyRef Name="id_main" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="good_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deals_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Directories_Users_ToyStore">
+          <End Role="Users_ToyStore" Type="Self.Users_ToyStore" Multiplicity="1" />
+          <End Role="Directories_ToyStore" Type="Self.Directories_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users_ToyStore">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Directories_ToyStore">
+              <PropertyRef Name="directory_id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Main_Categorys">
+          <End Role="Categorys" Type="Self.Categorys" Multiplicity="1" />
+          <End Role="Main" Type="Self.Main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorys">
+              <PropertyRef Name="id_category" />
+            </Principal>
+            <Dependent Role="Main">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Main_Edenices">
+          <End Role="Edenices" Type="Self.Edenices" Multiplicity="1" />
+          <End Role="Main" Type="Self.Main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Edenices">
+              <PropertyRef Name="id_edenic" />
+            </Principal>
+            <Dependent Role="Main">
+              <PropertyRef Name="edenic_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Main_Givers">
+          <End Role="Givers" Type="Self.Givers" Multiplicity="1" />
+          <End Role="Main" Type="Self.Main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Givers">
+              <PropertyRef Name="id_giver" />
+            </Principal>
+            <Dependent Role="Main">
+              <PropertyRef Name="giver_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Main_Makers">
+          <End Role="Makers" Type="Self.Makers" Multiplicity="1" />
+          <End Role="Main" Type="Self.Main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Makers">
+              <PropertyRef Name="id_maker" />
+            </Principal>
+            <Dependent Role="Main">
+              <PropertyRef Name="maker_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Main_Names">
+          <End Role="Names" Type="Self.Names" Multiplicity="1" />
+          <End Role="Main" Type="Self.Main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Names">
+              <PropertyRef Name="id_name" />
+            </Principal>
+            <Dependent Role="Main">
+              <PropertyRef Name="name_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Toys_ToyStore">
+          <End Role="Toys_ToyStore" Type="Self.Toys_ToyStore" Multiplicity="1" />
+          <End Role="Orders_ToyStore" Type="Self.Orders_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Toys_ToyStore">
+              <PropertyRef Name="id_toy" />
+            </Principal>
+            <Dependent Role="Orders_ToyStore">
+              <PropertyRef Name="order_id_toy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Toys_AgeCategories_ToyStore">
+          <End Role="AgeCategories_ToyStore" Type="Self.AgeCategories_ToyStore" Multiplicity="1" />
+          <End Role="Toys_ToyStore" Type="Self.Toys_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgeCategories_ToyStore">
+              <PropertyRef Name="id_ageCategory" />
+            </Principal>
+            <Dependent Role="Toys_ToyStore">
+              <PropertyRef Name="toy_id_ageCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Toys_Categories_ToyStore">
+          <End Role="Categories_ToyStore" Type="Self.Categories_ToyStore" Multiplicity="1" />
+          <End Role="Toys_ToyStore" Type="Self.Toys_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories_ToyStore">
+              <PropertyRef Name="id_category" />
+            </Principal>
+            <Dependent Role="Toys_ToyStore">
+              <PropertyRef Name="toy_id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Toys_Countries_ToyStore">
+          <End Role="Countries_ToyStore" Type="Self.Countries_ToyStore" Multiplicity="1" />
+          <End Role="Toys_ToyStore" Type="Self.Toys_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries_ToyStore">
+              <PropertyRef Name="id_country" />
+            </Principal>
+            <Dependent Role="Toys_ToyStore">
+              <PropertyRef Name="toy_id_country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Toys_Manufacturers_ToyStore">
+          <End Role="Manufacturers_ToyStore" Type="Self.Manufacturers_ToyStore" Multiplicity="1" />
+          <End Role="Toys_ToyStore" Type="Self.Toys_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers_ToyStore">
+              <PropertyRef Name="id_manufacturer" />
+            </Principal>
+            <Dependent Role="Toys_ToyStore">
+              <PropertyRef Name="toy_id_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Toys_Providers_ToyStore">
+          <End Role="Providers_ToyStore" Type="Self.Providers_ToyStore" Multiplicity="1" />
+          <End Role="Toys_ToyStore" Type="Self.Toys_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Providers_ToyStore">
+              <PropertyRef Name="id_provider" />
+            </Principal>
+            <Dependent Role="Toys_ToyStore">
+              <PropertyRef Name="toy_id_provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Classes">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="id_user_class" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="user_class_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles_ToyStore">
+          <End Role="Roles_ToyStore" Type="Self.Roles_ToyStore" Multiplicity="1" />
+          <End Role="Users_ToyStore" Type="Self.Users_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles_ToyStore">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="Users_ToyStore">
+              <PropertyRef Name="user_id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="AgeCategories_ToyStore" EntityType="Self.AgeCategories_ToyStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories_ToyStore" EntityType="Self.Categories_ToyStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categorys" EntityType="Self.Categorys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries_ToyStore" EntityType="Self.Countries_ToyStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Deals" EntityType="Self.Deals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Directories_ToyStore" EntityType="Self.Directories_ToyStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Edenices" EntityType="Self.Edenices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Givers" EntityType="Self.Givers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Main" EntityType="Self.Main" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Makers" EntityType="Self.Makers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manufacturers_ToyStore" EntityType="Self.Manufacturers_ToyStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Names" EntityType="Self.Names" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders_ToyStore" EntityType="Self.Orders_ToyStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Providers_ToyStore" EntityType="Self.Providers_ToyStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles_ToyStore" EntityType="Self.Roles_ToyStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Toys_ToyStore" EntityType="Self.Toys_ToyStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users_ToyStore" EntityType="Self.Users_ToyStore" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Deals_Main" Association="Self.FK_Deals_Main">
+            <End Role="Main" EntitySet="Main" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deals_Users" Association="Self.FK_Deals_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Directories_Users_ToyStore" Association="Self.FK_Directories_Users_ToyStore">
+            <End Role="Users_ToyStore" EntitySet="Users_ToyStore" />
+            <End Role="Directories_ToyStore" EntitySet="Directories_ToyStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Main_Categorys" Association="Self.FK_Main_Categorys">
+            <End Role="Categorys" EntitySet="Categorys" />
+            <End Role="Main" EntitySet="Main" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Main_Edenices" Association="Self.FK_Main_Edenices">
+            <End Role="Edenices" EntitySet="Edenices" />
+            <End Role="Main" EntitySet="Main" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Main_Givers" Association="Self.FK_Main_Givers">
+            <End Role="Givers" EntitySet="Givers" />
+            <End Role="Main" EntitySet="Main" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Main_Makers" Association="Self.FK_Main_Makers">
+            <End Role="Makers" EntitySet="Makers" />
+            <End Role="Main" EntitySet="Main" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Main_Names" Association="Self.FK_Main_Names">
+            <End Role="Names" EntitySet="Names" />
+            <End Role="Main" EntitySet="Main" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Toys_ToyStore" Association="Self.FK_Orders_Toys_ToyStore">
+            <End Role="Toys_ToyStore" EntitySet="Toys_ToyStore" />
+            <End Role="Orders_ToyStore" EntitySet="Orders_ToyStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Toys_AgeCategories_ToyStore" Association="Self.FK_Toys_AgeCategories_ToyStore">
+            <End Role="AgeCategories_ToyStore" EntitySet="AgeCategories_ToyStore" />
+            <End Role="Toys_ToyStore" EntitySet="Toys_ToyStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Toys_Categories_ToyStore" Association="Self.FK_Toys_Categories_ToyStore">
+            <End Role="Categories_ToyStore" EntitySet="Categories_ToyStore" />
+            <End Role="Toys_ToyStore" EntitySet="Toys_ToyStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Toys_Countries_ToyStore" Association="Self.FK_Toys_Countries_ToyStore">
+            <End Role="Countries_ToyStore" EntitySet="Countries_ToyStore" />
+            <End Role="Toys_ToyStore" EntitySet="Toys_ToyStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Toys_Manufacturers_ToyStore" Association="Self.FK_Toys_Manufacturers_ToyStore">
+            <End Role="Manufacturers_ToyStore" EntitySet="Manufacturers_ToyStore" />
+            <End Role="Toys_ToyStore" EntitySet="Toys_ToyStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Toys_Providers_ToyStore" Association="Self.FK_Toys_Providers_ToyStore">
+            <End Role="Providers_ToyStore" EntitySet="Providers_ToyStore" />
+            <End Role="Toys_ToyStore" EntitySet="Toys_ToyStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Classes" Association="Self.FK_Users_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles_ToyStore" Association="Self.FK_Users_Roles_ToyStore">
+            <End Role="Roles_ToyStore" EntitySet="Roles_ToyStore" />
+            <End Role="Users_ToyStore" EntitySet="Users_ToyStore" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AgeCategories_ToyStore">
+          <Key>
+            <PropertyRef Name="id_ageCategory" />
+          </Key>
+          <Property Name="id_ageCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ageCategory_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Toys_ToyStore" Relationship="Self.FK_Toys_AgeCategories_ToyStore" FromRole="AgeCategories_ToyStore" ToRole="Toys_ToyStore" />
+        </EntityType>
+        <EntityType Name="Categories_ToyStore">
+          <Key>
+            <PropertyRef Name="id_category" />
+          </Key>
+          <Property Name="id_category" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Toys_ToyStore" Relationship="Self.FK_Toys_Categories_ToyStore" FromRole="Categories_ToyStore" ToRole="Toys_ToyStore" />
+        </EntityType>
+        <EntityType Name="Categorys">
+          <Key>
+            <PropertyRef Name="id_category" />
+          </Key>
+          <Property Name="id_category" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Main" Relationship="Self.FK_Main_Categorys" FromRole="Categorys" ToRole="Main" />
+        </EntityType>
+        <EntityType Name="Classes">
+          <Key>
+            <PropertyRef Name="id_user_class" />
+          </Key>
+          <Property Name="id_user_class" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="class" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Classes" FromRole="Classes" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Countries_ToyStore">
+          <Key>
+            <PropertyRef Name="id_country" />
+          </Key>
+          <Property Name="id_country" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="country_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Toys_ToyStore" Relationship="Self.FK_Toys_Countries_ToyStore" FromRole="Countries_ToyStore" ToRole="Toys_ToyStore" />
+        </EntityType>
+        <EntityType Name="Deals">
+          <Key>
+            <PropertyRef Name="id_deal" />
+          </Key>
+          <Property Name="id_deal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="good_id" Type="Int32" Nullable="false" />
+          <Property Name="good_count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Main" Relationship="Self.FK_Deals_Main" FromRole="Deals" ToRole="Main" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Deals_Users" FromRole="Deals" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Directories_ToyStore">
+          <Key>
+            <PropertyRef Name="id_directory" />
+          </Key>
+          <Property Name="id_directory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="directory_id_user" Type="Int32" Nullable="false" />
+          <Property Name="directory_order_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users_ToyStore" Relationship="Self.FK_Directories_Users_ToyStore" FromRole="Directories_ToyStore" ToRole="Users_ToyStore" />
+        </EntityType>
+        <EntityType Name="Edenices">
+          <Key>
+            <PropertyRef Name="id_edenic" />
+          </Key>
+          <Property Name="id_edenic" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="edenic_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Main" Relationship="Self.FK_Main_Edenices" FromRole="Edenices" ToRole="Main" />
+        </EntityType>
+        <EntityType Name="Givers">
+          <Key>
+            <PropertyRef Name="id_giver" />
+          </Key>
+          <Property Name="id_giver" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="giver_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Main" Relationship="Self.FK_Main_Givers" FromRole="Givers" ToRole="Main" />
+        </EntityType>
+        <EntityType Name="Main">
+          <Key>
+            <PropertyRef Name="id_main" />
+          </Key>
+          <Property Name="id_main" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="article" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name_id" Type="Int32" Nullable="false" />
+          <Property Name="edenic_id" Type="Int32" Nullable="false" />
+          <Property Name="prize" Type="Int32" Nullable="false" />
+          <Property Name="maxSkid" Type="Int32" Nullable="false" />
+          <Property Name="maker_id" Type="Int32" Nullable="false" />
+          <Property Name="giver_id" Type="Int32" Nullable="false" />
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <Property Name="actSkid" Type="Int32" Nullable="false" />
+          <Property Name="kolOnSklad" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Categorys" Relationship="Self.FK_Main_Categorys" FromRole="Main" ToRole="Categorys" />
+          <NavigationProperty Name="Deals" Relationship="Self.FK_Deals_Main" FromRole="Main" ToRole="Deals" />
+          <NavigationProperty Name="Edenices" Relationship="Self.FK_Main_Edenices" FromRole="Main" ToRole="Edenices" />
+          <NavigationProperty Name="Givers" Relationship="Self.FK_Main_Givers" FromRole="Main" ToRole="Givers" />
+          <NavigationProperty Name="Makers" Relationship="Self.FK_Main_Makers" FromRole="Main" ToRole="Makers" />
+          <NavigationProperty Name="Names" Relationship="Self.FK_Main_Names" FromRole="Main" ToRole="Names" />
+        </EntityType>
+        <EntityType Name="Makers">
+          <Key>
+            <PropertyRef Name="id_maker" />
+          </Key>
+          <Property Name="id_maker" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="maker_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Main" Relationship="Self.FK_Main_Makers" FromRole="Makers" ToRole="Main" />
+        </EntityType>
+        <EntityType Name="Manufacturers_ToyStore">
+          <Key>
+            <PropertyRef Name="id_manufacturer" />
+          </Key>
+          <Property Name="id_manufacturer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="manufacturer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Toys_ToyStore" Relationship="Self.FK_Toys_Manufacturers_ToyStore" FromRole="Manufacturers_ToyStore" ToRole="Toys_ToyStore" />
+        </EntityType>
+        <EntityType Name="Names">
+          <Key>
+            <PropertyRef Name="id_name" />
+          </Key>
+          <Property Name="id_name" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Main" Relationship="Self.FK_Main_Names" FromRole="Names" ToRole="Main" />
+        </EntityType>
+        <EntityType Name="Orders_ToyStore">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="order_id_toy" Type="Int32" Nullable="false" />
+          <Property Name="order_quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Toys_ToyStore" Relationship="Self.FK_Orders_Toys_ToyStore" FromRole="Orders_ToyStore" ToRole="Toys_ToyStore" />
+        </EntityType>
+        <EntityType Name="Providers_ToyStore">
+          <Key>
+            <PropertyRef Name="id_provider" />
+          </Key>
+          <Property Name="id_provider" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="provider_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Toys_ToyStore" Relationship="Self.FK_Toys_Providers_ToyStore" FromRole="Providers_ToyStore" ToRole="Toys_ToyStore" />
+        </EntityType>
+        <EntityType Name="Roles_ToyStore">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users_ToyStore" Relationship="Self.FK_Users_Roles_ToyStore" FromRole="Roles_ToyStore" ToRole="Users_ToyStore" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Toys_ToyStore">
+          <Key>
+            <PropertyRef Name="id_toy" />
+          </Key>
+          <Property Name="id_toy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="toy_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="toy_id_category" Type="Int32" Nullable="false" />
+          <Property Name="toy_id_country" Type="Int32" Nullable="false" />
+          <Property Name="toy_id_manufacturer" Type="Int32" Nullable="false" />
+          <Property Name="toy_id_provider" Type="Int32" Nullable="false" />
+          <Property Name="toy_wholesalePrice" Type="Int32" Nullable="false" />
+          <Property Name="toy_retailPrice" Type="Int32" Nullable="false" />
+          <Property Name="toy_id_ageCategory" Type="Int32" Nullable="false" />
+          <Property Name="toy_discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="toy_image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AgeCategories_ToyStore" Relationship="Self.FK_Toys_AgeCategories_ToyStore" FromRole="Toys_ToyStore" ToRole="AgeCategories_ToyStore" />
+          <NavigationProperty Name="Categories_ToyStore" Relationship="Self.FK_Toys_Categories_ToyStore" FromRole="Toys_ToyStore" ToRole="Categories_ToyStore" />
+          <NavigationProperty Name="Countries_ToyStore" Relationship="Self.FK_Toys_Countries_ToyStore" FromRole="Toys_ToyStore" ToRole="Countries_ToyStore" />
+          <NavigationProperty Name="Manufacturers_ToyStore" Relationship="Self.FK_Toys_Manufacturers_ToyStore" FromRole="Toys_ToyStore" ToRole="Manufacturers_ToyStore" />
+          <NavigationProperty Name="Orders_ToyStore" Relationship="Self.FK_Orders_Toys_ToyStore" FromRole="Toys_ToyStore" ToRole="Orders_ToyStore" />
+          <NavigationProperty Name="Providers_ToyStore" Relationship="Self.FK_Toys_Providers_ToyStore" FromRole="Toys_ToyStore" ToRole="Providers_ToyStore" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_class_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Classes" Relationship="Self.FK_Users_Classes" FromRole="Users" ToRole="Classes" />
+          <NavigationProperty Name="Deals" Relationship="Self.FK_Deals_Users" FromRole="Users" ToRole="Deals" />
+        </EntityType>
+        <EntityType Name="Users_ToyStore">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_login" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="user_password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="user_id_role" Type="Int32" Nullable="false" />
+          <Property Name="user_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_phone" Type="String" MaxLength="17" FixedLength="true" Unicode="true" />
+          <Property Name="user_mail" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Directories_ToyStore" Relationship="Self.FK_Directories_Users_ToyStore" FromRole="Users_ToyStore" ToRole="Directories_ToyStore" />
+          <NavigationProperty Name="Roles_ToyStore" Relationship="Self.FK_Users_Roles_ToyStore" FromRole="Users_ToyStore" ToRole="Roles_ToyStore" />
+        </EntityType>
+        <Association Name="FK_Toys_AgeCategories_ToyStore">
+          <End Role="AgeCategories_ToyStore" Type="Self.AgeCategories_ToyStore" Multiplicity="1" />
+          <End Role="Toys_ToyStore" Type="Self.Toys_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgeCategories_ToyStore">
+              <PropertyRef Name="id_ageCategory" />
+            </Principal>
+            <Dependent Role="Toys_ToyStore">
+              <PropertyRef Name="toy_id_ageCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Toys_Categories_ToyStore">
+          <End Role="Categories_ToyStore" Type="Self.Categories_ToyStore" Multiplicity="1" />
+          <End Role="Toys_ToyStore" Type="Self.Toys_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories_ToyStore">
+              <PropertyRef Name="id_category" />
+            </Principal>
+            <Dependent Role="Toys_ToyStore">
+              <PropertyRef Name="toy_id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Main_Categorys">
+          <End Role="Categorys" Type="Self.Categorys" Multiplicity="1" />
+          <End Role="Main" Type="Self.Main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorys">
+              <PropertyRef Name="id_category" />
+            </Principal>
+            <Dependent Role="Main">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Classes">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="id_user_class" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="user_class_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Toys_Countries_ToyStore">
+          <End Role="Countries_ToyStore" Type="Self.Countries_ToyStore" Multiplicity="1" />
+          <End Role="Toys_ToyStore" Type="Self.Toys_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries_ToyStore">
+              <PropertyRef Name="id_country" />
+            </Principal>
+            <Dependent Role="Toys_ToyStore">
+              <PropertyRef Name="toy_id_country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deals_Main">
+          <End Role="Main" Type="Self.Main" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Main">
+              <PropertyRef Name="id_main" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="good_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deals_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Directories_Users_ToyStore">
+          <End Role="Users_ToyStore" Type="Self.Users_ToyStore" Multiplicity="1" />
+          <End Role="Directories_ToyStore" Type="Self.Directories_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users_ToyStore">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Directories_ToyStore">
+              <PropertyRef Name="directory_id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Main_Edenices">
+          <End Role="Edenices" Type="Self.Edenices" Multiplicity="1" />
+          <End Role="Main" Type="Self.Main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Edenices">
+              <PropertyRef Name="id_edenic" />
+            </Principal>
+            <Dependent Role="Main">
+              <PropertyRef Name="edenic_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Main_Givers">
+          <End Role="Givers" Type="Self.Givers" Multiplicity="1" />
+          <End Role="Main" Type="Self.Main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Givers">
+              <PropertyRef Name="id_giver" />
+            </Principal>
+            <Dependent Role="Main">
+              <PropertyRef Name="giver_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Main_Makers">
+          <End Role="Makers" Type="Self.Makers" Multiplicity="1" />
+          <End Role="Main" Type="Self.Main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Makers">
+              <PropertyRef Name="id_maker" />
+            </Principal>
+            <Dependent Role="Main">
+              <PropertyRef Name="maker_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Main_Names">
+          <End Role="Names" Type="Self.Names" Multiplicity="1" />
+          <End Role="Main" Type="Self.Main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Names">
+              <PropertyRef Name="id_name" />
+            </Principal>
+            <Dependent Role="Main">
+              <PropertyRef Name="name_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Toys_Manufacturers_ToyStore">
+          <End Role="Manufacturers_ToyStore" Type="Self.Manufacturers_ToyStore" Multiplicity="1" />
+          <End Role="Toys_ToyStore" Type="Self.Toys_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers_ToyStore">
+              <PropertyRef Name="id_manufacturer" />
+            </Principal>
+            <Dependent Role="Toys_ToyStore">
+              <PropertyRef Name="toy_id_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Toys_ToyStore">
+          <End Role="Toys_ToyStore" Type="Self.Toys_ToyStore" Multiplicity="1" />
+          <End Role="Orders_ToyStore" Type="Self.Orders_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Toys_ToyStore">
+              <PropertyRef Name="id_toy" />
+            </Principal>
+            <Dependent Role="Orders_ToyStore">
+              <PropertyRef Name="order_id_toy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Toys_Providers_ToyStore">
+          <End Role="Providers_ToyStore" Type="Self.Providers_ToyStore" Multiplicity="1" />
+          <End Role="Toys_ToyStore" Type="Self.Toys_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Providers_ToyStore">
+              <PropertyRef Name="id_provider" />
+            </Principal>
+            <Dependent Role="Toys_ToyStore">
+              <PropertyRef Name="toy_id_provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles_ToyStore">
+          <End Role="Roles_ToyStore" Type="Self.Roles_ToyStore" Multiplicity="1" />
+          <End Role="Users_ToyStore" Type="Self.Users_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles_ToyStore">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="Users_ToyStore">
+              <PropertyRef Name="user_id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AgeCategories_ToyStore" EntityType="Self.AgeCategories_ToyStore" />
+          <EntitySet Name="Categories_ToyStore" EntityType="Self.Categories_ToyStore" />
+          <EntitySet Name="Categorys" EntityType="Self.Categorys" />
+          <EntitySet Name="Classes" EntityType="Self.Classes" />
+          <EntitySet Name="Countries_ToyStore" EntityType="Self.Countries_ToyStore" />
+          <EntitySet Name="Deals" EntityType="Self.Deals" />
+          <EntitySet Name="Directories_ToyStore" EntityType="Self.Directories_ToyStore" />
+          <EntitySet Name="Edenices" EntityType="Self.Edenices" />
+          <EntitySet Name="Givers" EntityType="Self.Givers" />
+          <EntitySet Name="Main" EntityType="Self.Main" />
+          <EntitySet Name="Makers" EntityType="Self.Makers" />
+          <EntitySet Name="Manufacturers_ToyStore" EntityType="Self.Manufacturers_ToyStore" />
+          <EntitySet Name="Names" EntityType="Self.Names" />
+          <EntitySet Name="Orders_ToyStore" EntityType="Self.Orders_ToyStore" />
+          <EntitySet Name="Providers_ToyStore" EntityType="Self.Providers_ToyStore" />
+          <EntitySet Name="Roles_ToyStore" EntityType="Self.Roles_ToyStore" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Toys_ToyStore" EntityType="Self.Toys_ToyStore" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Users_ToyStore" EntityType="Self.Users_ToyStore" />
+          <AssociationSet Name="FK_Toys_AgeCategories_ToyStore" Association="Self.FK_Toys_AgeCategories_ToyStore">
+            <End Role="AgeCategories_ToyStore" EntitySet="AgeCategories_ToyStore" />
+            <End Role="Toys_ToyStore" EntitySet="Toys_ToyStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Toys_Categories_ToyStore" Association="Self.FK_Toys_Categories_ToyStore">
+            <End Role="Categories_ToyStore" EntitySet="Categories_ToyStore" />
+            <End Role="Toys_ToyStore" EntitySet="Toys_ToyStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Main_Categorys" Association="Self.FK_Main_Categorys">
+            <End Role="Categorys" EntitySet="Categorys" />
+            <End Role="Main" EntitySet="Main" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Classes" Association="Self.FK_Users_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Toys_Countries_ToyStore" Association="Self.FK_Toys_Countries_ToyStore">
+            <End Role="Countries_ToyStore" EntitySet="Countries_ToyStore" />
+            <End Role="Toys_ToyStore" EntitySet="Toys_ToyStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deals_Main" Association="Self.FK_Deals_Main">
+            <End Role="Main" EntitySet="Main" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deals_Users" Association="Self.FK_Deals_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Directories_Users_ToyStore" Association="Self.FK_Directories_Users_ToyStore">
+            <End Role="Users_ToyStore" EntitySet="Users_ToyStore" />
+            <End Role="Directories_ToyStore" EntitySet="Directories_ToyStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Main_Edenices" Association="Self.FK_Main_Edenices">
+            <End Role="Edenices" EntitySet="Edenices" />
+            <End Role="Main" EntitySet="Main" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Main_Givers" Association="Self.FK_Main_Givers">
+            <End Role="Givers" EntitySet="Givers" />
+            <End Role="Main" EntitySet="Main" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Main_Makers" Association="Self.FK_Main_Makers">
+            <End Role="Makers" EntitySet="Makers" />
+            <End Role="Main" EntitySet="Main" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Main_Names" Association="Self.FK_Main_Names">
+            <End Role="Names" EntitySet="Names" />
+            <End Role="Main" EntitySet="Main" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Toys_Manufacturers_ToyStore" Association="Self.FK_Toys_Manufacturers_ToyStore">
+            <End Role="Manufacturers_ToyStore" EntitySet="Manufacturers_ToyStore" />
+            <End Role="Toys_ToyStore" EntitySet="Toys_ToyStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Toys_ToyStore" Association="Self.FK_Orders_Toys_ToyStore">
+            <End Role="Toys_ToyStore" EntitySet="Toys_ToyStore" />
+            <End Role="Orders_ToyStore" EntitySet="Orders_ToyStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Toys_Providers_ToyStore" Association="Self.FK_Toys_Providers_ToyStore">
+            <End Role="Providers_ToyStore" EntitySet="Providers_ToyStore" />
+            <End Role="Toys_ToyStore" EntitySet="Toys_ToyStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles_ToyStore" Association="Self.FK_Users_Roles_ToyStore">
+            <End Role="Roles_ToyStore" EntitySet="Roles_ToyStore" />
+            <End Role="Users_ToyStore" EntitySet="Users_ToyStore" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="AgeCategories_ToyStore">
+            <EntityTypeMapping TypeName="Model.AgeCategories_ToyStore">
+              <MappingFragment StoreEntitySet="AgeCategories_ToyStore">
+                <ScalarProperty Name="id_ageCategory" ColumnName="id_ageCategory" />
+                <ScalarProperty Name="ageCategory_name" ColumnName="ageCategory_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories_ToyStore">
+            <EntityTypeMapping TypeName="Model.Categories_ToyStore">
+              <MappingFragment StoreEntitySet="Categories_ToyStore">
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorys">
+            <EntityTypeMapping TypeName="Model.Categorys">
+              <MappingFragment StoreEntitySet="Categorys">
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="Model.Classes">
+              <MappingFragment StoreEntitySet="Classes">
+                <ScalarProperty Name="id_user_class" ColumnName="id_user_class" />
+                <ScalarProperty Name="class" ColumnName="class" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries_ToyStore">
+            <EntityTypeMapping TypeName="Model.Countries_ToyStore">
+              <MappingFragment StoreEntitySet="Countries_ToyStore">
+                <ScalarProperty Name="id_country" ColumnName="id_country" />
+                <ScalarProperty Name="country_name" ColumnName="country_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Deals">
+            <EntityTypeMapping TypeName="Model.Deals">
+              <MappingFragment StoreEntitySet="Deals">
+                <ScalarProperty Name="id_deal" ColumnName="id_deal" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="good_id" ColumnName="good_id" />
+                <ScalarProperty Name="good_count" ColumnName="good_count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Directories_ToyStore">
+            <EntityTypeMapping TypeName="Model.Directories_ToyStore">
+              <MappingFragment StoreEntitySet="Directories_ToyStore">
+                <ScalarProperty Name="id_directory" ColumnName="id_directory" />
+                <ScalarProperty Name="directory_id_user" ColumnName="directory_id_user" />
+                <ScalarProperty Name="directory_order_number" ColumnName="directory_order_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Edenices">
+            <EntityTypeMapping TypeName="Model.Edenices">
+              <MappingFragment StoreEntitySet="Edenices">
+                <ScalarProperty Name="id_edenic" ColumnName="id_edenic" />
+                <ScalarProperty Name="edenic_name" ColumnName="edenic_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Givers">
+            <EntityTypeMapping TypeName="Model.Givers">
+              <MappingFragment StoreEntitySet="Givers">
+                <ScalarProperty Name="id_giver" ColumnName="id_giver" />
+                <ScalarProperty Name="giver_name" ColumnName="giver_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Main">
+            <EntityTypeMapping TypeName="Model.Main">
+              <MappingFragment StoreEntitySet="Main">
+                <ScalarProperty Name="id_main" ColumnName="id_main" />
+                <ScalarProperty Name="article" ColumnName="article" />
+                <ScalarProperty Name="name_id" ColumnName="name_id" />
+                <ScalarProperty Name="edenic_id" ColumnName="edenic_id" />
+                <ScalarProperty Name="prize" ColumnName="prize" />
+                <ScalarProperty Name="maxSkid" ColumnName="maxSkid" />
+                <ScalarProperty Name="maker_id" ColumnName="maker_id" />
+                <ScalarProperty Name="giver_id" ColumnName="giver_id" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="actSkid" ColumnName="actSkid" />
+                <ScalarProperty Name="kolOnSklad" ColumnName="kolOnSklad" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Makers">
+            <EntityTypeMapping TypeName="Model.Makers">
+              <MappingFragment StoreEntitySet="Makers">
+                <ScalarProperty Name="id_maker" ColumnName="id_maker" />
+                <ScalarProperty Name="maker_name" ColumnName="maker_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manufacturers_ToyStore">
+            <EntityTypeMapping TypeName="Model.Manufacturers_ToyStore">
+              <MappingFragment StoreEntitySet="Manufacturers_ToyStore">
+                <ScalarProperty Name="id_manufacturer" ColumnName="id_manufacturer" />
+                <ScalarProperty Name="manufacturer_name" ColumnName="manufacturer_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Names">
+            <EntityTypeMapping TypeName="Model.Names">
+              <MappingFragment StoreEntitySet="Names">
+                <ScalarProperty Name="id_name" ColumnName="id_name" />
+                <ScalarProperty Name="name_name" ColumnName="name_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders_ToyStore">
+            <EntityTypeMapping TypeName="Model.Orders_ToyStore">
+              <MappingFragment StoreEntitySet="Orders_ToyStore">
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="order_number" ColumnName="order_number" />
+                <ScalarProperty Name="order_id_toy" ColumnName="order_id_toy" />
+                <ScalarProperty Name="order_quantity" ColumnName="order_quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Providers_ToyStore">
+            <EntityTypeMapping TypeName="Model.Providers_ToyStore">
+              <MappingFragment StoreEntitySet="Providers_ToyStore">
+                <ScalarProperty Name="id_provider" ColumnName="id_provider" />
+                <ScalarProperty Name="provider_name" ColumnName="provider_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles_ToyStore">
+            <EntityTypeMapping TypeName="Model.Roles_ToyStore">
+              <MappingFragment StoreEntitySet="Roles_ToyStore">
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Toys_ToyStore">
+            <EntityTypeMapping TypeName="Model.Toys_ToyStore">
+              <MappingFragment StoreEntitySet="Toys_ToyStore">
+                <ScalarProperty Name="id_toy" ColumnName="id_toy" />
+                <ScalarProperty Name="toy_name" ColumnName="toy_name" />
+                <ScalarProperty Name="toy_id_category" ColumnName="toy_id_category" />
+                <ScalarProperty Name="toy_id_country" ColumnName="toy_id_country" />
+                <ScalarProperty Name="toy_id_manufacturer" ColumnName="toy_id_manufacturer" />
+                <ScalarProperty Name="toy_id_provider" ColumnName="toy_id_provider" />
+                <ScalarProperty Name="toy_wholesalePrice" ColumnName="toy_wholesalePrice" />
+                <ScalarProperty Name="toy_retailPrice" ColumnName="toy_retailPrice" />
+                <ScalarProperty Name="toy_id_ageCategory" ColumnName="toy_id_ageCategory" />
+                <ScalarProperty Name="toy_discription" ColumnName="toy_discription" />
+                <ScalarProperty Name="toy_image" ColumnName="toy_image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Model.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="user_class_id" ColumnName="user_class_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users_ToyStore">
+            <EntityTypeMapping TypeName="Model.Users_ToyStore">
+              <MappingFragment StoreEntitySet="Users_ToyStore">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="user_login" ColumnName="user_login" />
+                <ScalarProperty Name="user_password" ColumnName="user_password" />
+                <ScalarProperty Name="user_id_role" ColumnName="user_id_role" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="user_phone" ColumnName="user_phone" />
+                <ScalarProperty Name="user_mail" ColumnName="user_mail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище Model.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище Model.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище Model.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище Model.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище Model.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище Model.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище Model.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

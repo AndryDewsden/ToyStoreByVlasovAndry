@@ -12,22 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ToyStoreByVlasovAndry.ApplicationData;
 
-namespace ToyStoreByVlasovAndry
+namespace ToyStoreByVlasovAndry.EnterPages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для RegistrationPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RegistrationPage : Page
     {
-        public MainWindow()
+        public RegistrationPage()
         {
             InitializeComponent();
-            AppConnect.model1db = new Entities();
-            AppFrame.frameMain = FrmMain;
-
-            FrmMain.Navigate(new EnterPages.LoginPage());
         }
     }
 }
