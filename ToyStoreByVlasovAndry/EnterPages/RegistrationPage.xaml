@@ -5,10 +5,30 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ToyStoreByVlasovAndry.EnterPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="RegistrationPage">
+      d:DesignHeight="650" d:DesignWidth="1000"
+      Title="Регистрация">
 
     <Grid>
-        
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Введите логин:" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30"/>
+                <TextBox x:Name="txbLogin" HorizontalAlignment="Center" Margin="30,5,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="30"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Введите пароль:" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30"/>
+                <PasswordBox x:Name="passbox1" HorizontalAlignment="Center" Margin="30,5,0,0" VerticalAlignment="Center" Width="200" Height="30" PasswordChanged="passbox1_PasswordChanged"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Повторите пароль: " HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30"/>
+                <PasswordBox x:Name="passbox2" HorizontalAlignment="Center" Margin="30,5,0,0" VerticalAlignment="Center" Width="200" Height="30" PasswordChanged="passbox2_PasswordChanged"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="Regin" IsEnabled="False" Content="Зарегистрироваться" HorizontalAlignment="Center" Width="200" Height="30" Margin="0,5,0,0" VerticalAlignment="Center" Click="Regin_Click"/>
+                <Button x:Name="Exit" Content="Назад" HorizontalAlignment="Center" Width="200" Height="30" Margin="30,5,0,0" VerticalAlignment="Center" Click="Exit_Click"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>

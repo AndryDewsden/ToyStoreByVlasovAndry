@@ -1,0 +1,21 @@
+﻿<Page x:Class="ToyStoreByVlasovAndry.Content.UserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ToyStoreByVlasovAndry.Content"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1000"
+      Title="UserPage">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center">
+            <Label x:Name="username" Width="200" Height="30"/>
+            <Label Content="Последний вход: " Width="200" Height="30"/>
+            <Button x:Name="addButton" Content="Добавить" Margin="5" Width="200" Height="30" Click="addButton_Click"/>
+            <Button x:Name="CartButton" Content="Корзина" Margin="5" Width="200" Height="30" Click="CartButton_Click"/>
+            <Button Content="Магазин" Margin="5" Width="200" Height="30" Click="Button_Click"/>
+            <Button Content="Вывод" Margin="5" Width="200" Height="30" Click="goBack_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

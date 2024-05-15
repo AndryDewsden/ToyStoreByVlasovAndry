@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:ToyStoreByVlasovAndry"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="TextBlock" x:Key="Title">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="13pt"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="15"/>
+        </Style>
     </Application.Resources>
 </Application>

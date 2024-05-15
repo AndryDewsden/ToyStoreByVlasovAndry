@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ToyStoreByVlasovAndry.ApplicationData;
+using ToyStoreByVlasovAndry.Content;
 
 namespace ToyStoreByVlasovAndry.EnterPages
 {
@@ -42,12 +43,12 @@ namespace ToyStoreByVlasovAndry.EnterPages
                     switch (userObj.user_id_role)
                     {
                         case 1:
-                            MessageBox.Show("Здраствуйте, Администратор " + userObj.user_login + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                            //AppFrame.frameMain.Navigate(new PageAccountCust(userObj));
+                            MessageBox.Show("Здраствуйте, Администратор " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            AppFrame.frameMain.Navigate(new UserPage(userObj));
                             break;
                         case 2:
-                            MessageBox.Show("Здравствуйте, " + userObj.user_login + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                            //AppFrame.frameMain.Navigate(new PageAccountCust(userObj));
+                            MessageBox.Show("Здравствуйте, " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            AppFrame.frameMain.Navigate(new UserPage(userObj));
                             break;
                         default:
                             MessageBox.Show("Данные не обнаруженны!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -64,7 +65,7 @@ namespace ToyStoreByVlasovAndry.EnterPages
 
         private void SendReg_Click(object sender, RoutedEventArgs e)
         {
-            //AppFrame.frameMain.Navigate(new PageCreateAcc());
+            AppFrame.frameMain.Navigate(new RegistrationPage());
         }
     }
 }

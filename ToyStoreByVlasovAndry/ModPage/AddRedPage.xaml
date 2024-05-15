@@ -1,0 +1,54 @@
+﻿<Page x:Class="ToyStoreByVlasovAndry.ModPage.AddRedPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ToyStoreByVlasovAndry.ModPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1000"
+      Title="AddRedPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+            <Label Content="Категория:" Height="30" Margin="5"/>
+            <ComboBox SelectedIndex="{Binding toy_id_category}" DisplayMemberPath="category_name" x:Name="Combo_names" Height="30" Margin="5"/>
+            <Label Content="Наименование:" Height="30" Margin="5"/>
+            <TextBox Text="{Binding toy_name}" x:Name="article" Height="30" Margin="5"/>
+            <Label Content="Страна производитель:" Height="30" Margin="5"/>
+            <ComboBox SelectedIndex="{Binding toy_id_country}" DisplayMemberPath="country_name" x:Name="Combo_maker" Height="30" Margin="5"/>
+            <Label Content="Производитель:" Height="30" Margin="5"/>
+            <ComboBox SelectedIndex="{Binding toy_id_manufacturer}" DisplayMemberPath="manufacturer_name" x:Name="Combo_giver" Height="30" Margin="5"/>
+
+            <Button x:Name="Add" Content="Добавить" Width="200" Height="30"  Margin="5" Click="Add_Click"/>
+            <Button x:Name="Red" Content="Редактирование" Width="200" Height="30" Margin="5" Click="Red_Click"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+            <Label Content="Оптовая цена:" Height="30" Margin="5"/>
+            <TextBox Text="{Binding toy_wholesalePrice}" x:Name="prize" Height="30" Margin="5"/>
+            <Label Content="Розничная цена:" Height="30" Margin="5"/>
+            <TextBox Text="{Binding toy_retailPrice}" x:Name="maxskid" Height="30" Margin="5"/>
+            <Label Content="Описание:" Height="30" Margin="5"/>
+            <TextBox Text="{Binding toy_discription}" x:Name="kol" Height="30" Margin="5"/>
+
+            <Button x:Name="list" Content="Список товаров" Width="200" Height="30" Margin="5" Click="list_Click"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2">
+            <Label Content="Поставщик:" Height="30" Margin="5"/>
+            <ComboBox SelectedIndex="{Binding toy_id_provider}" DisplayMemberPath="provider_name" x:Name="Combo_ed" Height="30" Margin="5"/>
+            <Label Content="Возрастная категория:" Height="30" Margin="5"/>
+            <ComboBox SelectedIndex="{Binding toy_id_ageCategory}" DisplayMemberPath="ageCategory_name" x:Name="Combo_cat" Height="30" Margin="5"/>
+            <Label Content="Изображение товара:" Height="30" Margin="5"/>
+            <TextBox Text="{Binding toy_image}" x:Name="image" Height="30" Margin="5"/>
+
+            <Button x:Name="goBack" Content="Назад" Width="200" Height="30" Margin="5" Click="goBack_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>
