@@ -43,15 +43,15 @@ namespace ToyStoreByVlasovAndry.EnterPages
                     switch (userObj.user_id_role)
                     {
                         case 1:
-                            MessageBox.Show("Здраствуйте, Администратор " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            MessageBox.Show("Здравствуйте, \nадминистратор \n" + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                             AppFrame.frameMain.Navigate(new UserPage(userObj));
                             break;
                         case 2:
-                            MessageBox.Show("Здравствуйте, " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            MessageBox.Show("Здравствуйте, \nпользователь \n" + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                             AppFrame.frameMain.Navigate(new UserPage(userObj));
                             break;
                         default:
-                            MessageBox.Show("Данные не обнаруженны!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("Ощибка данных на сервере.", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
                             break;
                     }
                 }
@@ -59,13 +59,23 @@ namespace ToyStoreByVlasovAndry.EnterPages
 
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка: " + ex.Message.ToString(), "Критическая работа приложения!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Ошибка: \n" + ex.Message.ToString(), "Критическая работа приложения!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
         private void SendReg_Click(object sender, RoutedEventArgs e)
         {
             AppFrame.frameMain.Navigate(new RegistrationPage());
+        }
+
+        private void ExitB_Click(object sender, RoutedEventArgs e)
+        {
+            var exitBi = MessageBox.Show("Вы уверенны, что хотите закрыть приложение?", "Выход из приложения", MessageBoxButton.YesNo, MessageBoxImage.Hand);
+
+            if(exitBi == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown();
+            }
         }
     }
 }

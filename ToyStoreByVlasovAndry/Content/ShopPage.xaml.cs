@@ -202,10 +202,10 @@ namespace ToyStoreByVlasovAndry.Content
             }
         }
 
-        //перевод товара в корзину
+        //перевод товара в корзину через контекстное меню
         private void Buy_Click(object sender, RoutedEventArgs e)
         {
-
+            AddToCart();
         }
 
         //перейти в корзину
@@ -280,13 +280,35 @@ namespace ToyStoreByVlasovAndry.Content
             }
         }
 
+        //кнопка на товаре
         private void Add_toCart_Click(object sender, EventArgs e)
         {
-            int user = use.id_user;
-            int good = 1;
-            int count = 1;
+            AddToCart();
+        }
 
-            MessageBox.Show("АЙДИ товара: " + good + "\nАЙДИ пользователя: " + user, "1", MessageBoxButton.OK);
+        //Добавление товара в заказ
+        private void AddToCart()
+        {
+            var ord = (Toys_ToyStore)listProducts.SelectedItem;
+
+            if (ord != null)
+            {
+                try
+                {
+                    Orders_ToyStore userOrder = new Orders_ToyStore()
+                    {
+                        order_number = "1",
+                        order_id_toy = ord.id_toy,
+                        order_quantity = 1
+                    };
+                    AppConnect.model1db.Orders_ToyStore.Add(userOrder);
+                    AppConnect.model1db.SaveChanges();
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка при внедрении данных на сервер!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

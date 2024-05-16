@@ -12,10 +12,12 @@
         <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center">
             <Label x:Name="username" Width="200" Height="30"/>
             <Label Content="Последний вход: " Width="200" Height="30"/>
-            <Button x:Name="addButton" Content="Добавить" Margin="5" Width="200" Height="30" Click="addButton_Click"/>
-            <Button x:Name="CartButton" Content="Корзина" Margin="5" Width="200" Height="30" Click="CartButton_Click"/>
-            <Button Content="Магазин" Margin="5" Width="200" Height="30" Click="Button_Click"/>
-            <Button Content="Вывод" Margin="5" Width="200" Height="30" Click="goBack_Click"/>
+            <Button x:Name="addButton" Content="Добавить" Margin="5" Width="200" Height="30" Click="addButton_Click" FontWeight="Bold"/>
+            <Button x:Name="CartButton" Content="Корзина" Margin="5" Width="200" Height="30" Click="CartButton_Click" FontWeight="Bold"/>
+            <Button Content="Магазин" Margin="5" Width="200" Height="30" Click="Button_Click" FontWeight="Bold"/>
+            <Button Content="Выйти из аккаунта" Margin="5" Width="200" Height="30" Click="goBack_Click" FontWeight="Bold"/>
+            <Button Content="Выйти из приложения" Margin="5" Width="200" Height="30" Click="BtExit_Click" FontWeight="Bold"/>
+            <Button x:Name="BtDelAcc" Content="Удалить аккаунт" Margin="0,30,0,0" Width="200" Height="30" Click="BtDelAcc_Click" FontWeight="Bold" Foreground="#FFD02626"/>
         </StackPanel>
     </Grid>
 </Page>

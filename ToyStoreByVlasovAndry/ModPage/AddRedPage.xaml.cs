@@ -111,6 +111,7 @@ namespace ToyStoreByVlasovAndry.ModPage
                     AppConnect.model1db.Toys_ToyStore.Add(_curToy);
                     AppConnect.model1db.SaveChanges();
                     MessageBox.Show("Данные успешно добавленны", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    AppFrame.frameMain.Navigate(new ShopPage(use));
                 }
 
                 catch (Exception ex)
@@ -131,6 +132,7 @@ namespace ToyStoreByVlasovAndry.ModPage
                 {
                     AppConnect.model1db.SaveChanges();
                     MessageBox.Show("Данные успешно редактированы", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    AppFrame.frameMain.Navigate(new ShopPage(use));
                 }
 
                 catch (Exception ex)
