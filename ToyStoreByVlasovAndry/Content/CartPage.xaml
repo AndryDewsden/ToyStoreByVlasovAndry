@@ -5,10 +5,56 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ToyStoreByVlasovAndry.Content"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="650" d:DesignWidth="1000"
       Title="Корзина">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="450"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="warm" Content="Ваша корзина пуста" Width="200" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <ListView x:Name="listCart" Grid.Row="1" ScrollViewer.CanContentScroll="False">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="300"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
+                            <TextBlock>
+                                <Run Text="Номер заказа: "/>
+                                <Run Text="{Binding order_number}"/>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
+                            <TextBlock>
+                                <Run Text="АЙДИ игрушки: "/>
+                                <Run Text="{Binding order_id_toy}"/>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
+                            <TextBlock>
+                                <Run Text="Количество: "/>
+                                <Run Text="{Binding order_quantity}"/>
+                            </TextBlock>
+                            <TextBlock>
+                                <Button x:Name="delProduct" Content="X" Width="200" Height="30" Click="delProduct_Click"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
             <Button x:Name="userDisplay" Content="Пользователь" Width="120" Height="30" Margin="5,0,5,0" Click="userDisplay_Click"/>
             <Button x:Name="goList" Content="Список товаров" Click="goGood_Click" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left"/>

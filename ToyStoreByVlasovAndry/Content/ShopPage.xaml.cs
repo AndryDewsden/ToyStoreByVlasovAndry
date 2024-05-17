@@ -289,6 +289,33 @@ namespace ToyStoreByVlasovAndry.Content
         //Добавление товара в заказ
         private void AddToCart()
         {
+            string numOrder;
+            Directories_ToyStore userList = AppConnect.model1db.Directories_ToyStore.FirstOrDefault(x => x.directory_id_user == use.id_user);
+            
+            if(userList == null)
+            {
+                numOrder = use.id_user.ToString();//
+
+                try
+                {
+                    Directories_ToyStore userDir = new Directories_ToyStore()
+                    {
+                        directory_id_user = use.id_user,
+                        directory_order_number = numOrder
+                    };
+                    AppConnect.model1db.Directories_ToyStore.Add(userDir);
+                    AppConnect.model1db.SaveChanges();
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка при внедрении данных на сервер!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                numOrder = userList.directory_order_number.ToString();
+            }
+
             var ord = (Toys_ToyStore)listProducts.SelectedItem;
 
             if (ord != null)
@@ -297,7 +324,7 @@ namespace ToyStoreByVlasovAndry.Content
                 {
                     Orders_ToyStore userOrder = new Orders_ToyStore()
                     {
-                        order_number = "1",
+                        order_number = numOrder,
                         order_id_toy = ord.id_toy,
                         order_quantity = 1
                     };
