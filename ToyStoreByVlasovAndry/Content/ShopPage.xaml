@@ -78,7 +78,7 @@
 
                         <StackPanel Grid.Column="2" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
                             <TextBlock>
-                                
+                                <Image Source="{Binding pic}" Width="100" Height="100"/>
                             </TextBlock>
                             <TextBlock>
                                 <Run Text="Категория: "/>
