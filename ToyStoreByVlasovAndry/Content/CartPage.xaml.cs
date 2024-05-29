@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,6 @@ using ToyStoreByVlasovAndry.ApplicationData;
 
 namespace ToyStoreByVlasovAndry.Content
 {
-    /// <summary>
-    /// Логика взаимодействия для CartPage.xaml
-    /// </summary>
     public partial class CartPage : Page
     {
         Users_ToyStore use = new Users_ToyStore();
@@ -35,14 +33,7 @@ namespace ToyStoreByVlasovAndry.Content
             if (userList != null)
             {
                 numOrder = userList.directory_order_number;
-
-                warm.IsEnabled = false;
-                warm.Visibility = Visibility.Collapsed;
                 listCart.ItemsSource = FillCart();
-            }
-            else
-            {
-                warm.IsEnabled = true;
             }
         }
 
@@ -53,6 +44,14 @@ namespace ToyStoreByVlasovAndry.Content
             if (numOrder != null)
             {
                 productsInCart = AppConnect.model1db.Orders_ToyStore.Where(x => x.order_number == numOrder).ToList();
+                if (productsInCart.Count > 0)
+                {
+                    Stat.Content = "В вашей корзине " + productsInCart.Count + " товаров.";
+                }
+                else
+                {
+                    Stat.Content = "Ваша корзина пуста.";
+                }
             }
 
             return productsInCart.ToArray();
@@ -70,24 +69,92 @@ namespace ToyStoreByVlasovAndry.Content
 
         private void delProduct_Click(object sender, RoutedEventArgs e)
         {
-            if ((Main)listCart.SelectedItem != null)
+            if((Orders_ToyStore)listCart.SelectedItem != null)
             {
-                var del = (Orders_ToyStore)listCart.SelectedItem;
-                var res = MessageBox.Show($"Вы действительно хотите удалить этот товар?\n Будет удалён:\nНаименование: {del.order_number} \nАртикль: {del.order_id_toy} \n{del.order_quantity}", "Уведомление", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                Orders_ToyStore del = (Orders_ToyStore)listCart.SelectedItem;
+                delCart(del);
+            }
+        }
 
-                if (res == MessageBoxResult.OK)
+        private void delCart(Orders_ToyStore del)
+        {
+            var res = MessageBox.Show($"Вы действительно хотите удалить этот товар?\n Будет удалён:\nНаименование: {del.order_number} \nАртикль: {del.order_id_toy} \n{del.order_quantity}", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            if (res == MessageBoxResult.Yes)
+            {
+                try
                 {
-                    try
-                    {
-                        AppConnect.model1db.Orders_ToyStore.Remove(del);
-                        AppConnect.model1db.SaveChanges();
-                        //listCart.ItemsSource = FillCart(use.id_user.ToString());
-                        MessageBox.Show("Данные успешно удалены", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
+                    AppConnect.model1db.Orders_ToyStore.Remove(del);
+                    AppConnect.model1db.SaveChanges();
+                    listCart.ItemsSource = FillCart();
+                    //MessageBox.Show("Данные успешно удалены", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
 
-                    catch (Exception ex)
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Что-то пошло не так", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void OrderMake_Click(object sender, RoutedEventArgs e)
+        {
+            AppFrame.frameMain.Navigate(new Order(use));
+        }
+
+        private void upNum_Click(object sender, RoutedEventArgs e)
+        {
+            if ((Orders_ToyStore)listCart.SelectedItem != null)
+            {
+                Orders_ToyStore red = (Orders_ToyStore)listCart.SelectedItem;
+
+                if (red.order_quantity < 100)
+                {
+                    var res = MessageBox.Show("Вы действительно хотите увеличить это число?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+                    if (res == MessageBoxResult.OK)
                     {
-                        MessageBox.Show(ex.Message, "Что-то пошло не так", MessageBoxButton.OK, MessageBoxImage.Error);
+                        try
+                        {
+                            red.order_quantity = red.order_quantity + 1;
+                            AppConnect.model1db.SaveChanges();
+                            //MessageBox.Show("Данные успешно редактированы", "Тестирование", MessageBoxButton.OK, MessageBoxImage.Information);
+                            listCart.ItemsSource = FillCart();
+                        }
+
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void downNum_Click(object sender, RoutedEventArgs e)
+        {
+            if ((Orders_ToyStore)listCart.SelectedItem != null)
+            {
+                Orders_ToyStore red = (Orders_ToyStore)listCart.SelectedItem;
+                
+                if (red.order_quantity > 1)
+                {
+                    var res = MessageBox.Show("Вы действительно хотите убавить это число?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+                    if (res == MessageBoxResult.OK)
+                    {
+                        try
+                        {
+                            red.order_quantity = red.order_quantity - 1;
+                            AppConnect.model1db.SaveChanges();
+                            //MessageBox.Show("Данные успешно редактированы", "Тестирование", MessageBoxButton.OK, MessageBoxImage.Information);
+                            listCart.ItemsSource = FillCart();
+                        }
+
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                 }
             }

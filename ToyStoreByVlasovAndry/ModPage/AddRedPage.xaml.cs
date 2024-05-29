@@ -35,31 +35,31 @@ namespace ToyStoreByVlasovAndry.ModPage
             Combo_ed.Items.Add(" ");
             Combo_cat.Items.Add(" ");
 
-            //категория
+            //заполнение списка категорий
             for (int i = 0; i < AppConnect.model1db.Categories_ToyStore.ToList().Count; i++)
             {
                 Combo_names.Items.Add(AppConnect.model1db.Categories_ToyStore.ToList()[i]);
             }
 
-            //страна
+            //заполнение списка стран
             for (int i = 0; i < AppConnect.model1db.Countries_ToyStore.ToList().Count; i++)
             {
                 Combo_maker.Items.Add(AppConnect.model1db.Countries_ToyStore.ToList()[i]);
             }
 
-            //производитель
+            //заполнение списка производителей
             for (int i = 0; i < AppConnect.model1db.Manufacturers_ToyStore.ToList().Count; i++)
             {
                 Combo_giver.Items.Add(AppConnect.model1db.Manufacturers_ToyStore.ToList()[i]);
             }
 
-            //поставщик
+            //заполнение списка поставщиков
             for (int i = 0; i < AppConnect.model1db.Providers_ToyStore.ToList().Count; i++)
             {
                 Combo_ed.Items.Add(AppConnect.model1db.Providers_ToyStore.ToList()[i]);
             }
 
-            //возрастная категория
+            //заполнение списка возрастных категорий
             for (int i = 0; i < AppConnect.model1db.AgeCategories_ToyStore.ToList().Count; i++)
             {
                 Combo_cat.Items.Add(AppConnect.model1db.AgeCategories_ToyStore.ToList()[i]);
@@ -110,13 +110,13 @@ namespace ToyStoreByVlasovAndry.ModPage
                 {
                     AppConnect.model1db.Toys_ToyStore.Add(_curToy);
                     AppConnect.model1db.SaveChanges();
-                    MessageBox.Show("Данные успешно добавленны", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Данные успешно добавленны", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                     AppFrame.frameMain.Navigate(new ShopPage(use));
                 }
 
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Что-то пошло не так", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -131,13 +131,13 @@ namespace ToyStoreByVlasovAndry.ModPage
                 try
                 {
                     AppConnect.model1db.SaveChanges();
-                    MessageBox.Show("Данные успешно редактированы", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Данные успешно редактированы", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                     AppFrame.frameMain.Navigate(new ShopPage(use));
                 }
 
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Что-то пошло не так", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

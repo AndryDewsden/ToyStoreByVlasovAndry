@@ -98,9 +98,9 @@ namespace ToyStoreByVlasovAndry.Content
             public override string ToString() => $"{Name_filter}";
         }
 
+        //составление списка
         Toys_ToyStore[] FindProduct()
         {
-            //составление списка
             var products = AppConnect.model1db.Toys_ToyStore.ToList();
             var producttall = products;
 
@@ -220,48 +220,48 @@ namespace ToyStoreByVlasovAndry.Content
             AppFrame.frameMain.Navigate(new UserPage(use));
         }
 
-        //добавить товар
+        //добавить товар через админа
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
             addFun();
         }
 
-        //редактировать товар
+        //редактировать товар через админа
         private void editButton_Click(object sender, RoutedEventArgs e)
         {
-            if ((Main)listProducts.SelectedItem != null)
+            if ((Toys_ToyStore)listProducts.SelectedItem != null)
             {
                 editFun();
             }
         }
 
-        //удаление товара
+        //удаление товара через админа
         private void delButton_Click(object sender, RoutedEventArgs e)
         {
-            if ((Main)listProducts.SelectedItem != null)
+            if ((Toys_ToyStore)listProducts.SelectedItem != null)
             {
                 delFun();
             }
         }
 
-        //Переход на добавление товара через контекстное меню
+        //Переход на добавление товара через контекстное меню через админа
         private void addFun()
         {
             AppFrame.frameMain.Navigate(new AddRedPage(null, use));
         }
 
-        //Переход на редактирование товара через контекстное меню
+        //Переход на редактирование товара через контекстное меню через админа
         private void editFun()
         {
             Toys_ToyStore red = (Toys_ToyStore)listProducts.SelectedItem;
             AppFrame.frameMain.Navigate(new AddRedPage(red, use));
         }
 
-        //Удаление товара через контекстное меню
+        //Удаление товара через контекстное меню через админа
         private void delFun()
         {
             var del = (Toys_ToyStore)listProducts.SelectedItem;
-            var res = MessageBox.Show($"Вы действительно хотите удалить этот товар?\n Будет удалён:\nНаименование: {del.toy_name} \nАртикль: {del.toy_discription} \n{del.toy_image}", "Уведомление", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            var res = MessageBox.Show($"Вы действительно хотите удалить этот товар?\n Будет удалён:\nНаименование: {del.toy_name} \nАртикль: {del.toy_discription} \n{del.pic}", "Уведомление", MessageBoxButton.OKCancel, MessageBoxImage.Information);
 
             if (res == MessageBoxResult.OK)
             {
@@ -270,12 +270,12 @@ namespace ToyStoreByVlasovAndry.Content
                     AppConnect.model1db.Toys_ToyStore.Remove(del);
                     AppConnect.model1db.SaveChanges();
                     listProducts.ItemsSource = FindProduct();
-                    MessageBox.Show("Данные успешно удалены", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    //MessageBox.Show("Данные успешно удалены", "Тестирование", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Что-то пошло не так", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -283,6 +283,7 @@ namespace ToyStoreByVlasovAndry.Content
         //кнопка на товаре
         private void Add_toCart_Click(object sender, EventArgs e)
         {
+            MessageBox.Show($"", "Тестирование", MessageBoxButton.OK);
             AddToCart();
         }
 
@@ -292,9 +293,11 @@ namespace ToyStoreByVlasovAndry.Content
             string numOrder;
             Directories_ToyStore userList = AppConnect.model1db.Directories_ToyStore.FirstOrDefault(x => x.directory_id_user == use.id_user);
             
+            //присваивание товара к номеру заказа
             if(userList == null)
             {
-                numOrder = use.id_user.ToString();//
+                //генератор номера заказа
+                numOrder = use.id_user.ToString();
 
                 try
                 {
@@ -316,9 +319,12 @@ namespace ToyStoreByVlasovAndry.Content
                 numOrder = userList.directory_order_number.ToString();
             }
 
+            //Добавление товара в корзину
             var ord = (Toys_ToyStore)listProducts.SelectedItem;
 
-            if (ord != null)
+            Orders_ToyStore goodOrder = AppConnect.model1db.Orders_ToyStore.FirstOrDefault(x => x.order_id_toy == ord.id_toy);
+
+            if (ord != null && goodOrder == null)
             {
                 try
                 {
@@ -330,11 +336,16 @@ namespace ToyStoreByVlasovAndry.Content
                     };
                     AppConnect.model1db.Orders_ToyStore.Add(userOrder);
                     AppConnect.model1db.SaveChanges();
+                    //MessageBox.Show("Ваш товар успешно добавлен в корзину.", "Тестовое уведомление", MessageBoxButton.OK);
                 }
                 catch
                 {
                     MessageBox.Show("Ошибка при внедрении данных на сервер!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+            else
+            {
+                //MessageBox.Show("Этот товар уже есть в вашей корзине", "Тестовое уведомление", MessageBoxButton.OK);
             }
         }
     }

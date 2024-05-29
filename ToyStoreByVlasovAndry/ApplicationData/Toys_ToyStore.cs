@@ -37,11 +37,11 @@ namespace ToyStoreByVlasovAndry.ApplicationData
             {
                 if (String.IsNullOrEmpty(toy_image) || String.IsNullOrWhiteSpace(toy_image))
                 {
-                    return "images\\picture.png";
+                    return "/images/picture.png";
                 }
                 else
                 {
-                    return "images\\" + toy_image;
+                    return "/images/" + toy_image;
                 }
             }
         }
