@@ -9,14 +9,14 @@
       Title="Авторизация">
 
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="30,30,0,0">
-            <Label Content="Введите логин:" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
-            <TextBox x:Name="txbLogin" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="30"/>
-            <Label Content="Введите пароль:" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
-            <PasswordBox x:Name="txbPassword" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="Enter" Content="Войти" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="80" Height="30" Click="Enter_Click" FontWeight="Bold"/>
-                <Button x:Name="SendReg" Content="Регистрация" HorizontalAlignment="Center" Margin="10,5,0,0" VerticalAlignment="Center" Width="110" Height="30" Click="SendReg_Click" FontWeight="Bold"/>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="30,30,0,0">
+            <Label Content="Введите логин:" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
+            <TextBox x:Name="txbLogin" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="30"/>
+            <Label Content="Введите пароль:" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
+            <PasswordBox x:Name="txbPassword" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30"/>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="Enter" Content="Войти" Margin="0,5,0,0" VerticalAlignment="Center" Width="80" Height="30" Click="Enter_Click" FontWeight="Bold"/>
+                <Button x:Name="SendReg" Content="Регистрация" Margin="10,5,0,0" VerticalAlignment="Center" Width="110" Height="30" Click="SendReg_Click" FontWeight="Bold"/>
             </StackPanel>
             <Button x:Name="ExitB" Content="Выйти из приложения" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold" Click="ExitB_Click" />
         </StackPanel>

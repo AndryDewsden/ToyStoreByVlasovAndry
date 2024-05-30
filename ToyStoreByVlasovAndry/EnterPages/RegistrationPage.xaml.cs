@@ -60,7 +60,7 @@ namespace ToyStoreByVlasovAndry.EnterPages
                 AppConnect.model1db.Users_ToyStore.Add(userObj);
                 AppConnect.model1db.SaveChanges();
                 MessageBox.Show("Вы успешно зарегестрировались!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                AppFrame.frameMain.Navigate(new UserPage(userObj));
+                AppFrame.frameMain.Navigate(new ShopPage(userObj));
             }
             catch
             {

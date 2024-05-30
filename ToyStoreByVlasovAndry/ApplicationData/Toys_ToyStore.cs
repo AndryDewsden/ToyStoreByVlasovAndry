@@ -41,7 +41,7 @@ namespace ToyStoreByVlasovAndry.ApplicationData
                 }
                 else
                 {
-                    return "/images/" + toy_image;
+                    return $"/images/{toy_image}";
                 }
             }
         }

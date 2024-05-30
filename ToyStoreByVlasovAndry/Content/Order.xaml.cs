@@ -14,6 +14,13 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ToyStoreByVlasovAndry.ApplicationData;
 
+using System.IO;
+using System.Xml.Linq;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Paragraph = iTextSharp.text.Paragraph;
+using Aspose.BarCode.Generation;
+
 namespace ToyStoreByVlasovAndry.Content
 {
     /// <summary>
@@ -72,12 +79,87 @@ namespace ToyStoreByVlasovAndry.Content
 
         private void goCart_Click(object sender, RoutedEventArgs e)
         {
-            AppFrame.frameMain.Navigate(new UserPage(use));
+            AppFrame.frameMain.GoBack();
         }
 
         private void userDisplay_Click(object sender, RoutedEventArgs e)
         {
-            AppFrame.frameMain.GoBack();
+            AppFrame.frameMain.Navigate(new UserPage(use));
+        }
+
+        private void doDoc_Click(object sender, RoutedEventArgs e)
+        {
+            doPDF();
+        }
+
+        private void doPDF()
+        {
+            //новый документ
+            Document doc = new Document();
+
+            try
+            {
+                PdfWriter.GetInstance(doc, new FileStream("..\\..\\output.pdf", FileMode.Create));
+
+                doc.Open();
+                BaseFont baseFont = BaseFont.CreateFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+
+                Font font = new Font(baseFont, 12);
+                Font font1 = new Font(baseFont, 23, 3, BaseColor.BLUE);
+                Paragraph paragraph1 = new Paragraph("СПИСОК ТОВАРОВ ", font1);
+                paragraph1.Alignment = Element.ALIGN_CENTER;
+                doc.Add(paragraph1);
+                decimal sum = 0;
+
+                foreach (var item in AppConnect.model1db.Toys_ToyStore.ToList())
+                {
+                    if (item is Toys_ToyStore)
+                    {
+                        Toys_ToyStore data = (Toys_ToyStore)item;
+
+                        doc.Add(new Paragraph("Наименование: " + data.toy_name, font));
+                        sum += data.toy_wholesalePrice;
+                    }
+                }
+                Paragraph paragraph = new Paragraph("Сумма: " + sum.ToString(), font);
+                paragraph.Alignment = Element.ALIGN_RIGHT;
+                doc.Add(paragraph);
+            }
+            catch (DocumentException de)
+            {
+                Console.Error.WriteLine(de.Message);
+            }
+            catch (IOException ioe)
+            {
+                Console.Error.WriteLine(ioe.Message);
+            }
+            finally
+            {
+                doc.Close();
+            }
+        }
+
+        int a = 1;
+        private void doBarCode_Click(object sender, RoutedEventArgs e)
+        {
+            doQR();
+        }
+
+        private void doQR()
+        {
+            BitmapImage bitmap = new BitmapImage();
+            BarcodeGenerator gen = new BarcodeGenerator(EncodeTypes.QR, "https://bom.firpo.ru/Public/86");
+            gen.Parameters.Barcode.XDimension.Pixels = 34;
+
+            string dataDir = @"C:\Users\10210795\source\repos\ToyStoreByVlasovAndry\ToyStoreByVlasovAndry\";
+            gen.Save(dataDir + a.ToString() + "1.png", BarCodeImageFormat.Png);
+
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(dataDir + a.ToString() + "1.png");
+            bitmap.EndInit();
+
+            QRimg.Source = bitmap;
+            a++;
         }
     }
 }

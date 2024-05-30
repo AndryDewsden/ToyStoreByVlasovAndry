@@ -44,11 +44,11 @@ namespace ToyStoreByVlasovAndry.EnterPages
                     {
                         case 1:
                             MessageBox.Show("Здравствуйте, \nадминистратор \n" + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                            AppFrame.frameMain.Navigate(new UserPage(userObj));
+                            AppFrame.frameMain.Navigate(new ShopPage(userObj));
                             break;
                         case 2:
                             MessageBox.Show("Здравствуйте, \nпользователь \n" + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                            AppFrame.frameMain.Navigate(new UserPage(userObj));
+                            AppFrame.frameMain.Navigate(new ShopPage(userObj));
                             break;
                         default:
                             MessageBox.Show("Ощибка данных на сервере.", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);

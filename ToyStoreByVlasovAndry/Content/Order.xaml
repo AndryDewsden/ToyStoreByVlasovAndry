@@ -14,79 +14,38 @@
             <RowDefinition Height="450"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="600"/>
             <ColumnDefinition Width="400"/>
         </Grid.ColumnDefinitions>
 
         <ListView x:Name="listCart" Grid.Row="1" Grid.Column="0" ScrollViewer.CanContentScroll="False">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="110"/>
-                            <ColumnDefinition Width="230"/>
-                            <ColumnDefinition Width="230"/>
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Grid.Column="0" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
-                            <TextBlock>
-                                <Image Source="{Binding Toys_ToyStore.pic}" Width="100" Height="100"/>
-                            </TextBlock>
-                        </StackPanel>
-
-                        <StackPanel Grid.Column="1" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
-                            <TextBlock>
-                                <Run Text="{Binding Toys_ToyStore.toy_name}"/>
-                                <Run Text=" ("/>
-                                <Run Text="{Binding Toys_ToyStore.AgeCategories_ToyStore.ageCategory_name}"/>
-                                <Run Text=")"/>
-                            </TextBlock>
-                            <TextBlock>
-                                <Run Text="{Binding Toys_ToyStore.Manufacturers_ToyStore.manufacturer_name}"/>
-                            </TextBlock>
-                            <TextBlock>
-                                <Run Text="{Binding Toys_ToyStore.Providers_ToyStore.provider_name}"/>
-                            </TextBlock>
-                            <TextBlock TextWrapping="Wrap">
-                                <Run Text="Описание: " FontWeight="Bold"/>
-                                <Run Text="{Binding Toys_ToyStore.toy_discription}"/>
-                            </TextBlock>
-                        </StackPanel>
-
-                        <StackPanel Grid.Column="2" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
-                            <TextBlock>
-                                <Run Text="Количество: " FontWeight="Bold"/>
-                                <Run Text="{Binding order_quantity}"/>
-                            </TextBlock>
-                            <TextBlock>
-                                <Run Text="Оптовая цена: " FontWeight="Bold"/>
-                                <Run Text="{Binding Toys_ToyStore.toy_wholesalePrice}"/>
-                                <Run Text=" руб."/>
-                            </TextBlock>
-                            <TextBlock>
-                                <Run Text="Розничная цена: " FontWeight="Bold"/>
-                                <Run Text="{Binding Toys_ToyStore.toy_retailPrice}"/>
-                                <Run Text=" руб."/>
-                            </TextBlock>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Toys_ToyStore.toy_name}" Header="Наименование" Width="160"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Toys_ToyStore.toy_wholesalePrice}" Header="Оптовая цена" Width="110"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Toys_ToyStore.toy_retailPrice}" Header="Розничная цена" Width="110"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding order_quantity}" Header="Количество" Width="80"/>
+                </GridView>
+            </ListView.View>
         </ListView>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
             <Label Content = "Кол-во товаров: "/>
             <Label x:Name="GoodCount" Content="0"/>
             <Label Content = "Оптовая сумма:"/>
             <Label x:Name="WholeSale" Content = "0"/>
             <Label Content = "Розничная сумма:"/>
             <Label x:Name="Retail" Content = "0"/>
+            <Image x:Name="QRimg" Width="200" Height="200"/>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
             <Button x:Name="userDisplay" Content="Пользователь" Width="120" Height="30" Margin="5,0,5,0" Click="userDisplay_Click"/>
-            <Button x:Name="goCart" Content="Список товаров" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="goCart_Click"/>
+            <Button x:Name="goCart" Content="Назад" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="goCart_Click"/>
+            <Button x:Name="doDoc" Content="PDF документ" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="doDoc_Click"/>
+            <Button x:Name="doBarCode" Content="Штрих код" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="doBarCode_Click"/>
         </StackPanel>
     </Grid>
 </Page>

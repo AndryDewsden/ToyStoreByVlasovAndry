@@ -112,7 +112,7 @@ namespace ToyStoreByVlasovAndry.Content
                 {
                     var res = MessageBox.Show("Вы действительно хотите увеличить это число?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
-                    if (res == MessageBoxResult.OK)
+                    if (res == MessageBoxResult.Yes)
                     {
                         try
                         {
@@ -141,7 +141,7 @@ namespace ToyStoreByVlasovAndry.Content
                 {
                     var res = MessageBox.Show("Вы действительно хотите убавить это число?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
-                    if (res == MessageBoxResult.OK)
+                    if (res == MessageBoxResult.Yes)
                     {
                         try
                         {

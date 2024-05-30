@@ -308,6 +308,7 @@ namespace ToyStoreByVlasovAndry.Content
                     };
                     AppConnect.model1db.Directories_ToyStore.Add(userDir);
                     AppConnect.model1db.SaveChanges();
+                    MessageBox.Show("Новый номер сгенернирован", "Тестирование", MessageBoxButton.OK);
                 }
                 catch
                 {
@@ -316,13 +317,14 @@ namespace ToyStoreByVlasovAndry.Content
             }
             else
             {
+                MessageBox.Show("Товару успешно присвоен номер", "Тестирование", MessageBoxButton.OK);
                 numOrder = userList.directory_order_number.ToString();
             }
 
             //Добавление товара в корзину
             var ord = (Toys_ToyStore)listProducts.SelectedItem;
 
-            Orders_ToyStore goodOrder = AppConnect.model1db.Orders_ToyStore.FirstOrDefault(x => x.order_id_toy == ord.id_toy);
+            var goodOrder = AppConnect.model1db.Orders_ToyStore.FirstOrDefault(x => x.order_id_toy == ord.id_toy && x.order_number == numOrder);
 
             if (ord != null && goodOrder == null)
             {
@@ -336,16 +338,16 @@ namespace ToyStoreByVlasovAndry.Content
                     };
                     AppConnect.model1db.Orders_ToyStore.Add(userOrder);
                     AppConnect.model1db.SaveChanges();
-                    //MessageBox.Show("Ваш товар успешно добавлен в корзину.", "Тестовое уведомление", MessageBoxButton.OK);
+                    MessageBox.Show("Ваш товар успешно добавлен в корзину.", "Тестовое уведомление", MessageBoxButton.OK);
                 }
                 catch
                 {
-                    MessageBox.Show("Ошибка при внедрении данных на сервер!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Ошибка при внедрении данных на сервер!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
             {
-                //MessageBox.Show("Этот товар уже есть в вашей корзине", "Тестовое уведомление", MessageBoxButton.OK);
+                MessageBox.Show("Этот товар уже есть в вашей корзине", "Тестовое уведомление", MessageBoxButton.OK);
             }
         }
     }

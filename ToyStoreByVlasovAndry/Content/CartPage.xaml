@@ -28,7 +28,7 @@
                             <ColumnDefinition Width="180"/>
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="0" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
+                        <StackPanel Grid.Column="0" Width="auto" Orientation="Vertical" HorizontalAlignment="Center">
                             <TextBlock>
                                 <Image Source="{Binding Toys_ToyStore.pic}" Width="100" Height="100"/>
                             </TextBlock>
@@ -74,7 +74,7 @@
                             </TextBlock>
                         </StackPanel>
 
-                        <StackPanel Grid.Column="3" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
+                        <StackPanel Grid.Column="3" Width="auto" Orientation="Vertical" HorizontalAlignment="Center">
                             <TextBlock>
                                 <Run Text="Количество: " FontWeight="Bold"/>
                                 <Run Text="{Binding order_quantity}"/>
