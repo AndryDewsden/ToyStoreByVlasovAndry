@@ -14,24 +14,24 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="450"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="userDisplay" Content="Пользователь" Click="userDisplay_Click" Width="120" Height="30" Margin="5,0,5,0"/>
-                <Button x:Name="goCart" Content="Корзина" Click="goCart_Click" Width="100" Height="30" Margin="5,0,5,0"/>
-                <Button x:Name="addCart" Content="Добавить в корзину" Width="120" Height="30" Margin="5,0,5,0"/>
-                <Button x:Name="addButton" Content="Добавить товар" Width="120" Height="30" Margin="5,0,5,0" Click="addButton_Click"/>
-                <Button x:Name="editButton" Content="Редактировать товар" Width="120" Height="30" Margin="5,0,5,0" Click="editButton_Click"/>
-                <Button x:Name="delButton" Content="Удалить товар" Width="120" Height="30" Margin="5,0,5,0" Click="delButton_Click"/>
+        <Grid Grid.Row="2" Margin="0,5">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button x:Name="userDisplay" Content="Пользователь" Click="userDisplay_Click" Width="120" Height="30" Margin="5,0,5,0" Background="#00CED1" Foreground="#E0FFFF"/>
+                <Button x:Name="goCart" Content="Корзина" Click="goCart_Click" Width="100" Height="30" Margin="5,0,5,0" Background="#00CED1" Foreground="#E0FFFF"/>
+                <Button x:Name="addCart" Content="Добавить в корзину" Width="120" Height="30" Margin="5,0,5,0" Background="#00CED1" Foreground="#E0FFFF"/>
+                <Button x:Name="addButton" Content="Добавить товар" Width="120" Height="30" Margin="5,0,5,0" Click="addButton_Click" Background="#00CED1" Foreground="#E0FFFF"/>
+                <Button x:Name="editButton" Content="Редактировать товар" Width="120" Height="30" Margin="5,0,5,0" Click="editButton_Click" Background="#00CED1" Foreground="#E0FFFF"/>
+                <Button x:Name="delButton" Content="Удалить товар" Width="120" Height="30" Margin="5,0,5,0" Click="delButton_Click" Background="#00CED1" Foreground="#E0FFFF"/>
             </StackPanel>
         </Grid>
         
-        <Grid Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
+        <Grid Grid.Row="0" Margin="0,5">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock Text="Поиск" Width="40" Margin="5,0,0,0" TextAlignment="Center"/>
                 <TextBox x:Name="Searcher" Margin="5,0,0,0" Width="120" Height="30" TextChanged="Searcher_TextChanged"/>
                 <TextBlock Text="Фильтр" Margin="5,0,0,0" Width="60" TextAlignment="Center"/>
@@ -42,69 +42,72 @@
             </StackPanel>
         </Grid>
 
-        <ListView x:Name="listProducts" Grid.Row="2" ScrollViewer.CanContentScroll="False">
+        <ListView x:Name="listProducts" Grid.Row="1" ScrollViewer.CanContentScroll="False" Width="960" Background="#AFEEEE	">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Border BorderThickness="1" BorderBrush="Gray" CornerRadius="10" Background="#ffffff">
+
+                        <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="310"/>
                             <ColumnDefinition Width="310"/>
-                            <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="150"/>
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="0" Width="auto" Orientation="Vertical" HorizontalAlignment="Center">
-                            <TextBlock>
+                            <StackPanel Grid.Column="0" Width="auto" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock>
                                 <Image Source="{Binding pic}" Width="100" Height="100"/>
-                            </TextBlock>
-                        </StackPanel>
+                                </TextBlock>
+                            </StackPanel>
 
-                        <StackPanel Grid.Column="1" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
-                            <TextBlock>
+                            <StackPanel Grid.Column="1" Width="auto" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <TextBlock>
                                 <Run Text="Название: " FontWeight="Bold"/>
                                 <Run Text="{Binding toy_name}"/>
-                            </TextBlock>
-                            <TextBlock>
+                                </TextBlock>
+                                <TextBlock>
                                 <Run Text="Производитель: " FontWeight="Bold"/>
                                 <Run Text="{Binding Manufacturers_ToyStore.manufacturer_name}"/>
-                            </TextBlock>
-                            <TextBlock>
+                                </TextBlock>
+                                <TextBlock>
                                 <Run Text="Поставшик: " FontWeight="Bold"/>
                                 <Run Text="{Binding Providers_ToyStore.provider_name}"/>
-                            </TextBlock>
-                            <TextBlock>
+                                </TextBlock>
+                                <TextBlock>
                                 <Run Text="Оптовая цена: " FontWeight="Bold"/>
                                 <Run Text="{Binding toy_wholesalePrice}"/>
                                 <Run Text=" руб."/>
-                            </TextBlock>
-                            <TextBlock>
+                                </TextBlock>
+                                <TextBlock>
                                 <Run Text="Розничная цена: " FontWeight="Bold"/>
                                 <Run Text="{Binding toy_retailPrice}"/>
                                 <Run Text=" руб."/>
-                            </TextBlock>
-                        </StackPanel>
+                                </TextBlock>
+                            </StackPanel>
 
-                        <StackPanel Grid.Column="2" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
-                            <TextBlock>
+                            <StackPanel Grid.Column="2" Width="auto" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <TextBlock>
                                 <Run Text="Возрастная категория: " FontWeight="Bold"/>
                                 <Run Text="{Binding AgeCategories_ToyStore.ageCategory_name}"/>
-                            </TextBlock>
-                            <TextBlock>
+                                </TextBlock>
+                                <TextBlock>
                                 <Run Text="Категория: " FontWeight="Bold"/>
                                 <Run Text="{Binding Categories_ToyStore.category_name}"/>
-                            </TextBlock>
-                            <TextBlock TextWrapping="Wrap">
+                                </TextBlock>
+                                <TextBlock TextWrapping="Wrap">
                                 <Run Text="Описание: " FontWeight="Bold"/>
                                 <Run Text="{Binding toy_discription}"/>
-                            </TextBlock>
-                        </StackPanel>
+                                </TextBlock>
+                            </StackPanel>
 
-                        <StackPanel Grid.Column="3" Width="auto" Orientation="Vertical" HorizontalAlignment="Center">
-                            <TextBlock>
-                                <Button x:Name="Add_toCart" Content="Добавить в корзину" Width="120" Click="Add_toCart_Click"/>
-                            </TextBlock>
-                        </StackPanel>
+                            <StackPanel Grid.Column="3" Width="auto" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock>
+                                <Button x:Name="Add_toCart" Width="120" Click="Add_toCart_Click"><Image Source="/images/tocart.png"/></Button>
+                                </TextBlock>
+                            </StackPanel>
                     </Grid>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.ContextMenu>

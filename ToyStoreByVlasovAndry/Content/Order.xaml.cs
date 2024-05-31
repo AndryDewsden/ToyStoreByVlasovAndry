@@ -55,6 +55,7 @@ namespace ToyStoreByVlasovAndry.Content
                 productsInCart = AppConnect.model1db.Orders_ToyStore.Where(x => x.order_number == numOrder).ToList();
             }
 
+            int CountGood = 0;
             int WholeSaleSum = 0;
             int RetailSaleSum = 0;
 
@@ -66,11 +67,12 @@ namespace ToyStoreByVlasovAndry.Content
                 int whol = pro.toy_wholesalePrice;
                 int ret = pro.toy_retailPrice;
 
+                CountGood += quan;
                 WholeSaleSum += quan * whol;
                 RetailSaleSum += quan * ret;
             }
 
-            GoodCount.Content = productsInCart.Count;
+            GoodCount.Content = CountGood;
             WholeSale.Content = WholeSaleSum;
             Retail.Content = RetailSaleSum;
             

@@ -10,9 +10,9 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="450"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -20,32 +20,47 @@
             <ColumnDefinition Width="400"/>
         </Grid.ColumnDefinitions>
 
-        <ListView x:Name="listCart" Grid.Row="1" Grid.Column="0" ScrollViewer.CanContentScroll="False">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Toys_ToyStore.toy_name}" Header="Наименование" Width="160"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Toys_ToyStore.toy_wholesalePrice}" Header="Оптовая цена" Width="110"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Toys_ToyStore.toy_retailPrice}" Header="Розничная цена" Width="110"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding order_quantity}" Header="Количество" Width="80"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="3" CornerRadius="15">
+            <ListView x:Name="listCart" Grid.Row="1" Grid.Column="0" ScrollViewer.CanContentScroll="False" Margin="5,0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Toys_ToyStore.toy_name}" Header="Наименование" Width="160"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Toys_ToyStore.toy_wholesalePrice}" Header="Оптовая цена" Width="110"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Toys_ToyStore.toy_retailPrice}" Header="Розничная цена" Width="110"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding order_quantity}" Header="Количество" Width="80"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Border>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
-            <Label Content = "Кол-во товаров: "/>
-            <Label x:Name="GoodCount" Content="0"/>
-            <Label Content = "Оптовая сумма:"/>
-            <Label x:Name="WholeSale" Content = "0"/>
-            <Label Content = "Розничная сумма:"/>
-            <Label x:Name="Retail" Content = "0"/>
-            <Image x:Name="QRimg" Width="200" Height="200"/>
-        </StackPanel>
+        <Border Grid.Row="1" Grid.Column="1" BorderThickness="1" BorderBrush="Gray" Background="White" MinHeight="440" MaxHeight="480" MinWidth="260" MaxWidth="260" CornerRadius="15">
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10">
+                <StackPanel HorizontalAlignment="Center">
+                    <Label Content="Чек"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content = "Кол-во товаров: "/>
+                    <Label x:Name="GoodCount" Content="0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content = "Оптовая сумма:"/>
+                    <Label x:Name="WholeSale" Content = "0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content = "Розничная сумма:"/>
+                    <Label x:Name="Retail" Content = "0"/>
+                </StackPanel>
+                <Border MinHeight="210" MaxHeight="220" MinWidth="200" MaxWidth="220" BorderThickness="1" BorderBrush="Black" Background="White">
+                    <Image x:Name="QRimg" Width="200" Height="200"/>
+                </Border>
+            </StackPanel>
+        </Border>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
-            <Button x:Name="userDisplay" Content="Пользователь" Width="120" Height="30" Margin="5,0,5,0" Click="userDisplay_Click"/>
-            <Button x:Name="goCart" Content="Назад" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="goCart_Click"/>
-            <Button x:Name="doDoc" Content="PDF документ" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="doDoc_Click"/>
-            <Button x:Name="doBarCode" Content="Штрих код" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="doBarCode_Click"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="0,5">
+            <Button x:Name="userDisplay" Content="Пользователь" Width="120" Height="30" Margin="5,0,5,0" Click="userDisplay_Click" Background="#00CED1" Foreground="#E0FFFF"/>
+            <Button x:Name="goCart" Content="Назад" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="goCart_Click" Background="#00CED1" Foreground="#E0FFFF"/>
+            <Button x:Name="doDoc" Content="PDF документ" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="doDoc_Click" Background="#00CED1" Foreground="#E0FFFF"/>
+            <Button x:Name="doBarCode" Content="Штрих код" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="doBarCode_Click" Background="#00CED1" Foreground="#E0FFFF"/>
         </StackPanel>
     </Grid>
 </Page>

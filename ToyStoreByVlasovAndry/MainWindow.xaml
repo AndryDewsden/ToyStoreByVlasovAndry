@@ -5,16 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToyStoreByVlasovAndry"
         mc:Ignorable="d"
-        Title="ЯНеПридумалЕщёНазвание" Height="650" Width="1000">
+        Title="ЯНеПридумалЕщёНазвание" Height="650" Width="1000"
+        Background="#e0ffff"
+        Icon="/images/icon.png">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="550"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="570"/>
         </Grid.RowDefinitions>
-        
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Image Source="{Binding pic}"/>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#00CED1">
+            <Image Source="/images/icon.png"/>
             <TextBlock Style="{StaticResource Title}" Text="{Binding ElementName=FrmMain, Path=Content.Title}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <Line X1="0" Y1="0" X2="1000" Y2="0" Stroke="#808080" StrokeThickness="4"/>
         </StackPanel>
         <StackPanel Grid.Row="1">
             <Frame x:Name="FrmMain" NavigationUIVisibility="Hidden"/>

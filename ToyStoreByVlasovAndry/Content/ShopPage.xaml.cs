@@ -350,5 +350,10 @@ namespace ToyStoreByVlasovAndry.Content
                 MessageBox.Show("Этот товар уже есть в вашей корзине", "Тестовое уведомление", MessageBoxButton.OK);
             }
         }
+
+        private void Add_toCart_DpiChanged(object sender, DpiChangedEventArgs e)
+        {
+
+        }
     }
 }

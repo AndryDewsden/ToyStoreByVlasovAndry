@@ -5,20 +5,24 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ToyStoreByVlasovAndry.EnterPages"
       mc:Ignorable="d" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       d:DesignHeight="650" d:DesignWidth="1000"
       Title="Авторизация">
 
+    
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="30,30,0,0">
-            <Label Content="Введите логин:" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
-            <TextBox x:Name="txbLogin" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="30"/>
-            <Label Content="Введите пароль:" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
-            <PasswordBox x:Name="txbPassword" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30"/>
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="Enter" Content="Войти" Margin="0,5,0,0" VerticalAlignment="Center" Width="80" Height="30" Click="Enter_Click" FontWeight="Bold"/>
-                <Button x:Name="SendReg" Content="Регистрация" Margin="10,5,0,0" VerticalAlignment="Center" Width="110" Height="30" Click="SendReg_Click" FontWeight="Bold"/>
+        <Border Margin="15" Background="#ffffff" Padding="0" MinWidth="250" MaxWidth="250" MinHeight="250" MaxHeight="270" CornerRadius="25" BorderBrush="Gray" BorderThickness="1">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="5,5">
+                <Label Content="Введите логин:" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
+                <TextBox x:Name="txbLogin" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="30" TextChanged="txbLogin_TextChanged"/>
+                <Label Content="Введите пароль:" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
+                <PasswordBox x:Name="txbPassword" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" PasswordChanged="txbPassword_PasswordChanged"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="Enter" Content="Войти" Margin="0,5,0,0" VerticalAlignment="Center" Width="80" Height="30" Click="Enter_Click" FontWeight="Bold" Background="#00CED1" Foreground="#E0FFFF"/>
+                    <Button x:Name="SendReg" Content="Регистрация" Margin="10,5,0,0" VerticalAlignment="Center" Width="110" Height="30" Click="SendReg_Click" FontWeight="Bold" Background="#00CED1" Foreground="#E0FFFF"/>
+                </StackPanel>
+                <Button x:Name="ExitB" Content="Выйти из приложения" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold" Click="ExitB_Click" Background="#00CED1" Foreground="#E0FFFF"/>
             </StackPanel>
-            <Button x:Name="ExitB" Content="Выйти из приложения" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold" Click="ExitB_Click" />
-        </StackPanel>
+        </Border>
     </Grid>
 </Page>

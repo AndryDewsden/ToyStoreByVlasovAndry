@@ -17,14 +17,12 @@ using ToyStoreByVlasovAndry.Content;
 
 namespace ToyStoreByVlasovAndry.EnterPages
 {
-    /// <summary>
-    /// Логика взаимодействия для LoginPage.xaml
-    /// </summary>
     public partial class LoginPage : Page
     {
         public LoginPage()
         {
             InitializeComponent();
+            EnterEnable();
         }
 
         private void Enter_Click(object sender, RoutedEventArgs e)
@@ -75,6 +73,28 @@ namespace ToyStoreByVlasovAndry.EnterPages
             if(exitBi == MessageBoxResult.Yes)
             {
                 Application.Current.Shutdown();
+            }
+        }
+
+        private void txbPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            EnterEnable();
+        }
+
+        private void txbLogin_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EnterEnable();
+        }
+
+        private void EnterEnable()
+        {
+            if (txbPassword.Password.Length > 0 && txbLogin.Text.Length > 0)
+            {
+                Enter.IsEnabled = true;
+            }
+            else
+            {
+                Enter.IsEnabled = false;
             }
         }
     }

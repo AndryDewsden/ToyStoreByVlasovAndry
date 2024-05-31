@@ -15,12 +15,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ToyStoreByVlasovAndry.ApplicationData;
 using ToyStoreByVlasovAndry.Content;
+using static iTextSharp.text.pdf.events.IndexEvents;
 
 namespace ToyStoreByVlasovAndry.EnterPages
 {
-    /// <summary>
-    /// Логика взаимодействия для RegistrationPage.xaml
-    /// </summary>
     public partial class RegistrationPage : Page
     {
         public RegistrationPage()
@@ -70,33 +68,39 @@ namespace ToyStoreByVlasovAndry.EnterPages
 
         private void passbox2_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (passbox2.Password != passbox1.Password || passbox1.Password.Length == 0)
+            if (passbox2.Password == passbox1.Password && passbox1.Password.Length != 0)
+            {
+                passbox2.Background = Brushes.LightGreen;
+                passbox2.BorderBrush = Brushes.Green;
+                if (tbxUserName.Text.Length > 0 && txbLogin.Text.Length > 0)
+                {
+                    BtRegistration.IsEnabled = true;
+                }
+            }
+            else
             {
                 BtRegistration.IsEnabled = false;
                 passbox2.Background = Brushes.LightCoral;
                 passbox2.BorderBrush = Brushes.Red;
-            }
-            else
-            {
-                BtRegistration.IsEnabled = true;
-                passbox2.Background = Brushes.LightGreen;
-                passbox2.BorderBrush = Brushes.Green;
             }
         }
 
         private void passbox1_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (passbox2.Password != passbox1.Password || passbox2.Password.Length == 0)
+            if (passbox2.Password == passbox1.Password && passbox2.Password.Length != 0)
+            {
+                passbox2.Background = Brushes.LightGreen;
+                passbox2.BorderBrush = Brushes.Green;
+                if (tbxUserName.Text.Length > 0 && txbLogin.Text.Length > 0)
+                {
+                    BtRegistration.IsEnabled = true;
+                }
+            }
+            else
             {
                 BtRegistration.IsEnabled = false;
                 passbox2.Background = Brushes.LightCoral;
                 passbox2.BorderBrush = Brushes.Red;
-            }
-            else
-            {
-                BtRegistration.IsEnabled = true;
-                passbox2.Background = Brushes.LightGreen;
-                passbox2.BorderBrush = Brushes.Green;
             }
         }
 
@@ -107,6 +111,30 @@ namespace ToyStoreByVlasovAndry.EnterPages
             if (exitBi == MessageBoxResult.Yes)
             {
                 Application.Current.Shutdown();
+            }
+        }
+
+        private void tbxUserName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (passbox2.Password == passbox1.Password && passbox1.Password.Length != 0 && tbxUserName.Text.Length > 0 && txbLogin.Text.Length > 0)
+            {
+                BtRegistration.IsEnabled = true;
+            }
+            else
+            {
+                BtRegistration.IsEnabled = false;
+            }
+        }
+
+        private void txbLogin_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (passbox2.Password == passbox1.Password && passbox1.Password.Length != 0 && tbxUserName.Text.Length > 0 && txbLogin.Text.Length > 0)
+            {
+                BtRegistration.IsEnabled = true;
+            }
+            else
+            {
+                BtRegistration.IsEnabled = false;
             }
         }
     }
