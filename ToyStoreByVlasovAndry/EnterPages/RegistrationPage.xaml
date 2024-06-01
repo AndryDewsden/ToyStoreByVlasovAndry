@@ -13,32 +13,50 @@
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Ваше имя пользователя:" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
-                    <TextBox x:Name="tbxUserName" HorizontalAlignment="Center" Margin="30,5,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="30" TextChanged="tbxUserName_TextChanged"/>
+                    <Grid>
+                        <TextBox x:Name="tbxUserName" HorizontalAlignment="Center" Margin="30,5,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="30" TextChanged="tbxUserName_TextChanged" VerticalContentAlignment="Center" LostFocus="tbxUserName_LostFocus"/>
+                        <TextBox x:Name="tbxUserNamePlaceHolder" Text="Впишите своё имя" Foreground="#808080" HorizontalAlignment="Center" Margin="30,5,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="30" VerticalContentAlignment="Center" GotFocus="tbxUserNamePlaceHolder_GotFocus"/>
+                    </Grid>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Ваш логин:" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
-                    <TextBox x:Name="txbLogin" HorizontalAlignment="Center" Margin="30,5,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="30" TextChanged="txbLogin_TextChanged"/>
+                    <Grid>
+                        <TextBox x:Name="txbLogin" HorizontalAlignment="Center" Margin="30,5,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="30" TextChanged="txbLogin_TextChanged" VerticalContentAlignment="Center" LostFocus="txbLogin_LostFocus"/>
+                        <TextBox x:Name="txbLoginPlaceHolder" Text="Впешите свой логин" Foreground="#808080" HorizontalAlignment="Center" Margin="30,5,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="30" VerticalContentAlignment="Center" GotFocus="txbLoginPlaceHolder_GotFocus"/>
+                    </Grid>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Ваш пароль:" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
-                    <PasswordBox x:Name="passbox1" HorizontalAlignment="Center" Margin="30,5,0,0" VerticalAlignment="Center" Width="200" Height="30" PasswordChanged="passbox1_PasswordChanged"/>
+                    <Grid>
+                        <PasswordBox x:Name="passbox1" HorizontalAlignment="Center" Margin="30,5,0,0" VerticalAlignment="Center" Width="200" Height="30" PasswordChanged="passbox1_PasswordChanged" VerticalContentAlignment="Center" LostFocus="passbox1_LostFocus"/>
+                        <TextBox x:Name="passbox1PlaceHolder" Text="Впешите пароль" Foreground="#808080" HorizontalAlignment="Center" Margin="30,5,0,0" VerticalAlignment="Center" Width="200" Height="30"  VerticalContentAlignment="Center" GotFocus="passbox1PlaceHolder_GotFocus"/>
+                    </Grid>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Подтвердите пароль: " HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
-                    <PasswordBox x:Name="passbox2" HorizontalAlignment="Center" Margin="30,5,0,0" VerticalAlignment="Center" Width="200" Height="30" PasswordChanged="passbox2_PasswordChanged"/>
+                    <Grid>
+                        <PasswordBox x:Name="passbox2" HorizontalAlignment="Center" Margin="30,5,0,0" VerticalAlignment="Center" Width="200" Height="30" PasswordChanged="passbox2_PasswordChanged" VerticalContentAlignment="Center" LostFocus="passbox2_LostFocus"/>
+                        <TextBox x:Name="passbox2PlaceHolder" Text="Повторите пароль" Foreground="#808080" HorizontalAlignment="Center" Margin="30,5,0,0" VerticalAlignment="Center" Width="200" Height="30" VerticalContentAlignment="Center" GotFocus="passbox2PlaceHolder_GotFocus"/>
+                    </Grid>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Ваш телефон*:" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
-                    <TextBox x:Name="tbxUserPhone" HorizontalAlignment="Center" Margin="30,5,0,0" VerticalAlignment="Center" Width="200" Height="30"/>
+                    <Grid>
+                        <TextBox x:Name="tbxUserPhone" HorizontalAlignment="Center" Margin="30,5,0,0" VerticalAlignment="Center" Width="200" Height="30" VerticalContentAlignment="Center" LostFocus="tbxUserPhone_LostFocus"/>
+                        <TextBox x:Name="tbxUserPhonePlaceHolder" Text="Ваш телефон" Foreground="#808080" HorizontalAlignment="Center" Margin="30,5,0,0" VerticalAlignment="Center" Width="200" Height="30" VerticalContentAlignment="Center" GotFocus="tbxUserPhonePlaceHolder_GotFocus"/>
+                    </Grid>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Ваша почта*:" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
-                    <TextBox x:Name="tbxUserMail" HorizontalAlignment="Center" Margin="30,5,0,0" VerticalAlignment="Center" Width="200" Height="30"/>
+                    <Grid>
+                        <TextBox x:Name="tbxUserMail" HorizontalAlignment="Center" Margin="30,5,0,0" VerticalAlignment="Center" Width="200" Height="30" VerticalContentAlignment="Center" LostFocus="tbxUserMail_LostFocus"/>
+                        <TextBox x:Name="tbxUserMailPlaceHolder" Text="Ваша почта" Foreground="#808080" HorizontalAlignment="Center" Margin="30,5,0,0" VerticalAlignment="Center" Width="200" Height="30" VerticalContentAlignment="Center" GotFocus="tbxUserMailPlaceHolder_GotFocus"/>
+                    </Grid>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">

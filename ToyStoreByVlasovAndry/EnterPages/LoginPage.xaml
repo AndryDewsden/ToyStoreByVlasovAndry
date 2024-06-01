@@ -14,9 +14,17 @@
         <Border Margin="15" Background="#ffffff" Padding="0" MinWidth="250" MaxWidth="250" MinHeight="250" MaxHeight="270" CornerRadius="25" BorderBrush="Gray" BorderThickness="1">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="5,5">
                 <Label Content="Введите логин:" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
-                <TextBox x:Name="txbLogin" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="30" TextChanged="txbLogin_TextChanged"/>
+                <Grid>
+                    <TextBox x:Name="txbLogin" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="30" TextChanged="txbLogin_TextChanged" VerticalContentAlignment="Center" LostFocus="txbLogin_LostFocus"/>
+                    <TextBox x:Name="txbLoginPlaceHolder" Text="Ваш логин" Foreground="#808080" Margin="0,5,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Height="30" VerticalContentAlignment="Center" GotFocus="txbLoginPlaceHolder_GotFocus"/>
+                </Grid>
+                
                 <Label Content="Введите пароль:" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" FontWeight="Bold"/>
-                <PasswordBox x:Name="txbPassword" Margin="0,5,0,0" VerticalAlignment="Center" Width="200" Height="30" PasswordChanged="txbPassword_PasswordChanged"/>
+                <Grid>
+                    <PasswordBox x:Name="txbPassword" Margin="0,5,0,0" Width="200" Height="30" PasswordChanged="txbPassword_PasswordChanged" VerticalContentAlignment="Center" LostFocus="txbPassword_LostFocus"/>
+                    <TextBox x:Name="txbPasswordPlaceHolder" Text="Ваш пароль" Foreground="#808080" Margin="0,5,0,0" Width="200" Height="30" VerticalContentAlignment="Center" GotFocus="txbPasswordPlaceHolder_GotFocus"/>
+                </Grid>
+                
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="Enter" Content="Войти" Margin="0,5,0,0" VerticalAlignment="Center" Width="80" Height="30" Click="Enter_Click" FontWeight="Bold" Background="#00CED1" Foreground="#E0FFFF"/>
                     <Button x:Name="SendReg" Content="Регистрация" Margin="10,5,0,0" VerticalAlignment="Center" Width="110" Height="30" Click="SendReg_Click" FontWeight="Bold" Background="#00CED1" Foreground="#E0FFFF"/>

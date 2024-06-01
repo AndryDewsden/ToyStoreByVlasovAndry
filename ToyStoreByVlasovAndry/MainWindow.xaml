@@ -16,7 +16,10 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#00CED1">
             <Image Source="/images/icon.png"/>
-            <TextBlock Style="{StaticResource Title}" Text="{Binding ElementName=FrmMain, Path=Content.Title}"/>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Style="{StaticResource Title}" Text="{Binding ElementName=FrmMain, Path=Content.Title}" Foreground="#E0FFFF" FontSize="40px" Margin="0"/>
+                <Label Content="Copyright by Vlasov Andry @ 2024" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#E0FFFF" Margin="0,0,0,0"/>
+            </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="1">
             <Line X1="0" Y1="0" X2="1000" Y2="0" Stroke="#808080" StrokeThickness="4"/>

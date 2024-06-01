@@ -94,6 +94,11 @@ namespace ToyStoreByVlasovAndry.Content
             doPDF();
         }
 
+        private void doBarCode_Click(object sender, RoutedEventArgs e)
+        {
+            doQR();
+        }
+
         private void doPDF()
         {
             //новый документ
@@ -142,10 +147,6 @@ namespace ToyStoreByVlasovAndry.Content
         }
 
         int a = 1;
-        private void doBarCode_Click(object sender, RoutedEventArgs e)
-        {
-            doQR();
-        }
 
         private void doQR()
         {

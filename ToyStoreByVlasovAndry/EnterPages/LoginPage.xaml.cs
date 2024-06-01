@@ -97,5 +97,37 @@ namespace ToyStoreByVlasovAndry.EnterPages
                 Enter.IsEnabled = false;
             }
         }
+
+        private void txbLogin_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if(string.IsNullOrEmpty(txbLogin.Text))
+            {
+                txbLogin.Visibility = Visibility.Collapsed;
+                txbLoginPlaceHolder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void txbLoginPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txbLoginPlaceHolder.Visibility= Visibility.Collapsed;
+            txbLogin.Visibility= Visibility.Visible;
+            txbLogin.Focus();
+        }
+
+        private void txbPassword_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txbPassword.Password))
+            {
+                txbPassword.Visibility = Visibility.Collapsed;
+                txbPasswordPlaceHolder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void txbPasswordPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txbPasswordPlaceHolder.Visibility = Visibility.Collapsed;
+            txbPassword.Visibility = Visibility.Visible;
+            txbPassword.Focus();
+        }
     }
 }

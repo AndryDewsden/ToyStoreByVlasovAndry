@@ -297,7 +297,29 @@ namespace ToyStoreByVlasovAndry.Content
             if(userList == null)
             {
                 //генератор номера заказа
-                numOrder = use.id_user.ToString();
+                //numOrder = use.id_user.ToString();
+                
+                Random r = new Random();
+
+                numOrder = "R0";
+
+                while (AppConnect.model1db.Directories_ToyStore.Where(x => x.directory_order_number == numOrder).Count() > 0)
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        int t = r.Next(1, 2);
+                        switch (t)
+                        {
+                            case 1:
+                                numOrder += Convert.ToChar(r.Next(97, 122));
+                                break;
+                            case 2:
+                                numOrder += r.Next(0, 9).ToString();
+                                break;
+                        }
+                    }
+                }
+
 
                 try
                 {

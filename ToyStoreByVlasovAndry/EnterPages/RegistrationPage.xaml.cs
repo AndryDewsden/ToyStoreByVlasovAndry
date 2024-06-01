@@ -137,5 +137,101 @@ namespace ToyStoreByVlasovAndry.EnterPages
                 BtRegistration.IsEnabled = false;
             }
         }
+
+        private void tbxUserName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(tbxUserName.Text))
+            {
+                tbxUserName.Visibility = Visibility.Collapsed;
+                tbxUserNamePlaceHolder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void tbxUserNamePlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            tbxUserNamePlaceHolder.Visibility = Visibility.Collapsed;
+            tbxUserName.Visibility = Visibility.Visible;
+            tbxUserName.Focus();
+        }
+
+        private void txbLogin_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txbLogin.Text))
+            {
+                txbLogin.Visibility = Visibility.Collapsed;
+                txbLoginPlaceHolder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void txbLoginPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txbLoginPlaceHolder.Visibility = Visibility.Collapsed;
+            txbLogin.Visibility = Visibility.Visible;
+            txbLogin.Focus();
+        }
+
+        private void passbox1_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(passbox1.Password))
+            {
+                passbox1.Visibility = Visibility.Collapsed;
+                passbox1PlaceHolder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void passbox1PlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            passbox1PlaceHolder.Visibility = Visibility.Collapsed;
+            passbox1.Visibility = Visibility.Visible;
+            passbox1.Focus();
+        }
+
+        private void passbox2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(passbox2.Password))
+            {
+                passbox2.Visibility = Visibility.Collapsed;
+                passbox2PlaceHolder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void passbox2PlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            passbox2PlaceHolder.Visibility = Visibility.Collapsed;
+            passbox2.Visibility = Visibility.Visible;
+            passbox2.Focus();
+        }
+
+        private void tbxUserPhone_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(tbxUserPhone.Text))
+            {
+                tbxUserPhone.Visibility = Visibility.Collapsed;
+                tbxUserPhonePlaceHolder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void tbxUserPhonePlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            tbxUserPhonePlaceHolder.Visibility = Visibility.Collapsed;
+            tbxUserPhone.Visibility = Visibility.Visible;
+            tbxUserPhone.Focus();
+        }
+
+        private void tbxUserMail_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(tbxUserMail.Text))
+            {
+                tbxUserMail.Visibility = Visibility.Collapsed;
+                tbxUserMailPlaceHolder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void tbxUserMailPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            tbxUserMailPlaceHolder.Visibility = Visibility.Collapsed;
+            tbxUserMail.Visibility = Visibility.Visible;
+            tbxUserMail.Focus();
+        }
     }
 }
