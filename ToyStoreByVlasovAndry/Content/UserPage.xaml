@@ -23,25 +23,33 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="510"/>
                 <ColumnDefinition Width="240"/>
             </Grid.ColumnDefinitions>
 
             <Border Grid.Column="0" Background="#E0FFFF" BorderBrush="Black" BorderThickness="1" CornerRadius="15" MinHeight="300" MaxHeight="300" MinWidth="220" MaxWidth="220" Margin="5" VerticalAlignment="Top">
                 <StackPanel Orientation="Vertical">
                     <Label Content="Функции" HorizontalAlignment="Center"/>
-                    <Button x:Name="addButton" Content="Добавить" Margin="5" Width="200" Height="30" Click="addButton_Click" FontWeight="Bold" Background="#E0FFFF"/>
-                    <Button Content="Выйти из аккаунта" Margin="5" Width="200" Height="30" Click="goBack_Click" FontWeight="Bold" Background="#E0FFFF"/>
-                    <Button Content="Выйти из приложения" Margin="5" Width="200" Height="30" Click="BtExit_Click" FontWeight="Bold" Background="#E0FFFF"/>
+                    <Button x:Name="CartButton" Content="Корзина" Margin="5" Width="200" Height="30" Click="CartButton_Click" FontWeight="Bold" Background="#00CED1" Foreground="#E0FFFF"/>
+                    <Button Content="Магазин" Margin="5" Width="200" Height="30" Click="Button_Click" FontWeight="Bold" Background="#00CED1" Foreground="#E0FFFF"/>
+                    <Button x:Name="addButton" Content="Добавить товар" Margin="5" Width="200" Height="30" Click="addButton_Click" FontWeight="Bold" Background="#00CED1" Foreground="#E0FFFF"/>
+                    <Button Content="Выйти из аккаунта" Margin="5" Width="200" Height="30" Click="goBack_Click" FontWeight="Bold" Background="#00CED1" Foreground="#E0FFFF"/>
+                    <Button Content="Выйти из приложения" Margin="5" Width="200" Height="30" Click="BtExit_Click" FontWeight="Bold" Background="#00CED1" Foreground="#E0FFFF"/>
                     <Button x:Name="BtDelAcc" Content="Удалить аккаунт" Margin="5" Width="200" Height="30" Click="BtDelAcc_Click" FontWeight="Bold" Foreground="#FFD02626" Background="#E0FFFF"/>
                 </StackPanel>
             </Border>
 
-            <Border Grid.Column="1" Background="#E0FFFF" BorderBrush="Black" BorderThickness="1" CornerRadius="15" MinHeight="300" MaxHeight="300" MinWidth="220" MaxWidth="220" Margin="5" VerticalAlignment="Top">
-                <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center">
-                    <Label Content="Меню перемешения" HorizontalAlignment="Center"/>
-                    <Button x:Name="CartButton" Content="Корзина" Margin="5" Width="200" Height="30" Click="CartButton_Click" FontWeight="Bold" Background="#E0FFFF"/>
-                    <Button Content="Магазин" Margin="5" Width="200" Height="30" Click="Button_Click" FontWeight="Bold" Background="#E0FFFF"/>
-                </StackPanel>
+            <Border Grid.Column="1" Background="#E0FFFF" BorderBrush="Black" BorderThickness="1" CornerRadius="15" MinHeight="300" MaxHeight="300" MinWidth="500" MaxWidth="500" Margin="5" VerticalAlignment="Top">
+                <ListView x:Name="listUsers" Grid.Row="2" Grid.Column="0" ScrollViewer.CanContentScroll="False" Margin="0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Toys_ToyStore.toy_name}" Header="Имя" Width="160"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Toys_ToyStore.toy_wholesalePrice}" Header="Логин" Width="110"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Toys_ToyStore.toy_retailPrice}" Header="Розничная цена" Width="110"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding order_quantity}" Header="Количество" Width="80"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Border>
         </Grid>
     </Grid>

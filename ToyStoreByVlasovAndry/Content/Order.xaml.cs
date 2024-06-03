@@ -20,6 +20,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Paragraph = iTextSharp.text.Paragraph;
 using Aspose.BarCode.Generation;
+using Image = iTextSharp.text.Image;
 
 namespace ToyStoreByVlasovAndry.Content
 {
@@ -44,6 +45,7 @@ namespace ToyStoreByVlasovAndry.Content
                 numOrder = userList.directory_order_number;
                 listCart.ItemsSource = FillCart();
             }
+            OrderN.Content = numOrder;
         }
 
         Orders_ToyStore[] FillCart()
@@ -106,31 +108,66 @@ namespace ToyStoreByVlasovAndry.Content
 
             try
             {
-                PdfWriter.GetInstance(doc, new FileStream("..\\..\\output.pdf", FileMode.Create));
+                PdfWriter.GetInstance(doc, new FileStream("..\\..\\Чек.pdf", FileMode.Create));
 
                 doc.Open();
                 BaseFont baseFont = BaseFont.CreateFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
 
                 Font font = new Font(baseFont, 12);
-                Font font1 = new Font(baseFont, 23, 3, BaseColor.BLUE);
-                Paragraph paragraph1 = new Paragraph("СПИСОК ТОВАРОВ ", font1);
-                paragraph1.Alignment = Element.ALIGN_CENTER;
-                doc.Add(paragraph1);
-                decimal sum = 0;
+                Font font1 = new Font(baseFont, 23, 3, BaseColor.BLACK);
 
-                foreach (var item in AppConnect.model1db.Toys_ToyStore.ToList())
+                Paragraph line = new Paragraph("--------------------------------------------------------------------", font1);
+                line.Alignment = Element.ALIGN_CENTER;
+                doc.Add(line);
+
+                Paragraph title = new Paragraph("ЧЕК", font1);
+                title.Alignment = Element.ALIGN_CENTER;
+                doc.Add(title);
+
+                doc.Add(line);
+                
+                int cnt = 0;
+                decimal sumW = 0;
+                decimal sumR = 0;
+
+                foreach (var item in listCart.Items)
                 {
-                    if (item is Toys_ToyStore)
+                    if (item is Orders_ToyStore)
                     {
-                        Toys_ToyStore data = (Toys_ToyStore)item;
+                        Orders_ToyStore data = (Orders_ToyStore)item;
 
-                        doc.Add(new Paragraph("Наименование: " + data.toy_name, font));
-                        sum += data.toy_wholesalePrice;
+                        Image img = Image.GetInstance(@"C:\Users\10210795\source\repos\ToyStoreByVlasovAndry\ToyStoreByVlasovAndry\images\" + data.Toys_ToyStore.toy_image);
+                        img.ScaleAbsolute(100f, 100f);
+                        doc.Add(img);
+                        doc.Add(new Paragraph($"Наименование: {data.Toys_ToyStore.toy_name}", font));
+                        doc.Add(new Paragraph($"Оптовая цена: {data.Toys_ToyStore.toy_wholesalePrice}", font));
+                        doc.Add(new Paragraph($"Розничная цена: {data.Toys_ToyStore.toy_retailPrice}", font));
+                        doc.Add(new Paragraph($"Количество товара: {data.order_quantity}", font));
+                        doc.Add(new Paragraph($"Итоговая оптовая цена: {data.Toys_ToyStore.toy_wholesalePrice * data.order_quantity}", font));
+                        doc.Add(new Paragraph($"Итоговая розничная цена: {data.Toys_ToyStore.toy_retailPrice * data.order_quantity}", font));
+                        doc.Add(line);
+
+                        cnt += data.order_quantity;
+                        sumW += data.Toys_ToyStore.toy_wholesalePrice * data.order_quantity;
+                        sumR += data.Toys_ToyStore.toy_retailPrice * data.order_quantity;
                     }
                 }
-                Paragraph paragraph = new Paragraph("Сумма: " + sum.ToString(), font);
-                paragraph.Alignment = Element.ALIGN_RIGHT;
-                doc.Add(paragraph);
+
+                Paragraph ordN = new Paragraph($"Номер заказа: {numOrder}", font);
+                ordN.Alignment = Element.ALIGN_RIGHT;
+                doc.Add(ordN);
+                
+                Paragraph TotalQuantity = new Paragraph($"Общее количество товаров: {cnt}", font);
+                Paragraph TotalSumW = new Paragraph($"Оптовая сумма: {sumW}", font);
+                Paragraph TotalSumR = new Paragraph($"Розничная сумма: {sumR}", font);
+                
+                TotalQuantity.Alignment = Element.ALIGN_RIGHT;
+                TotalSumW.Alignment = Element.ALIGN_RIGHT;
+                TotalSumR.Alignment = Element.ALIGN_RIGHT;
+                
+                doc.Add(TotalQuantity);
+                doc.Add(TotalSumW);
+                doc.Add(TotalSumR);
             }
             catch (DocumentException de)
             {

@@ -21,8 +21,8 @@
                 <ColumnDefinition Width="400"/>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
-                <ListView x:Name="listCart" Grid.Row="1" Grid.Column="0" ScrollViewer.CanContentScroll="False" Margin="5,0">
+            <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="5,0">
+                <ListView x:Name="listCart" Grid.Row="1" Grid.Column="0" ScrollViewer.CanContentScroll="False" Margin="0">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding Toys_ToyStore.toy_name}" Header="Наименование" Width="160"/>
@@ -40,7 +40,11 @@
                         <Label Content="Чек" FontSize="30px" FontWeight="Bold"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Label Content = "Кол-во товаров: "/>
+                        <Label Content="Номер заказа:"/>
+                        <Label x:Name="OrderN" Content="R0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content = "Кол-во товаров:"/>
                         <Label x:Name="GoodCount" Content="0"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">

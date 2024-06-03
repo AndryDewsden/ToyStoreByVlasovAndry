@@ -17,8 +17,8 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#00CED1">
             <Image Source="/images/icon.png"/>
             <StackPanel Orientation="Vertical">
-                <TextBlock Style="{StaticResource Title}" Text="{Binding ElementName=FrmMain, Path=Content.Title}" Foreground="#E0FFFF" FontSize="40px" Margin="0"/>
-                <Label Content="Copyright by Vlasov Andry @ 2024" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#E0FFFF" Margin="0,0,0,0"/>
+                <TextBlock Style="{StaticResource Title}" Text="{Binding ElementName=FrmMain, Path=Content.Title}" Foreground="#E0FFFF" FontSize="40px" Margin="0" Width="910"/>
+                <Label Content="Copyright by Vlasov Andry @ 2024" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#E0FFFF" Margin="30,0,0,0"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="1">

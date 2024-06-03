@@ -18,9 +18,6 @@ using ToyStoreByVlasovAndry.ModPage;
 
 namespace ToyStoreByVlasovAndry.Content
 {
-    /// <summary>
-    /// Логика взаимодействия для UserPage.xaml
-    /// </summary>
     public partial class UserPage : Page
     {
         Users_ToyStore use = new Users_ToyStore();

@@ -32,13 +32,16 @@
         
         <Grid Grid.Row="0" Margin="0,5">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="Поиск" Width="40" Margin="5,0,0,0" TextAlignment="Center"/>
-                <TextBox x:Name="Searcher" Margin="5,0,0,0" Width="120" Height="30" TextChanged="Searcher_TextChanged"/>
-                <TextBlock Text="Фильтр" Margin="5,0,0,0" Width="60" TextAlignment="Center"/>
-                <ComboBox x:Name="Filter" Margin="5,0,0,0" Width="120" Height="30" SelectedIndex="0" SelectionChanged="Filter_SelectionChanged"/>
-                <TextBlock Text="Сортировшик" Margin="5,0,0,0" Width="80" TextAlignment="Center"/>
-                <ComboBox x:Name="Sorter" Margin="5,0,0,0" Width="120" Height="30" SelectedIndex="0" SelectionChanged="Sorter_SelectionChanged"/>
-                <TextBlock x:Name="Counter" Margin="5,0,0,0" Width="200" Height="30" TextAlignment="Center"/>
+                <Label Content="Поиск" VerticalContentAlignment="Center" Width="50" Margin="5,0,0,0" HorizontalContentAlignment="Center"/>
+                <Grid>
+                    <TextBox x:Name="Searcher" VerticalContentAlignment="Center" Margin="5,0,0,0" Width="200" Height="30" TextChanged="Searcher_TextChanged" LostFocus="Searcher_LostFocus"/>
+                    <TextBox x:Name="SearcherPlaceHolder" Text="Поиск..." Foreground="#808080" VerticalContentAlignment="Center" Margin="5,0,0,0" Width="200" Height="30" GotFocus="SearcherPlaceHolder_GotFocus"/>
+                </Grid>
+                <Label Content="Фильтр" VerticalContentAlignment="Center" Margin="5,0,0,0" Width="60" HorizontalContentAlignment="Center"/>
+                <ComboBox x:Name="Filter" VerticalContentAlignment="Center" Margin="5,0,0,0" Width="120" Height="30" SelectedIndex="0" SelectionChanged="Filter_SelectionChanged"/>
+                <Label Content="Сортировшик" VerticalContentAlignment="Center" Margin="5,0,0,0" Width="80" HorizontalContentAlignment="Center"/>
+                <ComboBox x:Name="Sorter" VerticalContentAlignment="Center" Margin="5,0,0,0" Width="120" Height="30" SelectedIndex="0" SelectionChanged="Sorter_SelectionChanged"/>
+                <Label x:Name="Counter" Margin="5,0,0,0" Width="200" Height="30" HorizontalContentAlignment="Center"/>
             </StackPanel>
         </Grid>
 

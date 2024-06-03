@@ -15,7 +15,7 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" x:Name="Stat" Content="Ваша корзина пуста" Width="200" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,5"/>
+        <Label Grid.Row="0" x:Name="Stat" Content="Ваша корзина пуста" Width="400" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,5"/>
 
         <ListView x:Name="listCart" Grid.Row="1" ScrollViewer.CanContentScroll="False" Width="960">
             <ListView.ItemTemplate>

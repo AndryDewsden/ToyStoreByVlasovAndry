@@ -46,7 +46,7 @@ namespace ToyStoreByVlasovAndry.Content
                 productsInCart = AppConnect.model1db.Orders_ToyStore.Where(x => x.order_number == numOrder).ToList();
                 if (productsInCart.Count > 0)
                 {
-                    Stat.Content = "В вашей корзине " + productsInCart.Count + " товаров.";
+                    Stat.Content = $"В вашей корзине {productsInCart.Count} товаров. Ваш номер: {numOrder}";
                 }
                 else
                 {

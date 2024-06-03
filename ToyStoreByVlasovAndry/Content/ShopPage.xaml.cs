@@ -140,11 +140,11 @@ namespace ToyStoreByVlasovAndry.Content
 
             if (products.Count > 0)
             {
-                Counter.Text = "Найдено " + products.Count + " из " + producttall.Count + " товаров.";
+                Counter.Content = $"Найдено {products.Count} из {producttall.Count} товаров.";
             }
             else
             {
-                Counter.Text = "Ничего не найдено.";
+                Counter.Content = "Ничего не найдено.";
             }
 
             return products.ToArray();
@@ -301,22 +301,28 @@ namespace ToyStoreByVlasovAndry.Content
                 
                 Random r = new Random();
 
-                numOrder = "R0";
+                numOrder = "";
 
-                while (AppConnect.model1db.Directories_ToyStore.Where(x => x.directory_order_number == numOrder).Count() > 0)
+                while (AppConnect.model1db.Directories_ToyStore.Where(x => x.directory_order_number == numOrder).Count() > 0 || numOrder == "")
                 {
+                    numOrder = "R0";
                     for (int i = 0; i < 10; i++)
                     {
-                        int t = r.Next(1, 2);
+                        int t = r.Next(0, 2);
                         switch (t)
                         {
-                            case 1:
-                                numOrder += Convert.ToChar(r.Next(97, 122));
+                            case 0:
+                                //numOrder += Convert.ToChar(r.Next(97, 122));
+                                numOrder += Convert.ToChar(r.Next(65, 90));
                                 break;
-                            case 2:
-                                numOrder += r.Next(0, 9).ToString();
+                            case 1:
+                                numOrder += r.Next(0, 10).ToString();
                                 break;
                         }
+                    }
+                    if(AppConnect.model1db.Directories_ToyStore.Where(x => x.directory_order_number == numOrder).Count() > 0)
+                    {
+                        MessageBox.Show("Такой номер уже есть.", "lol", MessageBoxButton.OK);
                     }
                 }
 
@@ -330,7 +336,7 @@ namespace ToyStoreByVlasovAndry.Content
                     };
                     AppConnect.model1db.Directories_ToyStore.Add(userDir);
                     AppConnect.model1db.SaveChanges();
-                    MessageBox.Show("Новый номер сгенернирован", "Тестирование", MessageBoxButton.OK);
+                    //MessageBox.Show($"Новый номер сгенернирован: {numOrder}", "Тестирование", MessageBoxButton.OK);
                 }
                 catch
                 {
@@ -339,7 +345,7 @@ namespace ToyStoreByVlasovAndry.Content
             }
             else
             {
-                MessageBox.Show("Товару успешно присвоен номер", "Тестирование", MessageBoxButton.OK);
+                //MessageBox.Show("Товару успешно присвоен номер", "Тестирование", MessageBoxButton.OK);
                 numOrder = userList.directory_order_number.ToString();
             }
 
@@ -360,7 +366,7 @@ namespace ToyStoreByVlasovAndry.Content
                     };
                     AppConnect.model1db.Orders_ToyStore.Add(userOrder);
                     AppConnect.model1db.SaveChanges();
-                    MessageBox.Show("Ваш товар успешно добавлен в корзину.", "Тестовое уведомление", MessageBoxButton.OK);
+                    //MessageBox.Show("Ваш товар успешно добавлен в корзину.", "Тестовое уведомление", MessageBoxButton.OK);
                 }
                 catch
                 {
@@ -369,13 +375,40 @@ namespace ToyStoreByVlasovAndry.Content
             }
             else
             {
-                MessageBox.Show("Этот товар уже есть в вашей корзине", "Тестовое уведомление", MessageBoxButton.OK);
+                try
+                {
+                    goodOrder.order_quantity = goodOrder.order_quantity + 1;
+                    AppConnect.model1db.SaveChanges();
+                    //MessageBox.Show("Данные успешно редактированы", "Тестирование", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                //MessageBox.Show("Этот товар уже есть в вашей корзине", "Тестовое уведомление", MessageBoxButton.OK);
             }
         }
 
         private void Add_toCart_DpiChanged(object sender, DpiChangedEventArgs e)
         {
 
+        }
+
+        private void Searcher_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(Searcher.Text))
+            {
+                Searcher.Visibility = Visibility.Collapsed;
+                SearcherPlaceHolder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void SearcherPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            SearcherPlaceHolder.Visibility = Visibility.Collapsed;
+            Searcher.Visibility = Visibility.Visible;
+            Searcher.Focus();
         }
     }
 }
