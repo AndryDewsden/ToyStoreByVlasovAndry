@@ -9,46 +9,72 @@
       Title="AddRedPage">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="400"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
-            <Label Content="Категория:" Height="30" Margin="5"/>
-            <ComboBox SelectedIndex="{Binding toy_id_category}" DisplayMemberPath="category_name" x:Name="Combo_names" Height="30" Margin="5"/>
-            <Label Content="Наименование:" Height="30" Margin="5"/>
-            <TextBox Text="{Binding toy_name}" x:Name="article" Height="30" Margin="5"/>
-            <Label Content="Страна производитель:" Height="30" Margin="5"/>
-            <ComboBox SelectedIndex="{Binding toy_id_country}" DisplayMemberPath="country_name" x:Name="Combo_maker" Height="30" Margin="5"/>
-            <Label Content="Производитель:" Height="30" Margin="5"/>
-            <ComboBox SelectedIndex="{Binding toy_id_manufacturer}" DisplayMemberPath="manufacturer_name" x:Name="Combo_giver" Height="30" Margin="5"/>
+        <Border Grid.Row="0" Background="#E0FFFF" BorderBrush="Black" BorderThickness="1" CornerRadius="15" Margin="5">
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-            <Button x:Name="Add" Content="Добавить" Width="200" Height="30"  Margin="5" Click="Add_Click"/>
-            <Button x:Name="Red" Content="Редактирование" Width="200" Height="30" Margin="5" Click="Red_Click"/>
-        </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+                    <Label Content="Категория:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <ComboBox SelectedIndex="{Binding toy_id_category}" DisplayMemberPath="category_name" x:Name="Combo_names" Height="30" Margin="5" VerticalContentAlignment="Center"/>
+                    <Label Content="Наименование:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <Grid>
+                        <TextBox Text="{Binding toy_name}" x:Name="article" Height="30" Margin="5" LostFocus="article_LostFocus" VerticalContentAlignment="Center"/>
+                        <TextBox Text="Наименование" x:Name="articlePlaceHolder" Height="30" Margin="5" GotFocus="articlePlaceHolder_GotFocus" VerticalContentAlignment="Center" Foreground="#808080"/>
+                    </Grid>
+                    <Label Content="Страна производитель:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <ComboBox SelectedIndex="{Binding toy_id_country}" DisplayMemberPath="country_name" x:Name="Combo_maker" Height="30" Margin="5" VerticalContentAlignment="Center"/>
+                    <Label Content="Производитель:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <ComboBox SelectedIndex="{Binding toy_id_manufacturer}" DisplayMemberPath="manufacturer_name" x:Name="Combo_giver" Height="30" Margin="5" VerticalContentAlignment="Center"/>
+                </StackPanel>
 
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
-            <Label Content="Оптовая цена:" Height="30" Margin="5"/>
-            <TextBox Text="{Binding toy_wholesalePrice}" x:Name="prize" Height="30" Margin="5"/>
-            <Label Content="Розничная цена:" Height="30" Margin="5"/>
-            <TextBox Text="{Binding toy_retailPrice}" x:Name="maxskid" Height="30" Margin="5"/>
-            <Label Content="Описание:" Height="30" Margin="5"/>
-            <TextBox Text="{Binding toy_discription}" x:Name="kol" Height="30" Margin="5"/>
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                    <Label Content="Оптовая цена:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <Grid>
+                        <TextBox Text="{Binding toy_wholesalePrice}" x:Name="prize" Height="30" Margin="5" LostFocus="prize_LostFocus" VerticalContentAlignment="Center"/>
+                        <TextBox Text="Оптовая цена" x:Name="prizePlaceHolder" Height="30" Margin="5" GotFocus="prizePlaceHolder_GotFocus" VerticalContentAlignment="Center" Foreground="#808080"/>
+                    </Grid>
+                    <Label Content="Розничная цена:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <Grid>
+                        <TextBox Text="{Binding toy_retailPrice}" x:Name="maxskid" Height="30" Margin="5" LostFocus="maxskid_LostFocus" VerticalContentAlignment="Center"/>
+                        <TextBox Text="Розничная цена" x:Name="maxskidPlaceHolder" Height="30" Margin="5" GotFocus="maxskidPlaceHolder_GotFocus" VerticalContentAlignment="Center" Foreground="#808080"/>
+                    </Grid>
+                    <Label Content="Описание:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <Grid>
+                        <TextBox Text="{Binding toy_discription}" x:Name="kol" Height="30" Margin="5" LostFocus="kol_LostFocus" VerticalContentAlignment="Center"/>
+                        <TextBox Text="Описание" x:Name="kolPlaceHolder" Height="30" Margin="5" GotFocus="kolPlaceHolder_GotFocus" VerticalContentAlignment="Center" Foreground="#808080"/>
+                    </Grid>
+                </StackPanel>
 
-            <Button x:Name="list" Content="Список товаров" Width="200" Height="30" Margin="5" Click="list_Click"/>
-        </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2">
+                    <Label Content="Поставщик:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <ComboBox SelectedIndex="{Binding toy_id_provider}" DisplayMemberPath="provider_name" x:Name="Combo_ed" Height="30" Margin="5" VerticalContentAlignment="Center"/>
+                    <Label Content="Возрастная категория:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <ComboBox SelectedIndex="{Binding toy_id_ageCategory}" DisplayMemberPath="ageCategory_name" x:Name="Combo_cat" Height="30" Margin="5" VerticalContentAlignment="Center"/>
+                    <Label Content="Изображение товара:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <Grid>
+                        <TextBox Text="{Binding toy_image}" x:Name="image" Height="30" Margin="5" LostFocus="image_LostFocus" VerticalContentAlignment="Center"/>
+                        <TextBox Text="Изображение" x:Name="imagePlaceHolder" Height="30" Margin="5" GotFocus="imagePlaceHolder_GotFocus" VerticalContentAlignment="Center" Foreground="#808080"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
 
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2">
-            <Label Content="Поставщик:" Height="30" Margin="5"/>
-            <ComboBox SelectedIndex="{Binding toy_id_provider}" DisplayMemberPath="provider_name" x:Name="Combo_ed" Height="30" Margin="5"/>
-            <Label Content="Возрастная категория:" Height="30" Margin="5"/>
-            <ComboBox SelectedIndex="{Binding toy_id_ageCategory}" DisplayMemberPath="ageCategory_name" x:Name="Combo_cat" Height="30" Margin="5"/>
-            <Label Content="Изображение товара:" Height="30" Margin="5"/>
-            <TextBox Text="{Binding toy_image}" x:Name="image" Height="30" Margin="5"/>
-
-            <Button x:Name="goBack" Content="Назад" Width="200" Height="30" Margin="5" Click="goBack_Click"/>
-        </StackPanel>
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" Background="#E0FFFF" CornerRadius="15" Margin="5" MinWidth="800" MaxWidth="900" MinHeight="50" MaxHeight="70">
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="Add" Content="Добавить товар" Width="200" Height="30"  Margin="5" Click="Add_Click"/>
+                <Button x:Name="Red" Content="Редактировать товар" Width="200" Height="30" Margin="5" Click="Red_Click"/>
+                <Button x:Name="list" Content="Список товаров" Width="200" Height="30" Margin="5" Click="list_Click"/>
+                <Button x:Name="goBack" Content="Назад" Width="200" Height="30" Margin="5" Click="goBack_Click"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

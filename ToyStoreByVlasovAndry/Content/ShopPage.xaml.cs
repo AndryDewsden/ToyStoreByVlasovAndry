@@ -140,11 +140,11 @@ namespace ToyStoreByVlasovAndry.Content
 
             if (products.Count > 0)
             {
-                Counter.Content = $"Найдено {products.Count} из {producttall.Count} товаров.";
+                Counter.Text = $"Найдено {products.Count} из {producttall.Count} товаров.";
             }
             else
             {
-                Counter.Content = "Ничего не найдено.";
+                Counter.Text = "Ничего не найдено.";
             }
 
             return products.ToArray();

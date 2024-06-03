@@ -17,9 +17,6 @@ using ToyStoreByVlasovAndry.Content;
 
 namespace ToyStoreByVlasovAndry.ModPage
 {
-    /// <summary>
-    /// Логика взаимодействия для AddRedPage.xaml
-    /// </summary>
     public partial class AddRedPage : Page
     {
         private Toys_ToyStore _curToy = new Toys_ToyStore();
@@ -29,11 +26,11 @@ namespace ToyStoreByVlasovAndry.ModPage
             InitializeComponent();
             use = user;
 
-            Combo_names.Items.Add(" ");
-            Combo_maker.Items.Add(" ");
-            Combo_giver.Items.Add(" ");
-            Combo_ed.Items.Add(" ");
-            Combo_cat.Items.Add(" ");
+            Combo_names.Items.Add("-выбрать-");
+            Combo_maker.Items.Add("-выбрать-");
+            Combo_giver.Items.Add("-выбрать-");
+            Combo_ed.Items.Add("-выбрать-");
+            Combo_cat.Items.Add("-выбрать-");
 
             //заполнение списка категорий
             for (int i = 0; i < AppConnect.model1db.Categories_ToyStore.ToList().Count; i++)
@@ -102,44 +99,138 @@ namespace ToyStoreByVlasovAndry.ModPage
         //добавить товар
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            var res = MessageBox.Show("Вы действительно хотите добавить этот товар?", "Уведомление", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            var res = MessageBox.Show("Вы действительно хотите добавить этот товар?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
-            if (res == MessageBoxResult.OK)
+            if (Combo_names.SelectedIndex != 0 && Combo_maker.SelectedIndex != 0 && Combo_giver.SelectedIndex != 0 && Combo_ed.SelectedIndex != 0 && Combo_cat.SelectedIndex != 0 && article.Text != "" && prize.Text != "" && maxskid.Text != "" && kol.Text != "")
             {
-                try
+                if (res == MessageBoxResult.Yes)
                 {
-                    AppConnect.model1db.Toys_ToyStore.Add(_curToy);
-                    AppConnect.model1db.SaveChanges();
-                    MessageBox.Show("Данные успешно добавленны", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                    AppFrame.frameMain.Navigate(new ShopPage(use));
-                }
+                    try
+                    {
+                        AppConnect.model1db.Toys_ToyStore.Add(_curToy);
+                        AppConnect.model1db.SaveChanges();
+                        MessageBox.Show("Данные успешно добавленны", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                        AppFrame.frameMain.Navigate(new ShopPage(use));
+                    }
 
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Заполните все необходимые поля!", "Уведомлениее", MessageBoxButton.OK);
             }
         }
 
         //редактировать товар
         private void Red_Click(object sender, RoutedEventArgs e)
         {
-            var res = MessageBox.Show("Вы действительно хотите редактировать этот товар?", "Уведомление", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            var res = MessageBox.Show("Вы действительно хотите редактировать этот товар?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
-            if (res == MessageBoxResult.OK)
+            if (Combo_names.SelectedIndex != 0 && Combo_maker.SelectedIndex != 0 && Combo_giver.SelectedIndex != 0 && Combo_ed.SelectedIndex != 0 && Combo_cat.SelectedIndex != 0 && article.Text != "" && prize.Text != "" && maxskid.Text != "" && kol.Text != "")
             {
-                try
+                if (res == MessageBoxResult.Yes)
                 {
-                    AppConnect.model1db.SaveChanges();
-                    MessageBox.Show("Данные успешно редактированы", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                    AppFrame.frameMain.Navigate(new ShopPage(use));
-                }
+                    try
+                    {
+                        AppConnect.model1db.SaveChanges();
+                        MessageBox.Show("Данные успешно редактированы", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                        AppFrame.frameMain.Navigate(new ShopPage(use));
+                    }
 
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
+            else
+            {
+                MessageBox.Show("Заполните все необходимые поля!", "Уведомлениее", MessageBoxButton.OK);
+            }
+        }
+
+        private void article_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(article.Text))
+            {
+                article.Visibility = Visibility.Collapsed;
+                articlePlaceHolder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void articlePlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            articlePlaceHolder.Visibility = Visibility.Collapsed;
+            article.Visibility = Visibility.Visible;
+            article.Focus();
+        }
+
+        private void prize_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(prize.Text))
+            {
+                prize.Visibility = Visibility.Collapsed;
+                prizePlaceHolder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void prizePlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            prizePlaceHolder.Visibility = Visibility.Collapsed;
+            prize.Visibility = Visibility.Visible;
+            prize.Focus();
+        }
+
+        private void maxskid_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(maxskid.Text))
+            {
+                maxskid.Visibility = Visibility.Collapsed;
+                maxskidPlaceHolder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void maxskidPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            maxskidPlaceHolder.Visibility = Visibility.Collapsed;
+            maxskid.Visibility = Visibility.Visible;
+            maxskid.Focus();
+        }
+
+        private void kol_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(kol.Text))
+            {
+                kol.Visibility = Visibility.Collapsed;
+                kolPlaceHolder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void kolPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            kolPlaceHolder.Visibility = Visibility.Collapsed;
+            kol.Visibility = Visibility.Visible;
+            kol.Focus();
+        }
+
+        private void image_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(image.Text))
+            {
+                image.Visibility = Visibility.Collapsed;
+                imagePlaceHolder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void imagePlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            imagePlaceHolder.Visibility = Visibility.Collapsed;
+            image.Visibility = Visibility.Visible;
+            image.Focus();
         }
     }
 }
