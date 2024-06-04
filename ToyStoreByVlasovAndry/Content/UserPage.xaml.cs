@@ -22,7 +22,6 @@ namespace ToyStoreByVlasovAndry.Content
     public partial class UserPage : Page
     {
         Users_ToyStore use = new Users_ToyStore();
-        private Users_ToyStore _curUser = new Users_ToyStore();
         public UserPage(Users_ToyStore user)
         {
             InitializeComponent();
@@ -61,8 +60,8 @@ namespace ToyStoreByVlasovAndry.Content
                     BtDelAcc.IsEnabled = false;
                     BtDelAcc.Visibility = Visibility.Collapsed;
 
-                    userList.IsEnabled = false;
-                    userList.Visibility = Visibility.Collapsed;
+                    listUsers.IsEnabled = false;
+                    listUsers.Visibility = Visibility.Collapsed;
 
                     uploadImage.IsEnabled = false;
                     uploadImage.Visibility = Visibility.Collapsed;
@@ -82,15 +81,22 @@ namespace ToyStoreByVlasovAndry.Content
                     break;
             }
 
-            userRole.Items.Add("");
+            userRole.Items.Add("--выбрать--");
 
             for (int i = 0; i < AppConnect.model1db.Roles_ToyStore.ToList().Count; i++)
             {
                 userRole.Items.Add(AppConnect.model1db.Roles_ToyStore.ToList()[i]);
             }
 
-            DataContext = _curUser;
+            listUsers.ItemsSource = fillUsers();
         }
+
+        Users_ToyStore[] fillUsers()
+        {
+            var pro = AppConnect.model1db.Users_ToyStore.Where(x => x.id_user != use.id_user).ToList();
+            return pro.ToArray();
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             AppFrame.frameMain.Navigate(new ShopPage(use));
@@ -156,6 +162,7 @@ namespace ToyStoreByVlasovAndry.Content
                 {
                     AppConnect.model1db.Users_ToyStore.Add(_curUser);
                     AppConnect.model1db.SaveChanges();
+                    listUsers.ItemsSource = fillUsers();
                     MessageBox.Show("Данные успешно добавленны", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
@@ -174,7 +181,17 @@ namespace ToyStoreByVlasovAndry.Content
             {
                 try
                 {
+                    _curUser.user_name = userName.Text;
+                    _curUser.user_login = userLogin.Text;
+                    _curUser.user_password = userPassword.Text;
+                    _curUser.user_id_role = userRole.SelectedIndex;
+                    _curUser.user_phone = userPhone.Text;
+                    _curUser.user_mail = userMail.Text;
+
+                    DataContext = _curUser;
+                    
                     AppConnect.model1db.SaveChanges();
+                    listUsers.ItemsSource = fillUsers();
                     MessageBox.Show("Данные успешно редактированы", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
@@ -193,82 +210,72 @@ namespace ToyStoreByVlasovAndry.Content
 
         private void userName_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(userName.Text))
-            {
-                userName.Visibility = Visibility.Collapsed;
-                userNamePlaceHolder.Visibility = Visibility.Visible;
-            }
+            placeHolder(userName, userNamePlaceHolder);
         }
 
         private void userLogin_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(userLogin.Text))
-            {
-                userLogin.Visibility = Visibility.Collapsed;
-                userLoginPlaceHolder.Visibility = Visibility.Visible;
-            }
+            placeHolder(userLogin, userLoginPlaceHolder);
         }
 
         private void userPassword_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(userPassword.Text))
-            {
-                userPassword.Visibility = Visibility.Collapsed;
-                userPasswordPlaceHolder.Visibility = Visibility.Visible;
-            }
+            placeHolder(userPassword, userPasswordPlaceHolder);
         }
 
         private void userPhone_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(userPhone.Text))
-            {
-                userPhone.Visibility = Visibility.Collapsed;
-                userPhonePlaceHolder.Visibility = Visibility.Visible;
-            }
+            placeHolder(userPhone, userPhonePlaceHolder);
         }
 
         private void userMail_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(userMail.Text))
-            {
-                userMail.Visibility = Visibility.Collapsed;
-                userMailPlaceHolder.Visibility = Visibility.Visible;
-            }
+            placeHolder(userMail, userMailPlaceHolder);
         }
 
         private void userNamePlaceHolder_GotFocus(object sender, RoutedEventArgs e)
         {
-            userNamePlaceHolder.Visibility = Visibility.Collapsed;
-            userName.Visibility = Visibility.Visible;
+            Original(userName, userNamePlaceHolder);
             userName.Focus();
         }
 
         private void userLoginPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
         {
-            userLoginPlaceHolder.Visibility = Visibility.Collapsed;
-            userLogin.Visibility = Visibility.Visible;
+            Original(userLogin, userLoginPlaceHolder);
             userLogin.Focus();
         }
 
         private void userPasswordPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
         {
-            userPasswordPlaceHolder.Visibility = Visibility.Collapsed;
-            userPassword.Visibility = Visibility.Visible;
+            Original(userPassword, userPasswordPlaceHolder);
             userPassword.Focus();
         }
 
         private void userPhonePlaceHolder_GotFocus(object sender, RoutedEventArgs e)
         {
-            userPhonePlaceHolder.Visibility = Visibility.Collapsed;
-            userPhone.Visibility = Visibility.Visible;
+            Original(userPhone, userPhonePlaceHolder);
             userPhone.Focus();
         }
 
         private void userMailPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
         {
-            userMailPlaceHolder.Visibility = Visibility.Collapsed;
-            userMail.Visibility = Visibility.Visible;
+            Original(userMail, userMailPlaceHolder);
             userMail.Focus();
+        }
+
+        private void Original(TextBox org, TextBox place)
+        {
+                place.Visibility = Visibility.Collapsed;
+                org.Visibility = Visibility.Visible;
+        }
+
+        private void placeHolder(TextBox org, TextBox place)
+        {
+            if (string.IsNullOrEmpty(org.Text))
+            {
+                org.Visibility = Visibility.Collapsed;
+                place.Visibility = Visibility.Visible;
+            }
         }
 
         private void uploadImage_Click(object sender, RoutedEventArgs e)
@@ -279,17 +286,87 @@ namespace ToyStoreByVlasovAndry.Content
 
             if(responce == true)
             {
-                var uni = MessageBox.Show("Вы хотите загрузить это изображение?", "Уведомление", MessageBoxButton.YesNo);
+                var uni = MessageBox.Show("Вы хотите загрузить это изображение для товара?", "Уведомление", MessageBoxButton.YesNo);
                 if (uni == MessageBoxResult.Yes)
                 {
                     //загрузка изображения
                     string soup = openFileDialog.FileName;
                     FileInfo inf = new FileInfo(soup);
-                    string d = @"/images/" + System.IO.Path.GetFileName(soup);
+                    string d = @"C:\Users\10210795\source\repos\ToyStoreByVlasovAndry\ToyStoreByVlasovAndry\images\" + System.IO.Path.GetFileName(soup);
                     inf.CopyTo(d);
                 }
             }
 
+        }
+
+        Users_ToyStore _curUser = new Users_ToyStore();
+        private void listUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _curUser = (Users_ToyStore)listUsers.SelectedItem;
+            
+            userName.Text = _curUser.user_name;
+            userLogin.Text = _curUser.user_login;
+            userPassword.Text = _curUser.user_password;
+            userRole.SelectedIndex = _curUser.user_id_role;
+            userPhone.Text = _curUser.user_phone;
+            userMail.Text = _curUser.user_mail;
+
+            Original(userName, userNamePlaceHolder);
+            Original(userLogin, userLoginPlaceHolder);
+            Original(userPassword, userPasswordPlaceHolder);
+            
+            if (userPhone.Text != "")
+            {
+                Original(userPhone, userPhonePlaceHolder);
+            }
+            else
+            {
+                placeHolder(userPhone, userPhonePlaceHolder);
+            }
+            if (userMail.Text != "")
+            {
+                Original(userMail, userMailPlaceHolder);
+            }
+            else
+            {
+                placeHolder(userMail, userMailPlaceHolder);
+            }
+        }
+
+        private void del_Click(object sender, RoutedEventArgs e)
+        {
+            var del = (Users_ToyStore)listUsers.SelectedItem;
+            var res = MessageBox.Show($"Вы действительно хотите удалить этого пользователя?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            if (res == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    AppConnect.model1db.Users_ToyStore.Remove(del);
+                    AppConnect.model1db.SaveChanges();
+
+                    userName.Text = "";
+                    userLogin.Text = "";
+                    userPassword.Text = "";
+                    userRole.SelectedIndex = 0;
+                    userPhone.Text = "";
+                    userMail.Text = "";
+
+                    placeHolder(userName, userNamePlaceHolder);
+                    placeHolder(userLogin, userLoginPlaceHolder);
+                    placeHolder(userPassword, userPasswordPlaceHolder);
+                    placeHolder(userPhone, userPhonePlaceHolder);
+                    placeHolder(userMail, userMailPlaceHolder);
+
+                    listUsers.ItemsSource = fillUsers();
+                    //MessageBox.Show("Данные успешно удалены", "Тестирование", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

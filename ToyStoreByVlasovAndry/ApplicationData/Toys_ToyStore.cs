@@ -35,13 +35,15 @@ namespace ToyStoreByVlasovAndry.ApplicationData
         {
             get
             {
-                if (String.IsNullOrEmpty(toy_image) || String.IsNullOrWhiteSpace(toy_image))
+                if (!String.IsNullOrEmpty(toy_image) || !String.IsNullOrWhiteSpace(toy_image))
                 {
-                    return "/images/picture.png";
+                    //return "/images/picture.png";
+                    return $"/images/{toy_image}";
                 }
                 else
                 {
-                    return $"/images/{toy_image}";
+                    return "/images/picture.png";
+                    //return $"/images/{toy_image}";
                 }
             }
         }

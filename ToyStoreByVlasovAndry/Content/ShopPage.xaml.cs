@@ -140,11 +140,11 @@ namespace ToyStoreByVlasovAndry.Content
 
             if (products.Count > 0)
             {
-                Counter.Text = $"Найдено {products.Count} из {producttall.Count} товаров.";
+                Counter.Content = $"Найдено {products.Count} из {producttall.Count} товаров.";
             }
             else
             {
-                Counter.Text = "Ничего не найдено.";
+                Counter.Content = "Ничего не найдено.";
             }
 
             return products.ToArray();
@@ -261,9 +261,9 @@ namespace ToyStoreByVlasovAndry.Content
         private void delFun()
         {
             var del = (Toys_ToyStore)listProducts.SelectedItem;
-            var res = MessageBox.Show($"Вы действительно хотите удалить этот товар?\n Будет удалён:\nНаименование: {del.toy_name} \nАртикль: {del.toy_discription} \n{del.pic}", "Уведомление", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            var res = MessageBox.Show($"Вы действительно хотите удалить этот товар?\n Будет удалён:\nНаименование: {del.toy_name} \nАртикль: {del.toy_discription} \n{del.pic}", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
-            if (res == MessageBoxResult.OK)
+            if (res == MessageBoxResult.Yes)
             {
                 try
                 {

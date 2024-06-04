@@ -106,7 +106,7 @@
 
                             <StackPanel Grid.Column="3" Width="auto" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <TextBlock>
-                                <Button x:Name="Add_toCart" Width="120" Click="Add_toCart_Click"><Image Source="/images/tocart.png"/></Button>
+                                <Button x:Name="Add_toCart" Click="Add_toCart_Click"><Image Source="/images/tocart.png" Width="50" Height="50"/></Button>
                                 </TextBlock>
                             </StackPanel>
                     </Grid>

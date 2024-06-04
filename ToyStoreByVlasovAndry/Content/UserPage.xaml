@@ -17,7 +17,7 @@
         
         <StackPanel>
             <Label x:Name="username" Width="200" Height="30"/>
-            <Label Content="Последний вход: " Width="200" Height="30"/>
+            <Label x:Name="test" Content="Последний вход: " Width="200" Height="30"/>
         </StackPanel>
         
         <Grid Grid.Row="1">
@@ -46,20 +46,18 @@
 
             <Border Grid.Column="1" Background="#E0FFFF" BorderBrush="Black" BorderThickness="1" CornerRadius="15" MinHeight="300" MaxHeight="300" MinWidth="500" MaxWidth="500" Margin="5" VerticalAlignment="Top">
                 <Grid>
-                    <StackPanel x:Name="usersPanel">
-                        <ListView x:Name="listUsers" Grid.Row="2" Grid.Column="1" ScrollViewer.CanContentScroll="False" Margin="0">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding user_name}" Header="Имя" Width="60"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding user_login}" Header="Логин" Width="60"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding user_password}" Header="Пароль" Width="60"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding user_id_role}" Header="Роль" Width="60"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding user_phone}" Header="Телефон" Width="60"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding user_mail}" Header="Почта" Width="60"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </StackPanel>
+                    <ListView x:Name="listUsers" Grid.Row="2" Grid.Column="1" ScrollViewer.CanContentScroll="False" Margin="0" SelectionChanged="listUsers_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding user_name}" Header="Имя" Width="60"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding user_login}" Header="Логин" Width="60"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding user_password}" Header="Пароль" Width="60"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Roles_ToyStore.role}" Header="Роль" Width="60"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding user_phone}" Header="Телефон" Width="60"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding user_mail}" Header="Почта" Width="60"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
 
                     <StackPanel x:Name="userPersonal">
                         
@@ -67,41 +65,42 @@
                 </Grid>
             </Border>
 
-            <Border x:Name="Cum" Grid.Column="2" Background="#E0FFFF" BorderBrush="Black" BorderThickness="1" CornerRadius="15" MinHeight="200" MaxHeight="400" MinWidth="220" MaxWidth="220" Margin="5" VerticalAlignment="Top">
+            <Border x:Name="Cum" Grid.Column="2" Background="#E0FFFF" BorderBrush="Black" BorderThickness="1" CornerRadius="15" MinHeight="200" MaxHeight="500" MinWidth="220" MaxWidth="220" Margin="5" VerticalAlignment="Top">
                 <Grid>
                     <StackPanel>
                         <Label Content="Настройки пользователя" Margin="0" Height="30" Width="200" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold"/>
                         <Label Content="Имя пользователя" Margin="0" Height="30" Width="200"/>
                         <Grid>
-                            <TextBox x:Name="userName" Margin="0" Height="20" Width="200" LostFocus="userName_LostFocus"/>
+                            <TextBox x:Name="userName" Text="{Binding user_name}" Margin="0" Height="20" Width="200" LostFocus="userName_LostFocus"/>
                             <TextBox x:Name="userNamePlaceHolder" Text="Имя" Margin="0" Height="20" Width="200" Foreground="#808080" GotFocus="userNamePlaceHolder_GotFocus"/>
                         </Grid>
                         <Label Content="Логин пользователя" Margin="0" Height="30" Width="200"/>
                         <Grid>
-                            <TextBox x:Name="userLogin" Margin="0" Height="20" Width="200" LostFocus="userLogin_LostFocus"/>
+                            <TextBox x:Name="userLogin" Text="{Binding user_login}" Margin="0" Height="20" Width="200" LostFocus="userLogin_LostFocus"/>
                             <TextBox x:Name="userLoginPlaceHolder" Text="Логин" Margin="0" Height="20" Width="200" Foreground="#808080" GotFocus="userLoginPlaceHolder_GotFocus"/>
                         </Grid>
                         <Label Content="Пароль пользователя" Margin="0" Height="30" Width="200"/>
                         <Grid>
-                            <TextBox x:Name="userPassword" Margin="0" Height="20" Width="200" LostFocus="userPassword_LostFocus"/>
+                            <TextBox x:Name="userPassword" Text="{Binding user_password}" Margin="0" Height="20" Width="200" LostFocus="userPassword_LostFocus"/>
                             <TextBox x:Name="userPasswordPlaceHolder" Text="Пароль" Margin="0" Height="20" Width="200" Foreground="#808080" GotFocus="userPasswordPlaceHolder_GotFocus"/>
                         </Grid>
                         <Label Content="Роль пользователя" Margin="0" Height="30" Width="200"/>
-                        <ComboBox x:Name="userRole" DisplayMemberPath="role"  Margin="0" Height="20" Width="200"/>
+                        <ComboBox x:Name="userRole" SelectedIndex="{Binding user_id_role}" DisplayMemberPath="role"  Margin="0" Height="20" Width="200"/>
                         <Label Content="Телефон пользователя" Margin="0" Height="30" Width="200"/>
                         <Grid>
-                            <TextBox x:Name="userPhone" Margin="0" Height="20" Width="200" LostFocus="userPhone_LostFocus"/>
+                            <TextBox x:Name="userPhone" Text="{Binding user_phone}" Margin="0" Height="20" Width="200" LostFocus="userPhone_LostFocus"/>
                             <TextBox x:Name="userPhonePlaceHolder" Text="Телефон" Margin="0" Height="20" Width="200" Foreground="#808080" GotFocus="userPhonePlaceHolder_GotFocus"/>
                         </Grid>
                         <Label Content="Почта пользователя" Margin="0" Height="30" Width="200"/>
                         <Grid>
-                            <TextBox x:Name="userMail" Margin="0" Height="20" Width="200" LostFocus="userMail_LostFocus"/>
+                            <TextBox x:Name="userMail" Text="{Binding user_mail}" Margin="0" Height="20" Width="200" LostFocus="userMail_LostFocus"/>
                             <TextBox x:Name="userMailPlaceHolder" Text="Почта" Margin="0" Height="20" Width="200" Foreground="#808080" GotFocus="userMailPlaceHolder_GotFocus"/>
                         </Grid>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5">
                             <Button x:Name="add" Content="Добавить" Width="60" Height="20" Margin="5,0" Click="add_Click"/>
                             <Button x:Name="red" Content="Редактировать" Width="100" Height="20" Margin="5,0" Click="red_Click"/>
                         </StackPanel>
+                        <Button x:Name="del" Content="Удалить пользователя" Width="170" Height="20" Margin="5,0" Click="del_Click"/>
                     </StackPanel>
                 </Grid>
             </Border>

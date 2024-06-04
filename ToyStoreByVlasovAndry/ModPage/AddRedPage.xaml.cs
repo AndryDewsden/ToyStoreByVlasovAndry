@@ -73,6 +73,12 @@ namespace ToyStoreByVlasovAndry.ModPage
                 _curToy = toy;
                 Title = "Редактирование";
                 Red.IsEnabled = true;
+                
+                check(article, articlePlaceHolder);
+                check(prize, prizePlaceHolder);
+                check(maxskid, maxskidPlaceHolder);
+                check(kol, kolPlaceHolder);
+                check(image, imagePlaceHolder);
             }
             else
             {
@@ -99,10 +105,10 @@ namespace ToyStoreByVlasovAndry.ModPage
         //добавить товар
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            var res = MessageBox.Show("Вы действительно хотите добавить этот товар?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
-
             if (Combo_names.SelectedIndex != 0 && Combo_maker.SelectedIndex != 0 && Combo_giver.SelectedIndex != 0 && Combo_ed.SelectedIndex != 0 && Combo_cat.SelectedIndex != 0 && article.Text != "" && prize.Text != "" && maxskid.Text != "" && kol.Text != "")
             {
+                var res = MessageBox.Show("Вы действительно хотите добавить этот товар?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
                 if (res == MessageBoxResult.Yes)
                 {
                     try
@@ -128,10 +134,10 @@ namespace ToyStoreByVlasovAndry.ModPage
         //редактировать товар
         private void Red_Click(object sender, RoutedEventArgs e)
         {
-            var res = MessageBox.Show("Вы действительно хотите редактировать этот товар?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
-
             if (Combo_names.SelectedIndex != 0 && Combo_maker.SelectedIndex != 0 && Combo_giver.SelectedIndex != 0 && Combo_ed.SelectedIndex != 0 && Combo_cat.SelectedIndex != 0 && article.Text != "" && prize.Text != "" && maxskid.Text != "" && kol.Text != "")
             {
+                var res = MessageBox.Show("Вы действительно хотите редактировать этот товар?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
                 if (res == MessageBoxResult.Yes)
                 {
                     try
@@ -155,82 +161,89 @@ namespace ToyStoreByVlasovAndry.ModPage
 
         private void article_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(article.Text))
-            {
-                article.Visibility = Visibility.Collapsed;
-                articlePlaceHolder.Visibility = Visibility.Visible;
-            }
+            check(article, articlePlaceHolder);
+            placeHolder(article, articlePlaceHolder);
         }
 
         private void articlePlaceHolder_GotFocus(object sender, RoutedEventArgs e)
         {
-            articlePlaceHolder.Visibility = Visibility.Collapsed;
-            article.Visibility = Visibility.Visible;
+            Original(article, articlePlaceHolder);
             article.Focus();
         }
 
         private void prize_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(prize.Text))
-            {
-                prize.Visibility = Visibility.Collapsed;
-                prizePlaceHolder.Visibility = Visibility.Visible;
-            }
+            check(prize, prizePlaceHolder);
+            placeHolder(prize, prizePlaceHolder);
         }
 
         private void prizePlaceHolder_GotFocus(object sender, RoutedEventArgs e)
         {
-            prizePlaceHolder.Visibility = Visibility.Collapsed;
-            prize.Visibility = Visibility.Visible;
+            Original(prize, prizePlaceHolder);
             prize.Focus();
         }
 
         private void maxskid_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(maxskid.Text))
-            {
-                maxskid.Visibility = Visibility.Collapsed;
-                maxskidPlaceHolder.Visibility = Visibility.Visible;
-            }
+            check(maxskid, maxskidPlaceHolder);
+            placeHolder(maxskid, maxskidPlaceHolder);
         }
 
         private void maxskidPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
         {
-            maxskidPlaceHolder.Visibility = Visibility.Collapsed;
-            maxskid.Visibility = Visibility.Visible;
+            Original(maxskid, maxskidPlaceHolder);
             maxskid.Focus();
         }
 
         private void kol_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(kol.Text))
-            {
-                kol.Visibility = Visibility.Collapsed;
-                kolPlaceHolder.Visibility = Visibility.Visible;
-            }
+            check(kol, kolPlaceHolder);
+            placeHolder(kol, kolPlaceHolder);
         }
 
         private void kolPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
         {
-            kolPlaceHolder.Visibility = Visibility.Collapsed;
-            kol.Visibility = Visibility.Visible;
+            Original(kol, kolPlaceHolder);
             kol.Focus();
         }
 
         private void image_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(image.Text))
-            {
-                image.Visibility = Visibility.Collapsed;
-                imagePlaceHolder.Visibility = Visibility.Visible;
-            }
+            check(image, imagePlaceHolder);
+            placeHolder(image, imagePlaceHolder);
         }
 
         private void imagePlaceHolder_GotFocus(object sender, RoutedEventArgs e)
         {
-            imagePlaceHolder.Visibility = Visibility.Collapsed;
-            image.Visibility = Visibility.Visible;
+            Original(image, imagePlaceHolder);
             image.Focus();
+        }
+
+        private void Original(TextBox org, TextBox place)
+        {
+            place.Visibility = Visibility.Collapsed;
+            org.Visibility = Visibility.Visible;
+        }
+
+        private void placeHolder(TextBox org, TextBox place)
+        {
+            if (string.IsNullOrEmpty(org.Text))
+            {
+                org.Visibility = Visibility.Collapsed;
+                place.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void check(TextBox org, TextBox place)
+        {
+            if (org.Text == null)
+            {
+                placeHolder(org, place);
+            }
+            else
+            {
+                Original(org, place);
+            }
         }
     }
 }
