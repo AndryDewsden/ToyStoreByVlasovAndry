@@ -40,7 +40,6 @@
                     <Button x:Name="uploadImage" Content="Загрузить изображение" Margin="5" Height="30" Width="200" Click="uploadImage_Click"/>
 
                     <ComboBox x:Name="ComboMenu" Margin="5" Height="30" Width="200" VerticalContentAlignment="Center"/>
-                    <ComboBox x:Name="ComboList" Margin="5" Height="30" Width="200" VerticalContentAlignment="Center"/>
                 </StackPanel>
             </Border>
 
@@ -59,15 +58,26 @@
                         </ListView.View>
                     </ListView>
 
+                    <ListView x:Name="listOrder">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding a}" Header="Пользователь" Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding a}" Header="Номер" Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding a}" Header="Товар" Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding a}" Header="Количество" Width="100"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    
                     <StackPanel x:Name="userPersonal">
                         
                     </StackPanel>
                 </Grid>
             </Border>
 
-            <Border x:Name="Cum" Grid.Column="2" Background="#E0FFFF" BorderBrush="Black" BorderThickness="1" CornerRadius="15" MinHeight="200" MaxHeight="500" MinWidth="220" MaxWidth="220" Margin="5" VerticalAlignment="Top">
+            <Border x:Name="RedactorWin" Grid.Column="2" Background="#E0FFFF" BorderBrush="Black" BorderThickness="1" CornerRadius="15" MinHeight="200" MaxHeight="500" MinWidth="220" MaxWidth="220" Margin="5" VerticalAlignment="Top">
                 <Grid>
-                    <StackPanel>
+                    <StackPanel x:Name="userdactor">
                         <Label Content="Настройки пользователя" Margin="0" Height="30" Width="200" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold"/>
                         <Label Content="Имя пользователя" Margin="0" Height="30" Width="200"/>
                         <Grid>
@@ -101,6 +111,31 @@
                             <Button x:Name="red" Content="Редактировать" Width="100" Height="20" Margin="5,0" Click="red_Click"/>
                         </StackPanel>
                         <Button x:Name="del" Content="Удалить пользователя" Width="170" Height="20" Margin="5,0" Click="del_Click"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="ordersdactor">
+                        <Label Content="Настройки зказа" Margin="0" Height="30" Width="200" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold"/>
+                        
+                        <Label Content="Имя пользователя" Margin="0" Height="30" Width="200"/>
+                        <ComboBox x:Name="userOrder" SelectedIndex="{Binding Users_ToyStore.id_user}" DisplayMemberPath="user_name"  Margin="0" Height="20" Width="200"/>
+                        
+                        <Label Content="Номер" Margin="0" Height="30" Width="200"/>
+                        <ComboBox x:Name="orderNumber" Text="{Binding Directories_ToyStore.id_directory}" DisplayMemberPath="directory_order_number" Margin="0" Height="20" Width="200" LostFocus="userLogin_LostFocus"/>
+
+                        <Label Content="Количество" Margin="0" Height="30" Width="200"/>
+                        <Grid>
+                            <TextBox x:Name="quantity" Text="{Binding order_quantity}" Margin="0" Height="20" Width="200" LostFocus="userPassword_LostFocus"/>
+                            <TextBox x:Name="quantityPlaceHolder" Text="Количество" Margin="0" Height="20" Width="200" Foreground="#808080" GotFocus="userPasswordPlaceHolder_GotFocus"/>
+                        </Grid>
+                        
+                        <Label Content="Товар" Margin="0" Height="30" Width="200"/>
+                        <ComboBox x:Name="good" SelectedIndex="{Binding Toys_ToyStore.id_toy}" DisplayMemberPath="toy_name"  Margin="0" Height="20" Width="200"/>
+                        
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5">
+                            <Button x:Name="addOrder" Content="Добавить" Width="60" Height="20" Margin="5,0" Click="add_Click"/>
+                            <Button x:Name="redOrder" Content="Редактировать" Width="100" Height="20" Margin="5,0" Click="red_Click"/>
+                        </StackPanel>
+                        <Button x:Name="delOrder" Content="Удалить пользователя" Width="170" Height="20" Margin="5,0" Click="del_Click"/>
                     </StackPanel>
                 </Grid>
             </Border>

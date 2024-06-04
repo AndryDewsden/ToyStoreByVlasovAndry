@@ -28,50 +28,42 @@ namespace ToyStoreByVlasovAndry.Content
             use = user;
             username.Content = $"Пользователь: {user.user_name}";
 
+            WindowShow(listUsers, 2);
+            WindowShow(userdactor, 2);
+            WindowShow(listOrder, 2);
+            WindowShow(ordersdactor, 2);
+
             switch (user.user_id_role)
             {
                 case 1:
                     Title = $"Страница администратора {user.user_name}";
 
-                    addButton.IsEnabled = true;
-                    addButton.Visibility = Visibility.Visible;
+                    WindowShow(addButton, 1);
+                    WindowShow(BtDelAcc, 2);
+                    WindowShow(userList, 1);
+                    WindowShow(uploadImage, 1);
+                    WindowShow(userList, 1);
 
-                    BtDelAcc.IsEnabled = false;
-                    BtDelAcc.Visibility = Visibility.Collapsed;
+                    userRole.Items.Add("--выбрать--");
 
-                    userList.IsEnabled = true;
-                    userList.Visibility = Visibility.Visible;
+                    for (int i = 0; i < AppConnect.model1db.Roles_ToyStore.ToList().Count; i++)
+                    {
+                        userRole.Items.Add(AppConnect.model1db.Roles_ToyStore.ToList()[i]);
+                    }
 
-                    uploadImage.IsEnabled = true;
-                    uploadImage.Visibility = Visibility.Visible;
-
-                    //заранее извиняюсь за вульгарные название, я просто пипец как спать хочу, потом поменяю
-                    Cum.IsEnabled = true;
-                    Cum.Visibility = Visibility.Visible;
+                    ComboMenu.Items.Add("Пользователи");
+                    ComboMenu.Items.Add("Заказы");
 
                     break;
 
                 case 2:
                     Title = $"Страница пользователя {user.user_name}";
-                    
-                    addButton.IsEnabled = false;
-                    addButton.Visibility = Visibility.Collapsed;
 
-                    BtDelAcc.IsEnabled = false;
-                    BtDelAcc.Visibility = Visibility.Collapsed;
-
-                    listUsers.IsEnabled = false;
-                    listUsers.Visibility = Visibility.Collapsed;
-
-                    uploadImage.IsEnabled = false;
-                    uploadImage.Visibility = Visibility.Collapsed;
-
-                    listUsers.IsEnabled = false;
-                    listUsers.Visibility = Visibility.Collapsed;
-
-                    //заранее извиняюсь за вульгарные название, я просто пипец как спать хочу, потом поменяю
-                    Cum.IsEnabled = false;
-                    Cum.Visibility = Visibility.Collapsed;
+                    WindowShow(addButton, 2);
+                    WindowShow(BtDelAcc, 2);
+                    WindowShow(listUsers, 2);
+                    WindowShow(uploadImage, 2);
+                    WindowShow(userList, 2);
                     
                     break;
                 
@@ -81,19 +73,19 @@ namespace ToyStoreByVlasovAndry.Content
                     break;
             }
 
-            userRole.Items.Add("--выбрать--");
-
-            for (int i = 0; i < AppConnect.model1db.Roles_ToyStore.ToList().Count; i++)
-            {
-                userRole.Items.Add(AppConnect.model1db.Roles_ToyStore.ToList()[i]);
-            }
-
             listUsers.ItemsSource = fillUsers();
+            listOrder.ItemsSource = fillOrders();
         }
 
         Users_ToyStore[] fillUsers()
         {
             var pro = AppConnect.model1db.Users_ToyStore.Where(x => x.id_user != use.id_user).ToList();
+            return pro.ToArray();
+        }
+
+        Orders_ToyStore[] fillOrders()
+        {
+            var pro = AppConnect.model1db.Orders_ToyStore.ToList();
             return pro.ToArray();
         }
 
@@ -210,71 +202,74 @@ namespace ToyStoreByVlasovAndry.Content
 
         private void userName_LostFocus(object sender, RoutedEventArgs e)
         {
-            placeHolder(userName, userNamePlaceHolder);
+            Original(userName, userNamePlaceHolder, 2);
         }
 
         private void userLogin_LostFocus(object sender, RoutedEventArgs e)
         {
-            placeHolder(userLogin, userLoginPlaceHolder);
+            Original(userLogin, userLoginPlaceHolder, 2);
         }
 
         private void userPassword_LostFocus(object sender, RoutedEventArgs e)
         {
-            placeHolder(userPassword, userPasswordPlaceHolder);
+            Original(userPassword, userPasswordPlaceHolder, 2);
         }
 
         private void userPhone_LostFocus(object sender, RoutedEventArgs e)
         {
-            placeHolder(userPhone, userPhonePlaceHolder);
+            Original(userPhone, userPhonePlaceHolder, 2);
         }
 
         private void userMail_LostFocus(object sender, RoutedEventArgs e)
         {
-            placeHolder(userMail, userMailPlaceHolder);
+            Original(userMail, userMailPlaceHolder, 2);
         }
 
         private void userNamePlaceHolder_GotFocus(object sender, RoutedEventArgs e)
         {
-            Original(userName, userNamePlaceHolder);
+            Original(userName, userNamePlaceHolder, 1);
             userName.Focus();
         }
 
         private void userLoginPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
         {
-            Original(userLogin, userLoginPlaceHolder);
+            Original(userLogin, userLoginPlaceHolder, 1);
             userLogin.Focus();
         }
 
         private void userPasswordPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
         {
-            Original(userPassword, userPasswordPlaceHolder);
+            Original(userPassword, userPasswordPlaceHolder, 1);
             userPassword.Focus();
         }
 
         private void userPhonePlaceHolder_GotFocus(object sender, RoutedEventArgs e)
         {
-            Original(userPhone, userPhonePlaceHolder);
+            Original(userPhone, userPhonePlaceHolder, 1);
             userPhone.Focus();
         }
 
         private void userMailPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
         {
-            Original(userMail, userMailPlaceHolder);
+            Original(userMail, userMailPlaceHolder, 1);
             userMail.Focus();
         }
 
-        private void Original(TextBox org, TextBox place)
+        private void Original(TextBox org, TextBox place, int r)
         {
-                place.Visibility = Visibility.Collapsed;
-                org.Visibility = Visibility.Visible;
-        }
-
-        private void placeHolder(TextBox org, TextBox place)
-        {
-            if (string.IsNullOrEmpty(org.Text))
+            switch (r)
             {
-                org.Visibility = Visibility.Collapsed;
-                place.Visibility = Visibility.Visible;
+                case 1:
+                    place.Visibility = Visibility.Collapsed;
+                    org.Visibility = Visibility.Visible;
+                    break;
+                case 2:
+                    if (string.IsNullOrEmpty(org.Text))
+                    {
+                        org.Visibility = Visibility.Collapsed;
+                        place.Visibility = Visibility.Visible;
+                    }
+                    break;
             }
         }
 
@@ -311,25 +306,25 @@ namespace ToyStoreByVlasovAndry.Content
             userPhone.Text = _curUser.user_phone;
             userMail.Text = _curUser.user_mail;
 
-            Original(userName, userNamePlaceHolder);
-            Original(userLogin, userLoginPlaceHolder);
-            Original(userPassword, userPasswordPlaceHolder);
+            Original(userName, userNamePlaceHolder, 1);
+            Original(userLogin, userLoginPlaceHolder, 1);
+            Original(userPassword, userPasswordPlaceHolder, 1);
             
             if (userPhone.Text != "")
             {
-                Original(userPhone, userPhonePlaceHolder);
+                Original(userPhone, userPhonePlaceHolder, 1);
             }
             else
             {
-                placeHolder(userPhone, userPhonePlaceHolder);
+                Original(userPhone, userPhonePlaceHolder, 2);
             }
             if (userMail.Text != "")
             {
-                Original(userMail, userMailPlaceHolder);
+                Original(userMail, userMailPlaceHolder, 1);
             }
             else
             {
-                placeHolder(userMail, userMailPlaceHolder);
+                Original(userMail, userMailPlaceHolder, 2);
             }
         }
 
@@ -352,20 +347,91 @@ namespace ToyStoreByVlasovAndry.Content
                     userPhone.Text = "";
                     userMail.Text = "";
 
-                    placeHolder(userName, userNamePlaceHolder);
-                    placeHolder(userLogin, userLoginPlaceHolder);
-                    placeHolder(userPassword, userPasswordPlaceHolder);
-                    placeHolder(userPhone, userPhonePlaceHolder);
-                    placeHolder(userMail, userMailPlaceHolder);
+                    Original(userName, userNamePlaceHolder, 2);
+                    Original(userLogin, userLoginPlaceHolder, 2);
+                    Original(userPassword, userPasswordPlaceHolder, 2);
+                    Original(userPhone, userPhonePlaceHolder, 2);
+                    Original(userMail, userMailPlaceHolder, 2);
 
                     listUsers.ItemsSource = fillUsers();
-                    //MessageBox.Show("Данные успешно удалены", "Тестирование", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+        }
+
+        private void ComboList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch(ComboMenu.SelectedIndex)
+            {
+                case 1:
+                    WindowShow(listUsers, 1);
+                    WindowShow(userdactor, 1);
+                    WindowShow(listOrder, 2);
+                    WindowShow(ordersdactor, 2);
+                    break;
+                
+                case 2:
+                    WindowShow(listUsers, 2);
+                    WindowShow(userdactor, 2);
+                    WindowShow(listOrder, 1);
+                    WindowShow(ordersdactor, 1);
+                    break;
+                
+                default:
+                    WindowShow(listUsers, 2);
+                    WindowShow(userdactor, 2);
+                    WindowShow(listOrder, 2);
+                    WindowShow(ordersdactor, 2);
+                    break;
+            }
+        }
+
+        private void WindowShow(ListView sim, int s)
+        {
+            switch (s)
+            {
+                case 1:
+                    sim.IsEnabled = true;
+                    sim.Visibility = Visibility.Visible;
+                    break;
+                case 2:
+                    sim.IsEnabled = false;
+                    sim.Visibility = Visibility.Collapsed;
+                    break;
+            }
+        }
+
+        private void WindowShow(StackPanel sim, int s)
+        {
+            switch (s)
+            {
+                case 1:
+                    sim.IsEnabled = true;
+                    sim.Visibility = Visibility.Visible;
+                    break;
+                case 2:
+                    sim.IsEnabled = false;
+                    sim.Visibility = Visibility.Collapsed;
+                    break;
+            }
+        }
+
+        private void WindowShow(Button sim, int s)
+        {
+            switch (s)
+            {
+                case 1:
+                    sim.IsEnabled = true;
+                    sim.Visibility = Visibility.Visible;
+                    break;
+                case 2:
+                    sim.IsEnabled = false;
+                    sim.Visibility = Visibility.Collapsed;
+                    break;
             }
         }
     }
