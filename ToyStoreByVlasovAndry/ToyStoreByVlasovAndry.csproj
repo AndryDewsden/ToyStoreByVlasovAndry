@@ -129,87 +129,81 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ApplicationData\AgeCategories_ToyStore.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\AppConnect.cs" />
     <Compile Include="ApplicationData\AppFrame.cs" />
     <Compile Include="ApplicationData\Categories_ToyStore.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Categorys.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Classes.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Countries_ToyStore.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Deals.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Directories_ToyStore.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Edenices.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Givers.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Main.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Makers.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Manufacturers_ToyStore.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationData\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationData\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationData\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Names.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Orders_ToyStore.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Providers_ToyStore.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Roles_ToyStore.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ApplicationData\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ApplicationData\sp_helpdiagrams_Result.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\sysdiagrams.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ApplicationData\ToyBase.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ToyBase.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ApplicationData\ToyBase.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ToyBase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ApplicationData\ToyBase.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ToyBase.edmx</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Toys_ToyStore.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Users.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationData\Users_ToyStore.cs">
-      <DependentUpon>ToyBase.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Content\CartPage.xaml.cs">
       <DependentUpon>CartPage.xaml</DependentUpon>
@@ -259,12 +253,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="ApplicationData\ToyBase.edmx">
+    <EntityDeploy Include="ApplicationData\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ToyBase.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ApplicationData\ToyBase.edmx.diagram">
-      <DependentUpon>ToyBase.edmx</DependentUpon>
+    <None Include="ApplicationData\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -276,16 +270,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApplicationData\ToyBase.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ToyBase.Context.cs</LastGenOutput>
-      <DependentUpon>ToyBase.edmx</DependentUpon>
-    </Content>
-    <Content Include="ApplicationData\ToyBase.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ToyBase.edmx</DependentUpon>
-      <LastGenOutput>ToyBase.cs</LastGenOutput>
-    </Content>
     <Resource Include="images\tocart.png" />
     <Resource Include="images\icon.png" />
     <Resource Include="images\spaceship.png" />
@@ -306,7 +290,18 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ApplicationData\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ApplicationData\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.5.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.5.0.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -4,27 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e8abf9fca2cf4e2299252f48d23adcfc" Name="Diagram1">
+      <Diagram DiagramId="93b21a4a243642b19717fb77ded48033" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="Model.AgeCategories_ToyStore" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Categories_ToyStore" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Categorys" Width="1.5" PointX="5.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Classes" Width="1.5" PointX="5.75" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Countries_ToyStore" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Deals" Width="1.5" PointX="10.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Directories_ToyStore" Width="1.5" PointX="12.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Directories_ToyStore" Width="1.5" PointX="3" PointY="16.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Edenices" Width="1.5" PointX="5.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Givers" Width="1.5" PointX="5.75" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Main" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Makers" Width="1.5" PointX="5.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Manufacturers_ToyStore" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Names" Width="1.5" PointX="5.75" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Orders_ToyStore" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Orders_ToyStore" Width="1.5" PointX="5.875" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Providers_ToyStore" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Roles_ToyStore" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Roles_ToyStore" Width="1.5" PointX="1.5" PointY="19.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Toys_ToyStore" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Users" Width="1.5" PointX="8" PointY="18.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Users_ToyStore" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Users_ToyStore" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_Toys_AgeCategories_ToyStore" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Toys_Categories_ToyStore" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Main_Categorys" ManuallyRouted="false" />
@@ -33,6 +33,7 @@
         <AssociationConnector Association="Model.FK_Deals_Main" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Deals_Users" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Directories_Users_ToyStore" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Orders_ToyStore_Directories_ToyStore" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Main_Edenices" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Main_Givers" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Main_Makers" ManuallyRouted="false" />

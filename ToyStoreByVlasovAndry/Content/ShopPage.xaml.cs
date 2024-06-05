@@ -352,7 +352,9 @@ namespace ToyStoreByVlasovAndry.Content
             //Добавление товара в корзину
             var ord = (Toys_ToyStore)listProducts.SelectedItem;
 
-            var goodOrder = AppConnect.model1db.Orders_ToyStore.FirstOrDefault(x => x.order_id_toy == ord.id_toy && x.order_number == numOrder);
+            //
+            var num = AppConnect.model1db.Directories_ToyStore.FirstOrDefault(x => x.directory_order_number == numOrder).id_directory;
+            var goodOrder = AppConnect.model1db.Orders_ToyStore.FirstOrDefault(x => x.order_id_toy == ord.id_toy && x.order_id_directory == num);
 
             if (ord != null && goodOrder == null)
             {
@@ -360,7 +362,8 @@ namespace ToyStoreByVlasovAndry.Content
                 {
                     Orders_ToyStore userOrder = new Orders_ToyStore()
                     {
-                        order_number = numOrder,
+                        //
+                        order_id_directory = num,
                         order_id_toy = ord.id_toy,
                         order_quantity = 1
                     };

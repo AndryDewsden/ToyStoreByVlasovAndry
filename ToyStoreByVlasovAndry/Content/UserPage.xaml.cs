@@ -54,6 +54,25 @@ namespace ToyStoreByVlasovAndry.Content
                     ComboMenu.Items.Add("Пользователи");
                     ComboMenu.Items.Add("Заказы");
 
+                    userOrder.Items.Add("");
+                    numOrder.Items.Add("");
+                    good.Items.Add("");
+
+                    for (int i = 0; i < AppConnect.model1db.Users_ToyStore.ToList().Count; i++)
+                    {
+                        userOrder.Items.Add(AppConnect.model1db.Users_ToyStore.ToList()[i]);
+                    }
+
+                    for (int i = 0; i < AppConnect.model1db.Directories_ToyStore.ToList().Count; i++)
+                    {
+                        numOrder.Items.Add(AppConnect.model1db.Directories_ToyStore.ToList()[i]);
+                    }
+
+                    for (int i = 0; i < AppConnect.model1db.Toys_ToyStore.ToList().Count; i++)
+                    {
+                        good.Items.Add(AppConnect.model1db.Toys_ToyStore.ToList()[i]);
+                    }
+
                     break;
 
                 case 2:
@@ -363,33 +382,6 @@ namespace ToyStoreByVlasovAndry.Content
             }
         }
 
-        private void ComboList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            switch(ComboMenu.SelectedIndex)
-            {
-                case 1:
-                    WindowShow(listUsers, 1);
-                    WindowShow(userdactor, 1);
-                    WindowShow(listOrder, 2);
-                    WindowShow(ordersdactor, 2);
-                    break;
-                
-                case 2:
-                    WindowShow(listUsers, 2);
-                    WindowShow(userdactor, 2);
-                    WindowShow(listOrder, 1);
-                    WindowShow(ordersdactor, 1);
-                    break;
-                
-                default:
-                    WindowShow(listUsers, 2);
-                    WindowShow(userdactor, 2);
-                    WindowShow(listOrder, 2);
-                    WindowShow(ordersdactor, 2);
-                    break;
-            }
-        }
-
         private void WindowShow(ListView sim, int s)
         {
             switch (s)
@@ -432,6 +424,143 @@ namespace ToyStoreByVlasovAndry.Content
                     sim.IsEnabled = false;
                     sim.Visibility = Visibility.Collapsed;
                     break;
+            }
+        }
+
+        private void ComboMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (ComboMenu.SelectedIndex)
+            {
+                case 0:
+                    WindowShow(listUsers, 1);
+                    WindowShow(userdactor, 1);
+                    WindowShow(listOrder, 2);
+                    WindowShow(ordersdactor, 2);
+                    break;
+
+                case 1:
+                    WindowShow(listUsers, 2);
+                    WindowShow(userdactor, 2);
+                    WindowShow(listOrder, 1);
+                    WindowShow(ordersdactor, 1);
+                    break;
+
+                default:
+                    WindowShow(listUsers, 2);
+                    WindowShow(userdactor, 2);
+                    WindowShow(listOrder, 2);
+                    WindowShow(ordersdactor, 2);
+                    break;
+            }
+        }
+
+        Orders_ToyStore _curOrder = new Orders_ToyStore();
+        private void listOrder_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _curOrder = (Orders_ToyStore)listOrder.SelectedItem;
+
+            userOrder.SelectedItem = AppConnect.model1db.Users_ToyStore.FirstOrDefault(x => x.id_user == AppConnect.model1db.Directories_ToyStore.FirstOrDefault(y => y.id_directory == _curOrder.order_id_directory).directory_id_user);
+            numOrder.SelectedItem = AppConnect.model1db.Directories_ToyStore.FirstOrDefault(x => x.id_directory == _curOrder.order_id_directory);
+            quantity.Text = _curOrder.order_quantity.ToString();
+            good.SelectedItem = AppConnect.model1db.Toys_ToyStore.FirstOrDefault(x => x.id_toy == _curOrder.order_id_toy);
+
+            if (quantity.Text != "")
+            {
+                Original(quantity, quantityPlaceHolder, 1);
+            }
+            else
+            {
+                Original(quantity, quantityPlaceHolder, 2);
+            }
+        }
+
+        private void quantity_LostFocus(object sender, RoutedEventArgs e)
+        {
+            Original(quantity, quantityPlaceHolder, 2);
+        }
+
+        private void quantityPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Original(quantity, quantityPlaceHolder, 1);
+            userName.Focus();
+        }
+
+        private void addOrder_Click(object sender, RoutedEventArgs e)
+        {
+            var res = MessageBox.Show("Вы действительно хотите добавить этого пользователя?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            if (res == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    AppConnect.model1db.Orders_ToyStore.Add(_curOrder);
+                    AppConnect.model1db.SaveChanges();
+                    listOrder.ItemsSource = fillOrders();
+                    MessageBox.Show("Данные успешно добавленны", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void redOrder_Click(object sender, RoutedEventArgs e)
+        {
+            var res = MessageBox.Show("Вы действительно хотите изменить параметры этого пользователя?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            if (res == MessageBoxResult.Yes)
+            {
+                try
+                {
+
+                    DataContext = _curUser;
+
+                    AppConnect.model1db.SaveChanges();
+                    listUsers.ItemsSource = fillUsers();
+                    MessageBox.Show("Данные успешно редактированы", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void delOrder_Click(object sender, RoutedEventArgs e)
+        {
+            var del = (Users_ToyStore)listUsers.SelectedItem;
+            var res = MessageBox.Show($"Вы действительно хотите удалить этого пользователя?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            if (res == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    AppConnect.model1db.Users_ToyStore.Remove(del);
+                    AppConnect.model1db.SaveChanges();
+
+                    userName.Text = "";
+                    userLogin.Text = "";
+                    userPassword.Text = "";
+                    userRole.SelectedIndex = 0;
+                    userPhone.Text = "";
+                    userMail.Text = "";
+
+                    Original(userName, userNamePlaceHolder, 2);
+                    Original(userLogin, userLoginPlaceHolder, 2);
+                    Original(userPassword, userPasswordPlaceHolder, 2);
+                    Original(userPhone, userPhonePlaceHolder, 2);
+                    Original(userMail, userMailPlaceHolder, 2);
+
+                    listUsers.ItemsSource = fillUsers();
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }

@@ -115,7 +115,7 @@
             <PropertyRef Name="id_order" />
           </Key>
           <Property Name="id_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="order_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="order_id_directory" Type="int" Nullable="false" />
           <Property Name="order_id_toy" Type="int" Nullable="false" />
           <Property Name="order_quantity" Type="int" Nullable="false" />
         </EntityType>
@@ -288,6 +288,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Orders_ToyStore_Directories_ToyStore">
+          <End Role="Directories_ToyStore" Type="Self.Directories_ToyStore" Multiplicity="1" />
+          <End Role="Orders_ToyStore" Type="Self.Orders_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Directories_ToyStore">
+              <PropertyRef Name="id_directory" />
+            </Principal>
+            <Dependent Role="Orders_ToyStore">
+              <PropertyRef Name="order_id_directory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Toys_AgeCategories_ToyStore">
           <End Role="AgeCategories_ToyStore" Type="Self.AgeCategories_ToyStore" Multiplicity="1" />
           <End Role="Toys_ToyStore" Type="Self.Toys_ToyStore" Multiplicity="*" />
@@ -372,37 +384,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Хранилище ModelContainer">
           <EntitySet Name="AgeCategories_ToyStore" EntityType="Self.AgeCategories_ToyStore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories_ToyStore" EntityType="Self.Categories_ToyStore" Schema="dbo" store:Type="Tables" />
@@ -458,6 +439,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Toys_ToyStore" Association="Self.FK_Orders_Toys_ToyStore">
             <End Role="Toys_ToyStore" EntitySet="Toys_ToyStore" />
+            <End Role="Orders_ToyStore" EntitySet="Orders_ToyStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToyStore_Directories_ToyStore" Association="Self.FK_Orders_ToyStore_Directories_ToyStore">
+            <End Role="Directories_ToyStore" EntitySet="Directories_ToyStore" />
             <End Role="Orders_ToyStore" EntitySet="Orders_ToyStore" />
           </AssociationSet>
           <AssociationSet Name="FK_Toys_AgeCategories_ToyStore" Association="Self.FK_Toys_AgeCategories_ToyStore">
@@ -553,6 +538,7 @@
           <Property Name="directory_id_user" Type="Int32" Nullable="false" />
           <Property Name="directory_order_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Users_ToyStore" Relationship="Self.FK_Directories_Users_ToyStore" FromRole="Directories_ToyStore" ToRole="Users_ToyStore" />
+          <NavigationProperty Name="Orders_ToyStore" Relationship="Self.FK_Orders_ToyStore_Directories_ToyStore" FromRole="Directories_ToyStore" ToRole="Orders_ToyStore" />
         </EntityType>
         <EntityType Name="Edenices">
           <Key>
@@ -623,9 +609,10 @@
             <PropertyRef Name="id_order" />
           </Key>
           <Property Name="id_order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="order_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="order_id_directory" Type="Int32" Nullable="false" />
           <Property Name="order_id_toy" Type="Int32" Nullable="false" />
           <Property Name="order_quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Directories_ToyStore" Relationship="Self.FK_Orders_ToyStore_Directories_ToyStore" FromRole="Orders_ToyStore" ToRole="Directories_ToyStore" />
           <NavigationProperty Name="Toys_ToyStore" Relationship="Self.FK_Orders_Toys_ToyStore" FromRole="Orders_ToyStore" ToRole="Toys_ToyStore" />
         </EntityType>
         <EntityType Name="Providers_ToyStore">
@@ -797,6 +784,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Orders_ToyStore_Directories_ToyStore">
+          <End Role="Directories_ToyStore" Type="Self.Directories_ToyStore" Multiplicity="1" />
+          <End Role="Orders_ToyStore" Type="Self.Orders_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Directories_ToyStore">
+              <PropertyRef Name="id_directory" />
+            </Principal>
+            <Dependent Role="Orders_ToyStore">
+              <PropertyRef Name="order_id_directory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Main_Edenices">
           <End Role="Edenices" Type="Self.Edenices" Multiplicity="1" />
           <End Role="Main" Type="Self.Main" Multiplicity="*" />
@@ -946,6 +945,10 @@
             <End Role="Users_ToyStore" EntitySet="Users_ToyStore" />
             <End Role="Directories_ToyStore" EntitySet="Directories_ToyStore" />
           </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToyStore_Directories_ToyStore" Association="Self.FK_Orders_ToyStore_Directories_ToyStore">
+            <End Role="Directories_ToyStore" EntitySet="Directories_ToyStore" />
+            <End Role="Orders_ToyStore" EntitySet="Orders_ToyStore" />
+          </AssociationSet>
           <AssociationSet Name="FK_Main_Edenices" Association="Self.FK_Main_Edenices">
             <End Role="Edenices" EntitySet="Edenices" />
             <End Role="Main" EntitySet="Main" />
@@ -978,48 +981,7 @@
             <End Role="Roles_ToyStore" EntitySet="Roles_ToyStore" />
             <End Role="Users_ToyStore" EntitySet="Users_ToyStore" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Model.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Model.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1148,7 +1110,7 @@
             <EntityTypeMapping TypeName="Model.Orders_ToyStore">
               <MappingFragment StoreEntitySet="Orders_ToyStore">
                 <ScalarProperty Name="id_order" ColumnName="id_order" />
-                <ScalarProperty Name="order_number" ColumnName="order_number" />
+                <ScalarProperty Name="order_id_directory" ColumnName="order_id_directory" />
                 <ScalarProperty Name="order_id_toy" ColumnName="order_id_toy" />
                 <ScalarProperty Name="order_quantity" ColumnName="order_quantity" />
               </MappingFragment>
@@ -1221,30 +1183,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище Model.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище Model.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище Model.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище Model.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище Model.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище Model.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище Model.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

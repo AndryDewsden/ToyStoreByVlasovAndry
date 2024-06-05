@@ -43,7 +43,9 @@ namespace ToyStoreByVlasovAndry.Content
 
             if (numOrder != null)
             {
-                productsInCart = AppConnect.model1db.Orders_ToyStore.Where(x => x.order_number == numOrder).ToList();
+                //
+                var num = AppConnect.model1db.Directories_ToyStore.FirstOrDefault(x => x.directory_order_number == numOrder).id_directory;
+                productsInCart = AppConnect.model1db.Orders_ToyStore.Where(x => x.order_id_directory == num).ToList();
                 if (productsInCart.Count > 0)
                 {
                     Stat.Content = $"В вашей корзине {productsInCart.Count} товаров. Ваш номер: {numOrder}";
@@ -78,7 +80,7 @@ namespace ToyStoreByVlasovAndry.Content
 
         private void delCart(Orders_ToyStore del)
         {
-            var res = MessageBox.Show($"Вы действительно хотите удалить этот товар?\n Будет удалён:\nНаименование: {del.order_number} \nАртикль: {del.order_id_toy} \n{del.order_quantity}", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            var res = MessageBox.Show($"Вы действительно хотите удалить этот товар?\n Будет удалён:\nНаименование: {del.order_id_directory} \nАртикль: {del.order_id_toy} \n{del.order_quantity}", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
             if (res == MessageBoxResult.Yes)
             {

@@ -54,7 +54,9 @@ namespace ToyStoreByVlasovAndry.Content
 
             if (numOrder != null)
             {
-                productsInCart = AppConnect.model1db.Orders_ToyStore.Where(x => x.order_number == numOrder).ToList();
+                //
+                var num = AppConnect.model1db.Directories_ToyStore.FirstOrDefault(x => x.directory_order_number == numOrder).id_directory;
+                productsInCart = AppConnect.model1db.Orders_ToyStore.Where(x => x.order_id_directory == num).ToList();
             }
 
             int CountGood = 0;

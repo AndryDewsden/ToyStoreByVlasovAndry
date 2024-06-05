@@ -15,10 +15,11 @@ namespace ToyStoreByVlasovAndry.ApplicationData
     public partial class Orders_ToyStore
     {
         public int id_order { get; set; }
-        public string order_number { get; set; }
+        public int order_id_directory { get; set; }
         public int order_id_toy { get; set; }
         public int order_quantity { get; set; }
     
+        public virtual Directories_ToyStore Directories_ToyStore { get; set; }
         public virtual Toys_ToyStore Toys_ToyStore { get; set; }
     }
 }
