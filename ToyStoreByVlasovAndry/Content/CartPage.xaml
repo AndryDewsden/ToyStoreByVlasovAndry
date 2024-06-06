@@ -96,6 +96,8 @@
             <Button x:Name="userDisplay" Content="Пользователь" Width="120" Height="30" Margin="5,0,5,0" Click="userDisplay_Click" Background="#00CED1" Foreground="#E0FFFF"/>
             <Button x:Name="goList" Content="Список товаров" Click="goGood_Click" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Background="#00CED1" Foreground="#E0FFFF"/>
             <Button x:Name="OrderMake" Content="Оформить заказ"  Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="OrderMake_Click" Background="#00CED1" Foreground="#E0FFFF"/>
+            <Label x:Name="WholeSale" Width="200"/>
+            <Label x:Name="Retail" Width="200"/>
         </StackPanel>
     </Grid>
 </Page>

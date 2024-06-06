@@ -58,6 +58,16 @@ namespace ToyStoreByVlasovAndry.Content
                     editButton.Visibility = Visibility.Collapsed;
                     delButton.Visibility = Visibility.Collapsed;
                     break;
+                case 3:
+                    //менеджер
+                    addConMenu.IsEnabled = true;
+                    editConMenu.IsEnabled = true;
+                    delConMenu.IsEnabled = true;
+
+                    addButton.IsEnabled = true;
+                    editButton.IsEnabled = true;
+                    delButton.IsEnabled = true;
+                    break;
                 default:
                     MessageBox.Show("Произошла какае-то ощибка с данными пользователя. Вас перекинут на страницу авторизации.", "О-оу", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
@@ -283,7 +293,7 @@ namespace ToyStoreByVlasovAndry.Content
         //кнопка на товаре
         private void Add_toCart_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"", "Тестирование", MessageBoxButton.OK);
+            //MessageBox.Show($"", "Тестирование", MessageBoxButton.OK);
             AddToCart();
         }
 
@@ -291,16 +301,14 @@ namespace ToyStoreByVlasovAndry.Content
         private void AddToCart()
         {
             string numOrder;
-            Directories_ToyStore userList = AppConnect.model1db.Directories_ToyStore.FirstOrDefault(x => x.directory_id_user == use.id_user);
+            
+            Directories_ToyStore userList = AppConnect.model1db.Directories_ToyStore.FirstOrDefault(x => x.directory_id_user == use.id_user && x.directory_status != 2);
             
             //присваивание товара к номеру заказа
             if(userList == null)
             {
-                //генератор номера заказа
-                //numOrder = use.id_user.ToString();
-                
+                //генератор номера заказа                
                 Random r = new Random();
-
                 numOrder = "";
 
                 while (AppConnect.model1db.Directories_ToyStore.Where(x => x.directory_order_number == numOrder).Count() > 0 || numOrder == "")
@@ -312,7 +320,6 @@ namespace ToyStoreByVlasovAndry.Content
                         switch (t)
                         {
                             case 0:
-                                //numOrder += Convert.ToChar(r.Next(97, 122));
                                 numOrder += Convert.ToChar(r.Next(65, 90));
                                 break;
                             case 1:
@@ -320,27 +327,29 @@ namespace ToyStoreByVlasovAndry.Content
                                 break;
                         }
                     }
-                    if(AppConnect.model1db.Directories_ToyStore.Where(x => x.directory_order_number == numOrder).Count() > 0)
+                    MessageBox.Show("Номер создан", "", MessageBoxButton.OK);
+
+                    if (AppConnect.model1db.Directories_ToyStore.Where(x => x.directory_order_number == numOrder).Count() > 0)
                     {
                         MessageBox.Show("Такой номер уже есть.", "lol", MessageBoxButton.OK);
                     }
                 }
-
 
                 try
                 {
                     Directories_ToyStore userDir = new Directories_ToyStore()
                     {
                         directory_id_user = use.id_user,
-                        directory_order_number = numOrder
+                        directory_order_number = numOrder,
+                        directory_status = 1
                     };
                     AppConnect.model1db.Directories_ToyStore.Add(userDir);
                     AppConnect.model1db.SaveChanges();
                     //MessageBox.Show($"Новый номер сгенернирован: {numOrder}", "Тестирование", MessageBoxButton.OK);
                 }
-                catch
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Ошибка при внедрении данных на сервер!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Ошибка при внедрении данных на сервер!\n{ex.Message}", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
@@ -352,18 +361,19 @@ namespace ToyStoreByVlasovAndry.Content
             //Добавление товара в корзину
             var ord = (Toys_ToyStore)listProducts.SelectedItem;
 
-            //
-            var num = AppConnect.model1db.Directories_ToyStore.FirstOrDefault(x => x.directory_order_number == numOrder).id_directory;
-            var goodOrder = AppConnect.model1db.Orders_ToyStore.FirstOrDefault(x => x.order_id_toy == ord.id_toy && x.order_id_directory == num);
+            //ищем наш заказ
+            var num = AppConnect.model1db.Directories_ToyStore.FirstOrDefault(x => x.directory_order_number == numOrder && x.directory_status != 2);
+            //ищем наш товар
+            var goodOrder = AppConnect.model1db.Orders_ToyStore.FirstOrDefault(x => x.order_id_toy == ord.id_toy && x.order_id_directory == num.id_directory);
 
+            //если товар впервые добавлен в корзину
             if (ord != null && goodOrder == null)
             {
                 try
                 {
                     Orders_ToyStore userOrder = new Orders_ToyStore()
                     {
-                        //
-                        order_id_directory = num,
+                        order_id_directory = num.id_directory,
                         order_id_toy = ord.id_toy,
                         order_quantity = 1
                     };
@@ -371,11 +381,13 @@ namespace ToyStoreByVlasovAndry.Content
                     AppConnect.model1db.SaveChanges();
                     //MessageBox.Show("Ваш товар успешно добавлен в корзину.", "Тестовое уведомление", MessageBoxButton.OK);
                 }
-                catch
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Ошибка при внедрении данных на сервер!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Ошибка при внедрении данных товара заказа!\n{ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+
+            //если товар уже есть в корзине 
             else
             {
                 try

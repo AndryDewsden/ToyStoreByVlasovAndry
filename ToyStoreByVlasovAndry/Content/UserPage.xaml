@@ -16,8 +16,8 @@
         </Grid.RowDefinitions>
         
         <StackPanel>
-            <Label x:Name="username" Width="200" Height="30"/>
-            <Label x:Name="test" Content="Последний вход: " Width="200" Height="30"/>
+            <Label x:Name="username" Width="200" Height="30" IsEnabled="False" Visibility="Collapsed"/>
+            <Label x:Name="test" Content="Последний вход: " Width="200" Height="30" IsEnabled="False" Visibility="Collapsed"/>
         </StackPanel>
         
         <Grid Grid.Row="1">
@@ -36,7 +36,6 @@
                     <Button Content="Выйти из аккаунта" Margin="5" Width="200" Height="30" Click="goBack_Click" FontWeight="Bold" Background="#00CED1" Foreground="#E0FFFF"/>
                     <Button Content="Выйти из приложения" Margin="5" Width="200" Height="30" Click="BtExit_Click" FontWeight="Bold" Background="#00CED1" Foreground="#E0FFFF"/>
                     <Button x:Name="BtDelAcc" Content="Удалить аккаунт" Margin="5" Width="200" Height="30" Click="BtDelAcc_Click" FontWeight="Bold" Foreground="#FFD02626" Background="#E0FFFF"/>
-                    <Button x:Name="userList" Content="Список пользователей" Margin="5" Height="30" Width="200" Click="userList_Click"/>
                     <Button x:Name="uploadImage" Content="Загрузить изображение" Margin="5" Height="30" Width="200" Click="uploadImage_Click"/>
 
                     <ComboBox x:Name="ComboMenu" Margin="5" Height="30" Width="200" VerticalContentAlignment="Center" SelectionChanged="ComboMenu_SelectionChanged"/>
@@ -50,18 +49,15 @@
                         <RowDefinition Height="260"/>
                     </Grid.RowDefinitions>
 
-                    <ComboBox x:Name="UserSearchUsers" Grid.Row="0" Height="30" Width="100"/>
-                    <ComboBox x:Name="UserSearchOrders" Grid.Row="0" Height="30" Width="100"/>
-
                     <ListView x:Name="listUsers" Grid.Row="1" ScrollViewer.CanContentScroll="False" Margin="0" SelectionChanged="listUsers_SelectionChanged">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding user_name}" Header="Имя" Width="60"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding user_login}" Header="Логин" Width="60"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding user_password}" Header="Пароль" Width="60"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding user_name}" Header="Имя" Width="90"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding user_login}" Header="Логин" Width="90"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding user_password}" Header="Пароль" Width="90"/>
                                 <GridViewColumn DisplayMemberBinding="{Binding Roles_ToyStore.role}" Header="Роль" Width="60"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding user_phone}" Header="Телефон" Width="60"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding user_mail}" Header="Почта" Width="60"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding user_phone}" Header="Телефон" Width="80"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding user_mail}" Header="Почта" Width="90"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -69,9 +65,9 @@
                     <ListView x:Name="listOrder" SelectionChanged="listOrder_SelectionChanged" Grid.Row="1">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Directories_ToyStore.directory_order_number}" Header="Номер" Width="100"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Toys_ToyStore.toy_name}" Header="Товар" Width="100"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding order_quantity}" Header="Количество" Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Users_ToyStore.user_name}" Header="Пользователь" Width="150"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding directory_order_number}" Header="Номер заказа" Width="180"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Status_ToyStore.status}" Header="Статус заказа" Width="160"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -121,28 +117,19 @@
                     </StackPanel>
 
                     <StackPanel x:Name="ordersdactor">
-                        <Label Content="Настройки зказа" Margin="0" Height="30" Width="200" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold"/>
-                        
-                        <Label Content="Имя пользователя" Margin="0" Height="30" Width="200"/>
-                        <ComboBox x:Name="userOrder" SelectedIndex="{Binding Users_ToyStore.id_user}" DisplayMemberPath="user_name"  Margin="0" Height="20" Width="200"/>
-                        
-                        <Label Content="Номер" Margin="0" Height="30" Width="200"/>
-                        <ComboBox x:Name="numOrder" SelectedIndex = "{Binding Directories_ToyStore.id_directory}" DisplayMemberPath="directory_order_number" Margin="0" Height="20" Width="200"/>
+                        <Label Content="Настройки заказа" Margin="0" Height="30" Width="200" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold"/>
 
-                        <Label Content="Количество" Margin="0" Height="30" Width="200"/>
-                        <Grid>
-                            <TextBox x:Name="quantity" Text="{Binding order_quantity}" Margin="0" Height="20" Width="200" LostFocus="quantity_LostFocus"/>
-                            <TextBox x:Name="quantityPlaceHolder" Text="Количество" Margin="0" Height="20" Width="200" Foreground="#808080" GotFocus="quantityPlaceHolder_GotFocus" />
-                        </Grid>
+                        <Label Content="Пользователь:" Margin="0" Height="30" Width="200"/>
+                        <Label x:Name="usl" Margin="0" Height="30" Width="200" FontWeight="Bold"/>
                         
-                        <Label Content="Товар" Margin="0" Height="30" Width="200"/>
-                        <ComboBox x:Name="good" SelectedIndex="{Binding Toys_ToyStore.id_toy}" DisplayMemberPath="toy_name"  Margin="0" Height="20" Width="200"/>
-                        
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5">
-                            <Button x:Name="addOrder" Content="Добавить" Width="60" Height="20" Margin="5,0" Click="addOrder_Click"/>
-                            <Button x:Name="redOrder" Content="Редактировать" Width="100" Height="20" Margin="5,0" Click="redOrder_Click"/>
-                        </StackPanel>
-                        <Button x:Name="delOrder" Content="Удалить пользователя" Width="170" Height="20" Margin="5,0" Click="delOrder_Click"/>
+                        <Label Content="Номер заказа:" Margin="0" Height="30" Width="200"/>
+                        <Label x:Name="numl" Margin="0" Height="30" Width="200" FontWeight="Bold"/>
+
+                        <Label Content="Статус заказа:" Margin="0" Height="30" Width="200"/>
+                        <ComboBox x:Name="orderStatus" SelectedIndex = "{Binding Status_ToyStore.id_status}" DisplayMemberPath="status" Margin="0" Height="20" Width="200"/>
+
+                        <Button x:Name="redOrder" Content="Редактировать" Width="100" Height="20" Margin="5" Click="redOrder_Click"/>
+                        <Button x:Name="delOrder" Content="Удалить заказ" Width="170" Height="20" Margin="5" Click="delOrder_Click"/>
                     </StackPanel>
                 </Grid>
             </Border>

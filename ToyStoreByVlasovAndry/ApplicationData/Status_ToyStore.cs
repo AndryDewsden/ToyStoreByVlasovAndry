@@ -12,22 +12,18 @@ namespace ToyStoreByVlasovAndry.ApplicationData
     using System;
     using System.Collections.Generic;
     
-    public partial class Directories_ToyStore
+    public partial class Status_ToyStore
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Directories_ToyStore()
+        public Status_ToyStore()
         {
-            this.Orders_ToyStore = new HashSet<Orders_ToyStore>();
+            this.Directories_ToyStore = new HashSet<Directories_ToyStore>();
         }
     
-        public int id_directory { get; set; }
-        public int directory_id_user { get; set; }
-        public string directory_order_number { get; set; }
-        public int directory_status { get; set; }
+        public int id_status { get; set; }
+        public string status { get; set; }
     
-        public virtual Status_ToyStore Status_ToyStore { get; set; }
-        public virtual Users_ToyStore Users_ToyStore { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders_ToyStore> Orders_ToyStore { get; set; }
+        public virtual ICollection<Directories_ToyStore> Directories_ToyStore { get; set; }
     }
 }

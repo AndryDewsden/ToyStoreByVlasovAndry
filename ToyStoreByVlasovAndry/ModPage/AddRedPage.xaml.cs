@@ -142,6 +142,7 @@ namespace ToyStoreByVlasovAndry.ModPage
                 {
                     try
                     {
+                        
                         AppConnect.model1db.SaveChanges();
                         MessageBox.Show("Данные успешно редактированы", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                         AppFrame.frameMain.Navigate(new ShopPage(use));

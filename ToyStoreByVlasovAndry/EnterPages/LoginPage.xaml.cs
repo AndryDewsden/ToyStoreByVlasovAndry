@@ -41,11 +41,15 @@ namespace ToyStoreByVlasovAndry.EnterPages
                     switch (userObj.user_id_role)
                     {
                         case 1:
-                            MessageBox.Show("Здравствуйте, \nадминистратор \n" + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            MessageBox.Show("Здравствуйте, администратор " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                             AppFrame.frameMain.Navigate(new ShopPage(userObj));
                             break;
                         case 2:
-                            MessageBox.Show("Здравствуйте, \nпользователь \n" + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            MessageBox.Show("Здравствуйте, пользователь " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            AppFrame.frameMain.Navigate(new ShopPage(userObj));
+                            break;
+                        case 3:
+                            MessageBox.Show("Здравствуйте, менеджер " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                             AppFrame.frameMain.Navigate(new ShopPage(userObj));
                             break;
                         default:

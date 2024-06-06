@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ToyStoreByVlasovAndry.ApplicationData;
-
 using System.IO;
 using System.Xml.Linq;
 using iTextSharp.text;
@@ -21,6 +20,7 @@ using iTextSharp.text.pdf;
 using Paragraph = iTextSharp.text.Paragraph;
 using Aspose.BarCode.Generation;
 using Image = iTextSharp.text.Image;
+using System.Windows.Markup;
 
 namespace ToyStoreByVlasovAndry.Content
 {
@@ -38,7 +38,7 @@ namespace ToyStoreByVlasovAndry.Content
             use = user;
             userDisplay.Content = use.user_name;
 
-            Directories_ToyStore userList = AppConnect.model1db.Directories_ToyStore.FirstOrDefault(x => x.directory_id_user == use.id_user);
+            Directories_ToyStore userList = AppConnect.model1db.Directories_ToyStore.FirstOrDefault(x => x.directory_id_user == use.id_user && x.directory_status != 2);
 
             if (userList != null)
             {
@@ -85,7 +85,7 @@ namespace ToyStoreByVlasovAndry.Content
 
         private void goCart_Click(object sender, RoutedEventArgs e)
         {
-            AppFrame.frameMain.GoBack();
+            AppFrame.frameMain.Navigate(new CartPage(use));
         }
 
         private void userDisplay_Click(object sender, RoutedEventArgs e)
@@ -100,7 +100,7 @@ namespace ToyStoreByVlasovAndry.Content
 
         private void doBarCode_Click(object sender, RoutedEventArgs e)
         {
-            doQR();
+            QRimg.Source = doQR();
         }
 
         private void doPDF()
@@ -110,7 +110,7 @@ namespace ToyStoreByVlasovAndry.Content
 
             try
             {
-                PdfWriter.GetInstance(doc, new FileStream("..\\..\\Чек.pdf", FileMode.Create));
+                PdfWriter.GetInstance(doc, new FileStream("..\\..\\Check" + use.user_name + "_" + numOrder +".pdf", FileMode.Create));
 
                 doc.Open();
                 BaseFont baseFont = BaseFont.CreateFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
@@ -126,6 +126,15 @@ namespace ToyStoreByVlasovAndry.Content
                 title.Alignment = Element.ALIGN_CENTER;
                 doc.Add(title);
 
+                doc.Add(line);
+
+                doQR();
+                Image Qimg = Image.GetInstance(@"C:\Users\10210795\source\repos\ToyStoreByVlasovAndry\ToyStoreByVlasovAndry\UserData\" + b.ToString() + "_QR_" + use.user_name + "_" + numOrder + ".png");
+
+                Qimg.ScaleAbsolute(200f, 200f);
+                Qimg.Alignment = Element.ALIGN_CENTER;
+                doc.Add(Qimg);
+                
                 doc.Add(line);
                 
                 int cnt = 0;
@@ -159,14 +168,17 @@ namespace ToyStoreByVlasovAndry.Content
                 ordN.Alignment = Element.ALIGN_RIGHT;
                 doc.Add(ordN);
                 
+                Paragraph userpar = new Paragraph($"Пользователь: {use.user_name}", font);
                 Paragraph TotalQuantity = new Paragraph($"Общее количество товаров: {cnt}", font);
                 Paragraph TotalSumW = new Paragraph($"Оптовая сумма: {sumW}", font);
                 Paragraph TotalSumR = new Paragraph($"Розничная сумма: {sumR}", font);
                 
+                userpar.Alignment = Element.ALIGN_RIGHT;
                 TotalQuantity.Alignment = Element.ALIGN_RIGHT;
                 TotalSumW.Alignment = Element.ALIGN_RIGHT;
                 TotalSumR.Alignment = Element.ALIGN_RIGHT;
-                
+
+                doc.Add(userpar);
                 doc.Add(TotalQuantity);
                 doc.Add(TotalSumW);
                 doc.Add(TotalSumR);
@@ -186,22 +198,63 @@ namespace ToyStoreByVlasovAndry.Content
         }
 
         int a = 1;
-
-        private void doQR()
+        int b = 1;
+        private BitmapImage doQR()
         {
+            //
             BitmapImage bitmap = new BitmapImage();
+            //
             BarcodeGenerator gen = new BarcodeGenerator(EncodeTypes.QR, "https://bom.firpo.ru/Public/86");
+            //
             gen.Parameters.Barcode.XDimension.Pixels = 34;
 
-            string dataDir = @"C:\Users\10210795\source\repos\ToyStoreByVlasovAndry\ToyStoreByVlasovAndry\";
-            gen.Save(dataDir + a.ToString() + "1.png", BarCodeImageFormat.Png);
+
+            string dataDir = @"C:\Users\10210795\source\repos\ToyStoreByVlasovAndry\ToyStoreByVlasovAndry\UserData\";
+
+            //string uuid = Guid.NewGuid().ToString();
+
+            string li = a.ToString() + "_QR_" + use.user_name + "_" + numOrder + ".png";
+
+            if (bitmap != null)
+            {
+                gen.Save(dataDir + li, BarCodeImageFormat.Png);
+            }
 
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri(dataDir + a.ToString() + "1.png");
+            
+            bitmap.UriSource = new Uri(dataDir + li);
+
             bitmap.EndInit();
 
-            QRimg.Source = bitmap;
+            //QRimg.Source = bitmap;
+            b = a;
             a++;
+            return bitmap;
+        }
+
+        Directories_ToyStore directories = new Directories_ToyStore();
+        private void endOrder_Click(object sender, RoutedEventArgs e)
+        {
+            doPDF();
+
+            var res = MessageBox.Show("Вы действительно хотите завершить этот заказ?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            if (res == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    directories = AppConnect.model1db.Directories_ToyStore.FirstOrDefault(x => x.directory_order_number == numOrder);
+                    directories.directory_status = 2;
+                    AppConnect.model1db.SaveChanges();
+                    MessageBox.Show("Ваш заказ успешно оформлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    AppFrame.frameMain.Navigate(new ShopPage(use));
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

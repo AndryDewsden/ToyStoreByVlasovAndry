@@ -41,19 +41,19 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Номер заказа:"/>
-                        <Label x:Name="OrderN" Content="R0"/>
+                        <Label x:Name="OrderN" Content="R0" FontWeight="Bold"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content = "Кол-во товаров:"/>
-                        <Label x:Name="GoodCount" Content="0"/>
+                        <Label x:Name="GoodCount" Content="0" FontWeight="Bold"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content = "Оптовая сумма:"/>
-                        <Label x:Name="WholeSale" Content = "0"/>
+                        <Label x:Name="WholeSale" Content = "0" FontWeight="Bold"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content = "Розничная сумма:"/>
-                        <Label x:Name="Retail" Content = "0"/>
+                        <Label x:Name="Retail" Content = "0" FontWeight="Bold"/>
                     </StackPanel>
                     <Border MinHeight="210" MaxHeight="220" MinWidth="200" MaxWidth="220" BorderThickness="1" BorderBrush="Black" Background="White">
                         <Image x:Name="QRimg" Width="200" Height="200"/>
@@ -66,7 +66,8 @@
             <Button x:Name="userDisplay" Content="Пользователь" Width="120" Height="30" Margin="5,0,5,0" Click="userDisplay_Click" Background="#00CED1" Foreground="#E0FFFF"/>
             <Button x:Name="goCart" Content="Назад" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="goCart_Click" Background="#00CED1" Foreground="#E0FFFF"/>
             <Button x:Name="doDoc" Content="PDF документ" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="doDoc_Click" Background="#00CED1" Foreground="#E0FFFF"/>
-            <Button x:Name="doBarCode" Content="Штрих код" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="doBarCode_Click" Background="#00CED1" Foreground="#E0FFFF"/>
+            <Button x:Name="doBarCode" Content="QR" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="doBarCode_Click" Background="#00CED1" Foreground="#E0FFFF"/>
+            <Button x:Name="endOrder" Content="Завершить заказ" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="endOrder_Click" Background="#00CED1" Foreground="#E0FFFF"/>
         </StackPanel>
     </Grid>
 </Page>

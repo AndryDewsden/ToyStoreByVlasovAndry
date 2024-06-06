@@ -40,9 +40,7 @@ namespace ToyStoreByVlasovAndry.Content
 
                     WindowShow(addButton, 1);
                     WindowShow(BtDelAcc, 2);
-                    WindowShow(userList, 1);
                     WindowShow(uploadImage, 1);
-                    WindowShow(userList, 1);
 
                     userRole.Items.Add("--выбрать--");
 
@@ -54,23 +52,11 @@ namespace ToyStoreByVlasovAndry.Content
                     ComboMenu.Items.Add("Пользователи");
                     ComboMenu.Items.Add("Заказы");
 
-                    userOrder.Items.Add("");
-                    numOrder.Items.Add("");
-                    good.Items.Add("");
+                    orderStatus.Items.Add("");
 
-                    for (int i = 0; i < AppConnect.model1db.Users_ToyStore.ToList().Count; i++)
+                    for (int i = 0; i < AppConnect.model1db.Status_ToyStore.ToList().Count; i++)
                     {
-                        userOrder.Items.Add(AppConnect.model1db.Users_ToyStore.ToList()[i]);
-                    }
-
-                    for (int i = 0; i < AppConnect.model1db.Directories_ToyStore.ToList().Count; i++)
-                    {
-                        numOrder.Items.Add(AppConnect.model1db.Directories_ToyStore.ToList()[i]);
-                    }
-
-                    for (int i = 0; i < AppConnect.model1db.Toys_ToyStore.ToList().Count; i++)
-                    {
-                        good.Items.Add(AppConnect.model1db.Toys_ToyStore.ToList()[i]);
+                        orderStatus.Items.Add(AppConnect.model1db.Status_ToyStore.ToList()[i]);
                     }
 
                     break;
@@ -81,11 +67,42 @@ namespace ToyStoreByVlasovAndry.Content
                     WindowShow(addButton, 2);
                     WindowShow(BtDelAcc, 2);
                     WindowShow(listUsers, 2);
-                    WindowShow(uploadImage, 2);
-                    WindowShow(userList, 2);
-                    
+                    WindowShow(uploadImage, 2);                    
                     break;
                 
+                case 3:
+                    Title = $"Страница менеджера {user.user_name}";
+
+                    WindowShow(addButton, 1);
+                    WindowShow(BtDelAcc, 2);
+                    WindowShow(uploadImage, 1);
+
+                    userRole.Items.Add("--выбрать--");
+
+                    for (int i = 0; i < AppConnect.model1db.Roles_ToyStore.ToList().Count; i++)
+                    {
+                        if (AppConnect.model1db.Roles_ToyStore.ToList()[i].id_role != 1 && AppConnect.model1db.Roles_ToyStore.ToList()[i].id_role != 3)
+                        {
+                            userRole.Items.Add(AppConnect.model1db.Roles_ToyStore.ToList()[i]);
+                        }
+                        else
+                        {
+                            userRole.Items.Remove(AppConnect.model1db.Roles_ToyStore.ToList()[i]);
+                        }
+                    }
+
+                    ComboMenu.Items.Add("Пользователи");
+                    ComboMenu.Items.Add("Заказы");
+
+                    orderStatus.Items.Add("");
+
+                    for (int i = 0; i < AppConnect.model1db.Status_ToyStore.ToList().Count; i++)
+                    {
+
+                        orderStatus.Items.Add(AppConnect.model1db.Status_ToyStore.ToList()[i]);
+                    }
+                    break;
+
                 default:
                     MessageBox.Show("Произошла какае-то ощибка с данными пользователя. Вас перекинут на страницу авторизации.", "О-оу", MessageBoxButton.OK, MessageBoxImage.Error);
                     AppFrame.frameMain.Navigate(new LoginPage());
@@ -98,13 +115,23 @@ namespace ToyStoreByVlasovAndry.Content
 
         Users_ToyStore[] fillUsers()
         {
-            var pro = AppConnect.model1db.Users_ToyStore.Where(x => x.id_user != use.id_user).ToList();
-            return pro.ToArray();
+            switch (use.user_id_role)
+            {
+                case 1:
+                    var pro = AppConnect.model1db.Users_ToyStore.Where(x => x.id_user != use.id_user && x.user_id_role != 1).ToList();
+                    return pro.ToArray();
+                case 3:
+                    pro = AppConnect.model1db.Users_ToyStore.Where(x => x.id_user != use.id_user && x.user_id_role != 1 && x.user_id_role != 3).ToList();
+                    return pro.ToArray();
+                default:
+                    pro = AppConnect.model1db.Users_ToyStore.Where(x => x.user_id_role != 1 && x.user_id_role != 2 && x.user_id_role != 3).ToList();
+                    return pro.ToArray();
+            }
         }
 
-        Orders_ToyStore[] fillOrders()
+        Directories_ToyStore[] fillOrders()
         {
-            var pro = AppConnect.model1db.Orders_ToyStore.ToList();
+            var pro = AppConnect.model1db.Directories_ToyStore.ToList();
             return pro.ToArray();
         }
 
@@ -165,51 +192,104 @@ namespace ToyStoreByVlasovAndry.Content
 
         private void add_Click(object sender, RoutedEventArgs e)
         {
-            var res = MessageBox.Show("Вы действительно хотите добавить этого пользователя?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
-
-            if (res == MessageBoxResult.Yes)
+            if (userName.Text != "" && userLogin.Text != "" && userPassword.Text != "" && userRole.SelectedIndex != 0)
             {
-                try
-                {
-                    AppConnect.model1db.Users_ToyStore.Add(_curUser);
-                    AppConnect.model1db.SaveChanges();
-                    listUsers.ItemsSource = fillUsers();
-                    MessageBox.Show("Данные успешно добавленны", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+                var res = MessageBox.Show("Вы действительно хотите добавить этого пользователя?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
-                catch (Exception ex)
+                if (res == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    try
+                    {
+                        _curUser.user_name = userName.Text;
+                        _curUser.user_login = userLogin.Text;
+                        _curUser.user_password = userPassword.Text;
+                        _curUser.user_id_role = userRole.SelectedIndex;
+
+                        if (userPhone.Text == "")
+                        {
+                            _curUser.user_phone = null;
+                        }
+                        else
+                        {
+                            _curUser.user_phone = userPhone.Text;
+                        }
+
+                        if (userMail.Text == "")
+                        {
+                            _curUser.user_mail = null;
+                        }
+                        else
+                        {
+                            _curUser.user_mail = userMail.Text;
+                        }
+
+                        AppConnect.model1db.Users_ToyStore.Add(_curUser);
+                        AppConnect.model1db.SaveChanges();
+                        listUsers.ItemsSource = fillUsers();
+                        MessageBox.Show("Данные успешно добавленны", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Заполните все поля!", "Уведомление", MessageBoxButton.OK);
             }
         }
 
         private void red_Click(object sender, RoutedEventArgs e)
         {
-            var res = MessageBox.Show("Вы действительно хотите изменить параметры этого пользователя?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
-
-            if (res == MessageBoxResult.Yes)
+            if (userName.Text != "" && userLogin.Text != "" && userPassword.Text != "" && userRole.SelectedIndex != 0)
             {
-                try
-                {
-                    _curUser.user_name = userName.Text;
-                    _curUser.user_login = userLogin.Text;
-                    _curUser.user_password = userPassword.Text;
-                    _curUser.user_id_role = userRole.SelectedIndex;
-                    _curUser.user_phone = userPhone.Text;
-                    _curUser.user_mail = userMail.Text;
+                var res = MessageBox.Show("Вы действительно хотите изменить параметры этого пользователя?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
-                    DataContext = _curUser;
-                    
-                    AppConnect.model1db.SaveChanges();
-                    listUsers.ItemsSource = fillUsers();
-                    MessageBox.Show("Данные успешно редактированы", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-
-                catch (Exception ex)
+                if (res == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    try
+                    {
+                        _curUser.user_name = userName.Text;
+                        _curUser.user_login = userLogin.Text;
+                        _curUser.user_password = userPassword.Text;
+                        _curUser.user_id_role = userRole.SelectedIndex;
+
+                        if (userPhone.Text == "")
+                        {
+                            _curUser.user_phone = null;
+                        }
+                        else
+                        {
+                            _curUser.user_phone = userPhone.Text;
+                        }
+
+                        if (userMail.Text == "")
+                        {
+                            _curUser.user_mail = null;
+                        }
+                        else
+                        {
+                            _curUser.user_mail = userMail.Text;
+                        }
+
+                        DataContext = _curUser;
+
+                        AppConnect.model1db.SaveChanges();
+                        listUsers.ItemsSource = fillUsers();
+                        MessageBox.Show("Данные успешно редактированы", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Заполните все поля!", "Уведомление", MessageBoxButton.OK);
             }
         }
 
@@ -454,107 +534,66 @@ namespace ToyStoreByVlasovAndry.Content
             }
         }
 
-        Orders_ToyStore _curOrder = new Orders_ToyStore();
+        Directories_ToyStore _curOrder = new Directories_ToyStore();
         private void listOrder_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _curOrder = (Orders_ToyStore)listOrder.SelectedItem;
+            _curOrder = (Directories_ToyStore)listOrder.SelectedItem;
+            usl.Content = AppConnect.model1db.Users_ToyStore.FirstOrDefault(x => x.id_user == _curOrder.directory_id_user).user_name;
+            numl.Content = _curOrder.directory_order_number;
 
-            userOrder.SelectedItem = AppConnect.model1db.Users_ToyStore.FirstOrDefault(x => x.id_user == AppConnect.model1db.Directories_ToyStore.FirstOrDefault(y => y.id_directory == _curOrder.order_id_directory).directory_id_user);
-            numOrder.SelectedItem = AppConnect.model1db.Directories_ToyStore.FirstOrDefault(x => x.id_directory == _curOrder.order_id_directory);
-            quantity.Text = _curOrder.order_quantity.ToString();
-            good.SelectedItem = AppConnect.model1db.Toys_ToyStore.FirstOrDefault(x => x.id_toy == _curOrder.order_id_toy);
-
-            if (quantity.Text != "")
-            {
-                Original(quantity, quantityPlaceHolder, 1);
-            }
-            else
-            {
-                Original(quantity, quantityPlaceHolder, 2);
-            }
-        }
-
-        private void quantity_LostFocus(object sender, RoutedEventArgs e)
-        {
-            Original(quantity, quantityPlaceHolder, 2);
-        }
-
-        private void quantityPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
-        {
-            Original(quantity, quantityPlaceHolder, 1);
-            userName.Focus();
-        }
-
-        private void addOrder_Click(object sender, RoutedEventArgs e)
-        {
-            var res = MessageBox.Show("Вы действительно хотите добавить этого пользователя?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
-
-            if (res == MessageBoxResult.Yes)
-            {
-                try
-                {
-                    AppConnect.model1db.Orders_ToyStore.Add(_curOrder);
-                    AppConnect.model1db.SaveChanges();
-                    listOrder.ItemsSource = fillOrders();
-                    MessageBox.Show("Данные успешно добавленны", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
+            orderStatus.SelectedItem = AppConnect.model1db.Status_ToyStore.FirstOrDefault(x => x.id_status == _curOrder.directory_status);
         }
 
         private void redOrder_Click(object sender, RoutedEventArgs e)
         {
-            var res = MessageBox.Show("Вы действительно хотите изменить параметры этого пользователя?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
-
-            if (res == MessageBoxResult.Yes)
+            if (orderStatus.SelectedIndex != 0)
             {
-                try
+                var res = MessageBox.Show("Вы действительно хотите изменить статус этого заказа?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+                if (res == MessageBoxResult.Yes)
                 {
+                    try
+                    {
+                        _curOrder.directory_status = orderStatus.SelectedIndex;
+                        DataContext = _curOrder;
 
-                    DataContext = _curUser;
+                        AppConnect.model1db.SaveChanges();
+                        listOrder.ItemsSource = fillOrders();
+                        //MessageBox.Show("Данные успешно редактированы", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
 
-                    AppConnect.model1db.SaveChanges();
-                    listUsers.ItemsSource = fillUsers();
-                    MessageBox.Show("Данные успешно редактированы", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
-        }
+            else
+            {
+                MessageBox.Show("Заполните все поля!", "Уведомление", MessageBoxButton.OK);
+            }
+}
 
         private void delOrder_Click(object sender, RoutedEventArgs e)
         {
-            var del = (Users_ToyStore)listUsers.SelectedItem;
-            var res = MessageBox.Show($"Вы действительно хотите удалить этого пользователя?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            var del = (Directories_ToyStore)listOrder.SelectedItem;
+            var res = MessageBox.Show($"Вы действительно хотите удалить этот заказ?\nВсе товары этого заказа также будут удалены.", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
             if (res == MessageBoxResult.Yes)
             {
                 try
                 {
-                    AppConnect.model1db.Users_ToyStore.Remove(del);
+                    int f = AppConnect.model1db.Orders_ToyStore.Where(x => x.order_id_directory == del.id_directory).Count();
+
+                    for(int i = 0; i < f; i++)
+                    {
+                        var c = AppConnect.model1db.Orders_ToyStore.FirstOrDefault(x => x.order_id_directory == del.id_directory);
+                        AppConnect.model1db.Orders_ToyStore.Remove(c);
+                    }
+                    AppConnect.model1db.Directories_ToyStore.Remove(del);
                     AppConnect.model1db.SaveChanges();
 
-                    userName.Text = "";
-                    userLogin.Text = "";
-                    userPassword.Text = "";
-                    userRole.SelectedIndex = 0;
-                    userPhone.Text = "";
-                    userMail.Text = "";
-
-                    Original(userName, userNamePlaceHolder, 2);
-                    Original(userLogin, userLoginPlaceHolder, 2);
-                    Original(userPassword, userPasswordPlaceHolder, 2);
-                    Original(userPhone, userPhonePlaceHolder, 2);
-                    Original(userMail, userMailPlaceHolder, 2);
-
-                    listUsers.ItemsSource = fillUsers();
+                    listOrder.ItemsSource = fillUsers();
                 }
 
                 catch (Exception ex)

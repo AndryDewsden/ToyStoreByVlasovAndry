@@ -56,6 +56,7 @@
           <Property Name="id_directory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="directory_id_user" Type="int" Nullable="false" />
           <Property Name="directory_order_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="directory_status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Edenices">
           <Key>
@@ -133,6 +134,13 @@
           <Property Name="id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="role" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Status_ToyStore">
+          <Key>
+            <PropertyRef Name="id_status" />
+          </Key>
+          <Property Name="id_status" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -201,6 +209,18 @@
             </Principal>
             <Dependent Role="Deals">
               <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Directories_ToyStore_Status_ToyStore">
+          <End Role="Status_ToyStore" Type="Self.Status_ToyStore" Multiplicity="1" />
+          <End Role="Directories_ToyStore" Type="Self.Directories_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_ToyStore">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Directories_ToyStore">
+              <PropertyRef Name="directory_status" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -401,6 +421,7 @@
           <EntitySet Name="Orders_ToyStore" EntityType="Self.Orders_ToyStore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Providers_ToyStore" EntityType="Self.Providers_ToyStore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles_ToyStore" EntityType="Self.Roles_ToyStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status_ToyStore" EntityType="Self.Status_ToyStore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Toys_ToyStore" EntityType="Self.Toys_ToyStore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -412,6 +433,10 @@
           <AssociationSet Name="FK_Deals_Users" Association="Self.FK_Deals_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Directories_ToyStore_Status_ToyStore" Association="Self.FK_Directories_ToyStore_Status_ToyStore">
+            <End Role="Status_ToyStore" EntitySet="Status_ToyStore" />
+            <End Role="Directories_ToyStore" EntitySet="Directories_ToyStore" />
           </AssociationSet>
           <AssociationSet Name="FK_Directories_Users_ToyStore" Association="Self.FK_Directories_Users_ToyStore">
             <End Role="Users_ToyStore" EntitySet="Users_ToyStore" />
@@ -537,6 +562,8 @@
           <Property Name="id_directory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="directory_id_user" Type="Int32" Nullable="false" />
           <Property Name="directory_order_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="directory_status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Status_ToyStore" Relationship="Self.FK_Directories_ToyStore_Status_ToyStore" FromRole="Directories_ToyStore" ToRole="Status_ToyStore" />
           <NavigationProperty Name="Users_ToyStore" Relationship="Self.FK_Directories_Users_ToyStore" FromRole="Directories_ToyStore" ToRole="Users_ToyStore" />
           <NavigationProperty Name="Orders_ToyStore" Relationship="Self.FK_Orders_ToyStore_Directories_ToyStore" FromRole="Directories_ToyStore" ToRole="Orders_ToyStore" />
         </EntityType>
@@ -630,6 +657,14 @@
           <Property Name="id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Users_ToyStore" Relationship="Self.FK_Users_Roles_ToyStore" FromRole="Roles_ToyStore" ToRole="Users_ToyStore" />
+        </EntityType>
+        <EntityType Name="Status_ToyStore">
+          <Key>
+            <PropertyRef Name="id_status" />
+          </Key>
+          <Property Name="id_status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Directories_ToyStore" Relationship="Self.FK_Directories_ToyStore_Status_ToyStore" FromRole="Status_ToyStore" ToRole="Directories_ToyStore" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -772,6 +807,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Directories_ToyStore_Status_ToyStore">
+          <End Role="Status_ToyStore" Type="Self.Status_ToyStore" Multiplicity="1" />
+          <End Role="Directories_ToyStore" Type="Self.Directories_ToyStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_ToyStore">
+              <PropertyRef Name="id_status" />
+            </Principal>
+            <Dependent Role="Directories_ToyStore">
+              <PropertyRef Name="directory_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Directories_Users_ToyStore">
           <End Role="Users_ToyStore" Type="Self.Users_ToyStore" Multiplicity="1" />
           <End Role="Directories_ToyStore" Type="Self.Directories_ToyStore" Multiplicity="*" />
@@ -909,6 +956,7 @@
           <EntitySet Name="Orders_ToyStore" EntityType="Self.Orders_ToyStore" />
           <EntitySet Name="Providers_ToyStore" EntityType="Self.Providers_ToyStore" />
           <EntitySet Name="Roles_ToyStore" EntityType="Self.Roles_ToyStore" />
+          <EntitySet Name="Status_ToyStore" EntityType="Self.Status_ToyStore" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Toys_ToyStore" EntityType="Self.Toys_ToyStore" />
           <EntitySet Name="Users" EntityType="Self.Users" />
@@ -940,6 +988,10 @@
           <AssociationSet Name="FK_Deals_Users" Association="Self.FK_Deals_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Directories_ToyStore_Status_ToyStore" Association="Self.FK_Directories_ToyStore_Status_ToyStore">
+            <End Role="Status_ToyStore" EntitySet="Status_ToyStore" />
+            <End Role="Directories_ToyStore" EntitySet="Directories_ToyStore" />
           </AssociationSet>
           <AssociationSet Name="FK_Directories_Users_ToyStore" Association="Self.FK_Directories_Users_ToyStore">
             <End Role="Users_ToyStore" EntitySet="Users_ToyStore" />
@@ -1044,6 +1096,7 @@
                 <ScalarProperty Name="id_directory" ColumnName="id_directory" />
                 <ScalarProperty Name="directory_id_user" ColumnName="directory_id_user" />
                 <ScalarProperty Name="directory_order_number" ColumnName="directory_order_number" />
+                <ScalarProperty Name="directory_status" ColumnName="directory_status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1129,6 +1182,14 @@
               <MappingFragment StoreEntitySet="Roles_ToyStore">
                 <ScalarProperty Name="id_role" ColumnName="id_role" />
                 <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status_ToyStore">
+            <EntityTypeMapping TypeName="Model.Status_ToyStore">
+              <MappingFragment StoreEntitySet="Status_ToyStore">
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

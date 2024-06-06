@@ -41,6 +41,7 @@ namespace ToyStoreByVlasovAndry.ApplicationData
         public virtual DbSet<Orders_ToyStore> Orders_ToyStore { get; set; }
         public virtual DbSet<Providers_ToyStore> Providers_ToyStore { get; set; }
         public virtual DbSet<Roles_ToyStore> Roles_ToyStore { get; set; }
+        public virtual DbSet<Status_ToyStore> Status_ToyStore { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Toys_ToyStore> Toys_ToyStore { get; set; }
         public virtual DbSet<Users> Users { get; set; }
