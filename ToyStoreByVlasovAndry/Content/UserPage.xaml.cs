@@ -67,7 +67,8 @@ namespace ToyStoreByVlasovAndry.Content
                     WindowShow(addButton, 2);
                     WindowShow(BtDelAcc, 2);
                     WindowShow(listUsers, 2);
-                    WindowShow(uploadImage, 2);                    
+                    WindowShow(uploadImage, 2);
+                    WindowShow(ComboMenu, 2);
                     break;
                 
                 case 3:
@@ -493,6 +494,21 @@ namespace ToyStoreByVlasovAndry.Content
         }
 
         private void WindowShow(Button sim, int s)
+        {
+            switch (s)
+            {
+                case 1:
+                    sim.IsEnabled = true;
+                    sim.Visibility = Visibility.Visible;
+                    break;
+                case 2:
+                    sim.IsEnabled = false;
+                    sim.Visibility = Visibility.Collapsed;
+                    break;
+            }
+        }
+
+        private void WindowShow(ComboBox sim, int s)
         {
             switch (s)
             {
